@@ -36,7 +36,7 @@ protected: // Overrides -------------------------------------------------------
 
 protected: // Events ----------------------------------------------------------
 
-	HRESULT OnButtonOK(IHTMLElement *pElement);
+	HRESULT OnButtonTrivialUsageofCEvent(IHTMLElement *pElement);
 	HRESULT OnButtonCancel(IHTMLElement *pElement);
 
 protected: // Implementation --------------------------------------------------

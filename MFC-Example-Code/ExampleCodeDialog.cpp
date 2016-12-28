@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(ExampleCodeDialog, CDHtmlDialog);
 
 
 BEGIN_DHTML_EVENT_MAP(ExampleCodeDialog)
-	DHTML_EVENT_ONCLICK(L"ButtonOK", OnButtonOK)
+	DHTML_EVENT_ONCLICK(L"TrivialUsageofCEvent", OnButtonTrivialUsageofCEvent)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
@@ -148,7 +148,6 @@ void ExampleCodeDialog::OnClose()
 
 void ExampleCodeDialog::OnOK()
 {
-	Example::Trivial_Usage_of_CEvent::run();
 
 	IHTMLElement* pElement = NULL;
 	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != NULL)
@@ -189,8 +188,10 @@ BOOL ExampleCodeDialog::CanExit()
 
 
 
-HRESULT ExampleCodeDialog::OnButtonOK(IHTMLElement* /*pElement*/)
+HRESULT ExampleCodeDialog::OnButtonTrivialUsageofCEvent(IHTMLElement* /*pElement*/)
 {
+	Example::Trivial_Usage_of_CEvent::run();
+
 	OnOK();
 	return S_OK;
 }
