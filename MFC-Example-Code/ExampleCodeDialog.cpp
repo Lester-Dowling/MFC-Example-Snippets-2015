@@ -4,6 +4,7 @@
 #include "ExampleCodeDialogAutoProxy.hpp"
 #include "AboutDlg.hpp"
 #include "Trivial_Usage_of_CEvent.hpp"
+#include "Calculate_Prime_Numbers_via_CEvent.hpp"
 #include "Resource.h"
 
 #ifdef _DEBUG
@@ -14,16 +15,35 @@
 IMPLEMENT_DYNAMIC(ExampleCodeDialog, CDHtmlDialog);
 
 
-BEGIN_DHTML_EVENT_MAP(ExampleCodeDialog)
-	DHTML_EVENT_ONCLICK(L"TrivialUsageofCEvent", OnButtonTrivialUsageofCEvent)
-	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
-END_DHTML_EVENT_MAP();
-
-
 BEGIN_MESSAGE_MAP(ExampleCodeDialog, CDHtmlDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_CLOSE()
 END_MESSAGE_MAP();
+
+
+BEGIN_DHTML_EVENT_MAP(ExampleCodeDialog)
+	DHTML_EVENT_ONCLICK(L"Trivial_Usage_of_CEvent", On_Trivial_Usage_of_CEvent)
+	DHTML_EVENT_ONCLICK(L"Calculate_Prime_Numbers_via_CEvent", On_Calculate_Prime_Numbers_via_CEvent)
+	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
+END_DHTML_EVENT_MAP();
+
+
+
+HRESULT ExampleCodeDialog::On_Trivial_Usage_of_CEvent(IHTMLElement* /*pElement*/)
+{
+	Example::Trivial_Usage_of_CEvent::run();
+
+	OnOK();
+	return S_OK;
+}
+
+HRESULT ExampleCodeDialog::On_Calculate_Prime_Numbers_via_CEvent(IHTMLElement * pElement)
+{
+	Example::Calculate_Prime_Numbers_via_CEvent example;
+
+	OnOK();
+	return S_OK;
+}
 
 
 ExampleCodeDialog::ExampleCodeDialog(CWnd* pParent /*=nullptr*/)
@@ -184,16 +204,6 @@ BOOL ExampleCodeDialog::CanExit()
 		return FALSE;
 	}
 	return TRUE;
-}
-
-
-
-HRESULT ExampleCodeDialog::OnButtonTrivialUsageofCEvent(IHTMLElement* /*pElement*/)
-{
-	Example::Trivial_Usage_of_CEvent::run();
-
-	OnOK();
-	return S_OK;
 }
 
 

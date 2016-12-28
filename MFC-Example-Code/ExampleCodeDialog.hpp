@@ -36,7 +36,8 @@ protected: // Overrides -------------------------------------------------------
 
 protected: // Events ----------------------------------------------------------
 
-	HRESULT OnButtonTrivialUsageofCEvent(IHTMLElement *pElement);
+	HRESULT On_Trivial_Usage_of_CEvent(IHTMLElement *pElement);
+	HRESULT On_Calculate_Prime_Numbers_via_CEvent(IHTMLElement *pElement);
 	HRESULT OnButtonCancel(IHTMLElement *pElement);
 
 protected: // Implementation --------------------------------------------------

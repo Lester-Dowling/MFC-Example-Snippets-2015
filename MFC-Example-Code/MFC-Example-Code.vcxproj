@@ -55,7 +55,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW;_AFX_ALL_WARNINGS;_ATL_CSTRING_EXPLICIT_CONSTRUCTORS;VC_EXTRALEAN;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_WINDOWS;_CRTDBG_MAP_ALLOC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <PrecompiledHeaderFile>pch-MFC-Example-Code.hpp</PrecompiledHeaderFile>
     </ClCompile>
@@ -93,7 +93,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW;_AFX_ALL_WARNINGS;_ATL_CSTRING_EXPLICIT_CONSTRUCTORS;VC_EXTRALEAN;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <PrecompiledHeaderFile>pch-MFC-Example-Code.hpp</PrecompiledHeaderFile>
     </ClCompile>
@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.hpp" />
+    <ClInclude Include="Calculate_Prime_Numbers_via_CEvent.hpp" />
     <ClInclude Include="ExampleCodeDialog.hpp" />
     <ClInclude Include="ExampleCodeDialogAutoProxy.hpp" />
     <ClInclude Include="MFCExampleCode_h.h" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="Calculate_Prime_Numbers_via_CEvent.cpp" />
     <ClCompile Include="ExampleCodeDialog.cpp" />
     <ClCompile Include="ExampleCodeDialogAutoProxy.cpp" />
     <ClCompile Include="MFCExampleCode_i.c">

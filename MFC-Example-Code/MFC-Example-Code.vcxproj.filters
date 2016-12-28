@@ -48,6 +48,9 @@
     <ClInclude Include="Trivial_Usage_of_CEvent.hpp">
       <Filter>The Examples</Filter>
     </ClInclude>
+    <ClInclude Include="Calculate_Prime_Numbers_via_CEvent.hpp">
+      <Filter>The Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleCodeDialog.cpp">
@@ -69,6 +72,9 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Trivial_Usage_of_CEvent.cpp">
+      <Filter>The Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculate_Prime_Numbers_via_CEvent.cpp">
       <Filter>The Examples</Filter>
     </ClCompile>
   </ItemGroup>
