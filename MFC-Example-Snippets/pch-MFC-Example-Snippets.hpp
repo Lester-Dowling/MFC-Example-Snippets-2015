@@ -11,7 +11,7 @@
 #include <afxcmn.h>                         // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxcmn.h
 #include <afxcontrolbars.h>                 // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxcontrolbars.h
 #include <afxsock.h>                        // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxsock.h
-#include <afxdialogex.h>					// C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxdialogex.h
+#include <afxdialogex.h>                    // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxdialogex.h
 #include <afxdhtml.h>                       // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxdhtml.h
 
 #include <WindowsX.h>                       // C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\shared\windowsx.h
@@ -21,7 +21,7 @@
 #include <Stringapiset.h>                   // C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um\stringapiset.h
 #include <xpsobjectmodel_1.h>               // C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um\xpsobjectmodel_1.h
 #include <DocumentTarget.h>                 // C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um\DocumentTarget.h
-#include <wininet.h>						// C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um\WinInet.h
+#include <wininet.h>                        // C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um\WinInet.h
 
 #ifndef NDEBUG
 #include <crtdbg.h>                         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\ucrt\crtdbg.h

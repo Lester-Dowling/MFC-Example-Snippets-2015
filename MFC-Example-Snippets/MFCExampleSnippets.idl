@@ -1,0 +1,29 @@
+// MFCExampleSnippets.idl : type library source for MFC-Example-Snippets.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (MFCExampleSnippets.tlb).
+
+[ uuid(2448A547-EC16-4036-B419-33675184923F), version(1.0) ]
+library MFCExampleSnippets
+{
+  importlib("stdole32.tlb");
+  importlib("stdole2.tlb");
+
+  //  Primary dispatch interface for CMFCExampleSnippetsDoc
+
+  [ uuid(FFD422F2-4B62-4D59-B35A-8CACEE5806CB) ]
+    dispinterface IMFCExampleSnippets
+    {
+      properties:
+
+      methods:
+    };
+
+  //  Class information for CMFCExampleSnippetsDoc
+
+  [ uuid(E858A01C-0C76-41E6-A375-C1626C6E0F8C) ]
+    coclass MFCExampleSnippets
+    {
+      [default] dispinterface IMFCExampleSnippets;
+    };
+};

@@ -6,7 +6,7 @@
  /* File created by MIDL compiler version 8.01.0620 */
 /* at Tue Jan 19 14:14:07 2038
  */
-/* Compiler settings for MFCExampleCode.idl:
+/* Compiler settings for MFCExampleSnippets.idl:
     Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.01.0620 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
@@ -32,8 +32,8 @@
 #endif /* __RPCNDR_H_VERSION__ */
 
 
-#ifndef __MFCExampleCode_h_h__
-#define __MFCExampleCode_h_h__
+#ifndef __MFCExampleSnippets_h_h__
+#define __MFCExampleSnippets_h_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -41,23 +41,23 @@
 
 /* Forward Declarations */ 
 
-#ifndef __IMFCExampleCode_FWD_DEFINED__
-#define __IMFCExampleCode_FWD_DEFINED__
-typedef interface IMFCExampleCode IMFCExampleCode;
+#ifndef __IMFCExampleSnippets_FWD_DEFINED__
+#define __IMFCExampleSnippets_FWD_DEFINED__
+typedef interface IMFCExampleSnippets IMFCExampleSnippets;
 
-#endif 	/* __IMFCExampleCode_FWD_DEFINED__ */
+#endif 	/* __IMFCExampleSnippets_FWD_DEFINED__ */
 
 
-#ifndef __MFCExampleCode_FWD_DEFINED__
-#define __MFCExampleCode_FWD_DEFINED__
+#ifndef __MFCExampleSnippets_FWD_DEFINED__
+#define __MFCExampleSnippets_FWD_DEFINED__
 
 #ifdef __cplusplus
-typedef class MFCExampleCode MFCExampleCode;
+typedef class MFCExampleSnippets MFCExampleSnippets;
 #else
-typedef struct MFCExampleCode MFCExampleCode;
+typedef struct MFCExampleSnippets MFCExampleSnippets;
 #endif /* __cplusplus */
 
-#endif 	/* __MFCExampleCode_FWD_DEFINED__ */
+#endif 	/* __MFCExampleSnippets_FWD_DEFINED__ */
 
 
 #ifdef __cplusplus
@@ -66,61 +66,61 @@ extern "C"{
 
 
 
-#ifndef __MFCExampleCode_LIBRARY_DEFINED__
-#define __MFCExampleCode_LIBRARY_DEFINED__
+#ifndef __MFCExampleSnippets_LIBRARY_DEFINED__
+#define __MFCExampleSnippets_LIBRARY_DEFINED__
 
-/* library MFCExampleCode */
+/* library MFCExampleSnippets */
 /* [version][uuid] */ 
 
 
-EXTERN_C const IID LIBID_MFCExampleCode;
+EXTERN_C const IID LIBID_MFCExampleSnippets;
 
-#ifndef __IMFCExampleCode_DISPINTERFACE_DEFINED__
-#define __IMFCExampleCode_DISPINTERFACE_DEFINED__
+#ifndef __IMFCExampleSnippets_DISPINTERFACE_DEFINED__
+#define __IMFCExampleSnippets_DISPINTERFACE_DEFINED__
 
-/* dispinterface IMFCExampleCode */
+/* dispinterface IMFCExampleSnippets */
 /* [uuid] */ 
 
 
-EXTERN_C const IID DIID_IMFCExampleCode;
+EXTERN_C const IID DIID_IMFCExampleSnippets;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 
     MIDL_INTERFACE("FFD422F2-4B62-4D59-B35A-8CACEE5806CB")
-    IMFCExampleCode : public IDispatch
+    IMFCExampleSnippets : public IDispatch
     {
     };
     
 #else 	/* C style interface */
 
-    typedef struct IMFCExampleCodeVtbl
+    typedef struct IMFCExampleSnippetsVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMFCExampleCode * This,
+            IMFCExampleSnippets * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMFCExampleCode * This);
+            IMFCExampleSnippets * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMFCExampleCode * This);
+            IMFCExampleSnippets * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMFCExampleCode * This,
+            IMFCExampleSnippets * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMFCExampleCode * This,
+            IMFCExampleSnippets * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMFCExampleCode * This,
+            IMFCExampleSnippets * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
@@ -128,7 +128,7 @@ EXTERN_C const IID DIID_IMFCExampleCode;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMFCExampleCode * This,
+            IMFCExampleSnippets * This,
             /* [annotation][in] */ 
             _In_  DISPID dispIdMember,
             /* [annotation][in] */ 
@@ -147,11 +147,11 @@ EXTERN_C const IID DIID_IMFCExampleCode;
             _Out_opt_  UINT *puArgErr);
         
         END_INTERFACE
-    } IMFCExampleCodeVtbl;
+    } IMFCExampleSnippetsVtbl;
 
-    interface IMFCExampleCode
+    interface IMFCExampleSnippets
     {
-        CONST_VTBL struct IMFCExampleCodeVtbl *lpVtbl;
+        CONST_VTBL struct IMFCExampleSnippetsVtbl *lpVtbl;
     };
 
     
@@ -159,26 +159,26 @@ EXTERN_C const IID DIID_IMFCExampleCode;
 #ifdef COBJMACROS
 
 
-#define IMFCExampleCode_QueryInterface(This,riid,ppvObject)	\
+#define IMFCExampleSnippets_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define IMFCExampleCode_AddRef(This)	\
+#define IMFCExampleSnippets_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define IMFCExampleCode_Release(This)	\
+#define IMFCExampleSnippets_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define IMFCExampleCode_GetTypeInfoCount(This,pctinfo)	\
+#define IMFCExampleSnippets_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define IMFCExampleCode_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IMFCExampleSnippets_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define IMFCExampleCode_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IMFCExampleSnippets_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define IMFCExampleCode_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IMFCExampleSnippets_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 #endif /* COBJMACROS */
@@ -187,17 +187,17 @@ EXTERN_C const IID DIID_IMFCExampleCode;
 #endif 	/* C style interface */
 
 
-#endif 	/* __IMFCExampleCode_DISPINTERFACE_DEFINED__ */
+#endif 	/* __IMFCExampleSnippets_DISPINTERFACE_DEFINED__ */
 
 
-EXTERN_C const CLSID CLSID_MFCExampleCode;
+EXTERN_C const CLSID CLSID_MFCExampleSnippets;
 
 #ifdef __cplusplus
 
 class DECLSPEC_UUID("E858A01C-0C76-41E6-A375-C1626C6E0F8C")
-MFCExampleCode;
+MFCExampleSnippets;
 #endif
-#endif /* __MFCExampleCode_LIBRARY_DEFINED__ */
+#endif /* __MFCExampleSnippets_LIBRARY_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */
 

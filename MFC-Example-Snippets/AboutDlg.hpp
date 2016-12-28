@@ -11,16 +11,15 @@ class AboutDlg : public CDialogEx
 
 public: // Ctors et al --------------------------------------------------------
 
-	AboutDlg();
+    AboutDlg();
 
-	enum { IDD = IDD_ABOUTBOX };
+    enum { IDD = IDD_ABOUTBOX };
 
 public: // Overrides ----------------------------------------------------------
 
-	void DoDataExchange(CDataExchange* pDX) override;
+    void DoDataExchange(CDataExchange* pDX) override;
 
 public: // Messages -----------------------------------------------------------
 
-	DECLARE_MESSAGE_MAP();
+    DECLARE_MESSAGE_MAP();
 };
-

@@ -12,9 +12,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}</ProjectGuid>
-    <RootNamespace>MFCExampleCode</RootNamespace>
+    <RootNamespace>MFCExampleSnippets</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
+    <ProjectName>MFC-Example-Snippets</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -57,7 +58,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW;_AFX_ALL_WARNINGS;_ATL_CSTRING_EXPLICIT_CONSTRUCTORS;VC_EXTRALEAN;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_WINDOWS;_CRTDBG_MAP_ALLOC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
-      <PrecompiledHeaderFile>pch-MFC-Example-Code.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch-MFC-Example-Snippets.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -69,8 +70,8 @@
       <MkTypLibCompatible>false</MkTypLibCompatible>
       <ValidateAllParameters>true</ValidateAllParameters>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>$(IntDir)MFCExampleCode.tlb</TypeLibraryName>
-      <HeaderFileName>MFCExampleCode_h.h</HeaderFileName>
+      <TypeLibraryName>$(IntDir)MFCExampleSnippets.tlb</TypeLibraryName>
+      <HeaderFileName>MFCExampleSnippets_h.h</HeaderFileName>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Midl>
     <ResourceCompile>
@@ -95,7 +96,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW;_AFX_ALL_WARNINGS;_ATL_CSTRING_EXPLICIT_CONSTRUCTORS;VC_EXTRALEAN;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
-      <PrecompiledHeaderFile>pch-MFC-Example-Code.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch-MFC-Example-Snippets.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,8 +110,8 @@
       <MkTypLibCompatible>false</MkTypLibCompatible>
       <ValidateAllParameters>true</ValidateAllParameters>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>$(IntDir)MFCExampleCode.tlb</TypeLibraryName>
-      <HeaderFileName>MFCExampleCode_h.h</HeaderFileName>
+      <TypeLibraryName>$(IntDir)MFCExampleSnippets.tlb</TypeLibraryName>
+      <HeaderFileName>MFCExampleSnippets_h.h</HeaderFileName>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Midl>
     <ResourceCompile>
@@ -129,53 +130,53 @@
   <ItemGroup>
     <ClInclude Include="AboutDlg.hpp" />
     <ClInclude Include="Calculate_Prime_Numbers_via_CEvent.hpp" />
-    <ClInclude Include="ExampleCodeDialog.hpp" />
-    <ClInclude Include="ExampleCodeDialogAutoProxy.hpp" />
-    <ClInclude Include="MFCExampleCode_h.h" />
+    <ClInclude Include="ExampleSnippetsDialog.hpp" />
+    <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
+    <ClInclude Include="MFCExampleSnippets_h.h" />
     <ClInclude Include="TheApp.hpp" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="pch-MFC-Example-Code.hpp" />
+    <ClInclude Include="pch-MFC-Example-Snippets.hpp" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Trivial_Usage_of_CEvent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="Calculate_Prime_Numbers_via_CEvent.cpp" />
-    <ClCompile Include="ExampleCodeDialog.cpp" />
-    <ClCompile Include="ExampleCodeDialogAutoProxy.cpp" />
-    <ClCompile Include="MFCExampleCode_i.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    <ClCompile Include="ExampleSnippetsDialog.cpp" />
+    <ClCompile Include="ExampleSnippetsDialogAutoProxy.cpp" />
+    <ClCompile Include="MFCExampleSnippets_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TheApp.cpp" />
-    <ClCompile Include="pch-MFC-Example-Code.cpp">
+    <ClCompile Include="pch-MFC-Example-Snippets.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Trivial_Usage_of_CEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MFC-Example-Code.htm">
+    <None Include="MFC-Example-Snippets.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="MFC-Example-Code.reg" />
-    <None Include="res\MFCExampleCode.rc2" />
+    <None Include="MFC-Example-Snippets.reg" />
+    <None Include="res\MFCExampleSnippets.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="MFCExampleCode.idl" />
+    <Midl Include="MFCExampleSnippets.idl" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="MFC-Example-Code.rc" />
+    <ResourceCompile Include="MFC-Example-Snippets.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\MFC-Example-Code.ico" />
+    <Image Include="res\MFC-Example-Snippets.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="MFC-Example-Code.rc" />
+      <UserProperties RESOURCE_FILE="MFC-Example-Snippets.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -14,16 +14,16 @@ class TheApp : public CWinApp
 {
 public:
 
-	TheApp() {}
+    TheApp() {}
 
 public: // Overrides ----------------------------------------------------------
 
-	BOOL InitInstance() override;
-	int ExitInstance() override;
+    BOOL InitInstance() override;
+    int ExitInstance() override;
 
 public: // Messages -----------------------------------------------------------
 
-	DECLARE_MESSAGE_MAP();
+    DECLARE_MESSAGE_MAP();
 };
 
 extern TheApp theApp;
