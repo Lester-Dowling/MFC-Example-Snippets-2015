@@ -10,6 +10,7 @@
 #include <afxdhtml.h>
 #undef min
 #undef max
+#include <string>
 #include "Resource.h"
 class ExampleSnippetsDialogAutoProxy;
 
@@ -26,12 +27,10 @@ public: // Ctors et al --------------------------------------------------------
 
     enum { IDD = IDD_MFCEXAMPLECODE_DIALOG, IDH = IDR_HTML_MFCEXAMPLECODE_DIALOG };
 
-
 protected: // Overrides -------------------------------------------------------
 
     void DoDataExchange(CDataExchange* pDX) override;
     BOOL OnInitDialog() override;
-    void OnOK() override;
     void OnCancel() override;
 
 protected: // Events ----------------------------------------------------------
@@ -44,6 +43,8 @@ protected: // Implementation --------------------------------------------------
 
     ExampleSnippetsDialogAutoProxy* m_pAutoProxy;
     HICON m_hIcon;
+	std::wostringstream *m_text_out_stream;
+    void write_text_out_stream();
     BOOL CanExit();
 
 public: // Messages -----------------------------------------------------------

@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Generated Files">
       <UniqueIdentifier>{ff6f8ff2-4179-44f7-88c3-e138042a707f}</UniqueIdentifier>
     </Filter>
     <Filter Include="The Examples">
       <UniqueIdentifier>{55d0d3e3-e6f6-4806-8a51-c254b0ef1cef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Code">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="TheApp.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="AboutDlg.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Trivial_Usage_of_CEvent.hpp">
       <Filter>The Examples</Filter>
@@ -40,13 +40,13 @@
       <Filter>The Examples</Filter>
     </ClInclude>
     <ClInclude Include="pch-MFC-Example-Snippets.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ExampleSnippetsDialog.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="MFCExampleSnippets_h.h">
       <Filter>Generated Files</Filter>
@@ -54,10 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Code</Filter>
     </ClCompile>
     <ClCompile Include="AboutDlg.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Code</Filter>
     </ClCompile>
     <ClCompile Include="Trivial_Usage_of_CEvent.cpp">
       <Filter>The Examples</Filter>
@@ -66,13 +66,13 @@
       <Filter>The Examples</Filter>
     </ClCompile>
     <ClCompile Include="pch-MFC-Example-Snippets.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Code</Filter>
     </ClCompile>
     <ClCompile Include="ExampleSnippetsDialog.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Code</Filter>
     </ClCompile>
     <ClCompile Include="ExampleSnippetsDialogAutoProxy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Code</Filter>
     </ClCompile>
     <ClCompile Include="MFCExampleSnippets_i.c">
       <Filter>Generated Files</Filter>
@@ -80,24 +80,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MFCExampleSnippets.rc2">
-      <Filter>Resource Files</Filter>
+      <Filter>Resources</Filter>
     </None>
     <None Include="MFC-Example-Snippets.htm" />
     <None Include="MFC-Example-Snippets.reg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MFC-Example-Snippets.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resources</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFC-Example-Snippets.rc">
-      <Filter>Resource Files</Filter>
+      <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MFCExampleSnippets.idl">
-      <Filter>Source Files</Filter>
+      <Filter>Source Code</Filter>
     </Midl>
   </ItemGroup>
 </Project>

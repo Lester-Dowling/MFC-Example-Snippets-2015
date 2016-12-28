@@ -36,7 +36,7 @@ namespace Example {
 
     public:
 
-        Calculate_Prime_Numbers_via_CEvent();
+        Calculate_Prime_Numbers_via_CEvent(std::wostringstream *text_out_stream);
 
         ~Calculate_Prime_Numbers_via_CEvent();
 

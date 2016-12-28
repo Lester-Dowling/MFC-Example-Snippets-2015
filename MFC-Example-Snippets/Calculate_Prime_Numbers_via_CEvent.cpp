@@ -3,7 +3,7 @@
 namespace Example {
 
 
-    Calculate_Prime_Numbers_via_CEvent::Calculate_Prime_Numbers_via_CEvent()
+    Calculate_Prime_Numbers_via_CEvent::Calculate_Prime_Numbers_via_CEvent(std::wostringstream *text_out_stream)
         : m_pCalcNext(new CEvent(FALSE, FALSE))
         , m_pCalcFinished(new CEvent(FALSE, FALSE))
         , m_pTerminateThread(new CEvent(FALSE, FALSE))
@@ -23,7 +23,7 @@ namespace Example {
                 // Wait for the thread to complete the current task
                 ::WaitForSingleObject(m_pCalcFinished->m_hObject, INFINITE);
                 // Print the result
-                TRACE(_T("The value of m_iCurrentPrime is: %d\n"), m_iCurrentPrime);
+				*text_out_stream << "<p>The value of m_iCurrentPrime is " << m_iCurrentPrime << "</p>";
             }
 
         // Notify the worker thread to exit and wait for it to complete
