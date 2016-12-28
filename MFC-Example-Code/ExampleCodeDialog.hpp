@@ -1,49 +1,56 @@
-
-// ExampleCodeDialog.hpp : header file
-//
-
 #pragma once
-
+#include <afx.h>
+#include <afxwin.h>
+#include <afxext.h>
+#include <atlbase.h>
+#include <atlstr.h>
+#include <afxdisp.h>
+#include <afxdtctl.h>
+#include <afxdialogex.h>
+#include <afxdhtml.h>
+#undef min
+#undef max
+#include "Resource.h"
 class ExampleCodeDialogAutoProxy;
 
 
-// ExampleCodeDialog dialog
 class ExampleCodeDialog : public CDHtmlDialog
 {
-	DECLARE_DYNAMIC(ExampleCodeDialog);
 	friend class ExampleCodeDialogAutoProxy;
 
-// Construction
-public:
-	ExampleCodeDialog(CWnd* pParent = NULL);	// standard constructor
+public: // Ctors et al --------------------------------------------------------
+
+	ExampleCodeDialog(CWnd* pParent = nullptr);
 	virtual ~ExampleCodeDialog();
+	DECLARE_DYNAMIC(ExampleCodeDialog);
 
-// Dialog Data
-#ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCEXAMPLECODE_DIALOG, IDH = IDR_HTML_MFCEXAMPLECODE_DIALOG };
-#endif
 
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
+
+protected: // Overrides -------------------------------------------------------
+
+	void DoDataExchange(CDataExchange* pDX) override;
+	BOOL OnInitDialog() override;
+	void OnOK() override;
+	void OnCancel() override;
+
+protected: // Events ----------------------------------------------------------
 
 	HRESULT OnButtonOK(IHTMLElement *pElement);
 	HRESULT OnButtonCancel(IHTMLElement *pElement);
 
-// Implementation
-protected:
+protected: // Implementation --------------------------------------------------
+
 	ExampleCodeDialogAutoProxy* m_pAutoProxy;
 	HICON m_hIcon;
-
 	BOOL CanExit();
 
-	// Generated message map functions
-	virtual BOOL OnInitDialog();
+public: // Messages -----------------------------------------------------------
+
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnClose();
-	virtual void OnOK();
-	virtual void OnCancel();
-	DECLARE_MESSAGE_MAP()
+	DECLARE_MESSAGE_MAP();
 	DECLARE_DHTML_EVENT_MAP()
 };

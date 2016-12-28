@@ -1,43 +1,23 @@
-
-// MFC-Example-Code.cpp : Defines the class behaviors for the application.
-//
-
-#include "stdafx.h"
-#include "MFC-Example-Code.h"
+#include "pch-MFC-Example-Code.hpp"
+#include "TheApp.hpp"
 #include "ExampleCodeDialog.hpp"
+#include "MFCExampleCode_h.h"
+#include "Resource.h"
+// The one and only TheApp object:
+TheApp theApp;
+const WORD _wVerMajor = 1;
+const WORD _wVerMinor = 0;
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// TheApp
-
 BEGIN_MESSAGE_MAP(TheApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
-
-// TheApp construction
-
-TheApp::TheApp()
-{
-	// TODO: add construction code here,
-	// Place all significant initialization in InitInstance
-}
-
-
-// The one and only TheApp object
-
-TheApp theApp;
-
-const GUID CDECL BASED_CODE _tlid =
-		{ 0x2448A547, 0xEC16, 0x4036, { 0xB4, 0x19, 0x33, 0x67, 0x51, 0x84, 0x92, 0x3F } };
-const WORD _wVerMajor = 1;
-const WORD _wVerMinor = 0;
-
-
-// TheApp initialization
 
 BOOL TheApp::InitInstance()
 {
@@ -100,7 +80,7 @@ BOOL TheApp::InitInstance()
 	else if (cmdInfo.m_nShellCommand == CCommandLineInfo::AppUnregister)
 	{
 		COleObjectFactory::UpdateRegistryAll(FALSE);
-		AfxOleUnregisterTypeLib(_tlid, _wVerMajor, _wVerMinor);
+		AfxOleUnregisterTypeLib(LIBID_MFCExampleCode, _wVerMajor, _wVerMinor);
 		return FALSE;
 	}
 	// App was launched standalone or with other switches (e.g. /Register
@@ -108,7 +88,7 @@ BOOL TheApp::InitInstance()
 	else
 	{
 		COleObjectFactory::UpdateRegistryAll();
-		AfxOleRegisterTypeLib(AfxGetInstanceHandle(), _tlid);
+		AfxOleRegisterTypeLib(AfxGetInstanceHandle(), LIBID_MFCExampleCode);
 		if (cmdInfo.m_nShellCommand == CCommandLineInfo::AppRegister)
 			return FALSE;
 	}
@@ -133,7 +113,7 @@ BOOL TheApp::InitInstance()
 	}
 
 	// Delete the shell manager created above.
-	if (pShellManager != NULL)
+	if (pShellManager != nullptr)
 	{
 		delete pShellManager;
 	}
@@ -143,9 +123,10 @@ BOOL TheApp::InitInstance()
 	return FALSE;
 }
 
+
+
 int TheApp::ExitInstance()
 {
 	AfxOleTerm(FALSE);
-
 	return CWinApp::ExitInstance();
 }

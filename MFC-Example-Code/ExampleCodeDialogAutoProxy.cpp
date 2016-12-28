@@ -1,25 +1,37 @@
-
-// ExampleCodeDialogAutoProxy.cpp : implementation file
-//
-
-#include "stdafx.h"
-#include "MFC-Example-Code.h"
+#include "pch-MFC-Example-Code.hpp"
+#include "TheApp.hpp"
 #include "ExampleCodeDialogAutoProxy.hpp"
 #include "ExampleCodeDialog.hpp"
+#include "MFCExampleCode_h.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// ExampleCodeDialogAutoProxy
+IMPLEMENT_DYNCREATE(ExampleCodeDialogAutoProxy, CCmdTarget);
 
-IMPLEMENT_DYNCREATE(ExampleCodeDialogAutoProxy, CCmdTarget)
+
+BEGIN_MESSAGE_MAP(ExampleCodeDialogAutoProxy, CCmdTarget)
+END_MESSAGE_MAP();
+
+
+BEGIN_DISPATCH_MAP(ExampleCodeDialogAutoProxy, CCmdTarget)
+END_DISPATCH_MAP();
+
+
+BEGIN_INTERFACE_MAP(ExampleCodeDialogAutoProxy, CCmdTarget)
+	INTERFACE_PART(ExampleCodeDialogAutoProxy, DIID_IMFCExampleCode, Dispatch)
+END_INTERFACE_MAP();
+
+
+IMPLEMENT_OLECREATE2(ExampleCodeDialogAutoProxy, "MFCExampleCode.Application", CLSID_MFCExampleCode);
+
 
 ExampleCodeDialogAutoProxy::ExampleCodeDialogAutoProxy()
 {
 	EnableAutomation();
-	
+
 	// To keep the application running as long as an automation 
 	//	object is active, the constructor calls AfxOleLockApp.
 	AfxOleLockApp();
@@ -40,15 +52,19 @@ ExampleCodeDialogAutoProxy::ExampleCodeDialogAutoProxy()
 	}
 }
 
+
+
 ExampleCodeDialogAutoProxy::~ExampleCodeDialogAutoProxy()
 {
 	// To terminate the application when all objects created with
 	// 	with automation, the destructor calls AfxOleUnlockApp.
 	//  Among other things, this will destroy the main dialog
-	if (m_pDialog != NULL)
-		m_pDialog->m_pAutoProxy = NULL;
+	if (m_pDialog != nullptr)
+		m_pDialog->m_pAutoProxy = nullptr;
 	AfxOleUnlockApp();
 }
+
+
 
 void ExampleCodeDialogAutoProxy::OnFinalRelease()
 {
@@ -59,28 +75,3 @@ void ExampleCodeDialogAutoProxy::OnFinalRelease()
 
 	CCmdTarget::OnFinalRelease();
 }
-
-BEGIN_MESSAGE_MAP(ExampleCodeDialogAutoProxy, CCmdTarget)
-END_MESSAGE_MAP()
-
-BEGIN_DISPATCH_MAP(ExampleCodeDialogAutoProxy, CCmdTarget)
-END_DISPATCH_MAP()
-
-// Note: we add support for IID_IMFCExampleCode to support typesafe binding
-//  from VBA.  This IID must match the GUID that is attached to the 
-//  dispinterface in the .IDL file.
-
-// {FFD422F2-4B62-4D59-B35A-8CACEE5806CB}
-static const IID IID_IMFCExampleCode =
-{ 0xFFD422F2, 0x4B62, 0x4D59, { 0xB3, 0x5A, 0x8C, 0xAC, 0xEE, 0x58, 0x6, 0xCB } };
-
-BEGIN_INTERFACE_MAP(ExampleCodeDialogAutoProxy, CCmdTarget)
-	INTERFACE_PART(ExampleCodeDialogAutoProxy, IID_IMFCExampleCode, Dispatch)
-END_INTERFACE_MAP()
-
-// The IMPLEMENT_OLECREATE2 macro is defined in StdAfx.h of this project
-// {E858A01C-0C76-41E6-A375-C1626C6E0F8C}
-IMPLEMENT_OLECREATE2(ExampleCodeDialogAutoProxy, "MFCExampleCode.Application", 0xe858a01c, 0xc76, 0x41e6, 0xa3, 0x75, 0xc1, 0x62, 0x6c, 0x6e, 0xf, 0x8c)
-
-
-// ExampleCodeDialogAutoProxy message handlers

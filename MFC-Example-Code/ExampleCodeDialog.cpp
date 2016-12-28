@@ -1,88 +1,57 @@
-
-// ExampleCodeDialog.cpp : implementation file
-//
-
-#include "stdafx.h"
-#include "MFC-Example-Code.h"
+#include "pch-MFC-Example-Code.hpp"
+#include "TheApp.hpp"
 #include "ExampleCodeDialog.hpp"
 #include "ExampleCodeDialogAutoProxy.hpp"
-#include "afxdialogex.h"
+#include "AboutDlg.hpp"
+#include "Trivial_Usage_of_CEvent.hpp"
+#include "Resource.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CAboutDlg dialog used for App About
-
-class CAboutDlg : public CDialogEx
-{
-public:
-	CAboutDlg();
-
-// Dialog Data
-#ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_ABOUTBOX };
-#endif
-
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-
-// Implementation
-protected:
-	DECLARE_MESSAGE_MAP()
-};
-
-CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
-{
-}
-
-void CAboutDlg::DoDataExchange(CDataExchange* pDX)
-{
-	CDialogEx::DoDataExchange(pDX);
-}
-
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-END_MESSAGE_MAP()
-
-
-// ExampleCodeDialog dialog
-
-BEGIN_DHTML_EVENT_MAP(ExampleCodeDialog)
-	DHTML_EVENT_ONCLICK(_T("ButtonOK"), OnButtonOK)
-	DHTML_EVENT_ONCLICK(_T("ButtonCancel"), OnButtonCancel)
-END_DHTML_EVENT_MAP()
-
 IMPLEMENT_DYNAMIC(ExampleCodeDialog, CDHtmlDialog);
 
-ExampleCodeDialog::ExampleCodeDialog(CWnd* pParent /*=NULL*/)
+
+BEGIN_DHTML_EVENT_MAP(ExampleCodeDialog)
+	DHTML_EVENT_ONCLICK(L"ButtonOK", OnButtonOK)
+	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
+END_DHTML_EVENT_MAP();
+
+
+BEGIN_MESSAGE_MAP(ExampleCodeDialog, CDHtmlDialog)
+	ON_WM_SYSCOMMAND()
+	ON_WM_CLOSE()
+END_MESSAGE_MAP();
+
+
+ExampleCodeDialog::ExampleCodeDialog(CWnd* pParent /*=nullptr*/)
 	: CDHtmlDialog(IDD_MFCEXAMPLECODE_DIALOG, IDR_HTML_MFCEXAMPLECODE_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m_pAutoProxy = NULL;
+	m_pAutoProxy = nullptr;
 }
+
+
 
 ExampleCodeDialog::~ExampleCodeDialog()
 {
 	// If there is an automation proxy for this dialog, set
-	//  its back pointer to this dialog to NULL, so it knows
+	//  its back pointer to this dialog to nullptr, so it knows
 	//  the dialog has been deleted.
-	if (m_pAutoProxy != NULL)
-		m_pAutoProxy->m_pDialog = NULL;
+	if (m_pAutoProxy != nullptr)
+		m_pAutoProxy->m_pDialog = nullptr;
 }
+
+
 
 void ExampleCodeDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDHtmlDialog::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(ExampleCodeDialog, CDHtmlDialog)
-	ON_WM_SYSCOMMAND()
-	ON_WM_CLOSE()
-END_MESSAGE_MAP()
 
-
-// ExampleCodeDialog message handlers
 
 BOOL ExampleCodeDialog::OnInitDialog()
 {
@@ -95,7 +64,7 @@ BOOL ExampleCodeDialog::OnInitDialog()
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL)
+	if (pSysMenu != nullptr)
 	{
 		BOOL bNameValid;
 		CString strAboutMenu;
@@ -118,11 +87,13 @@ BOOL ExampleCodeDialog::OnInitDialog()
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
+
+
 void ExampleCodeDialog::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
-		CAboutDlg dlgAbout;
+		AboutDlg dlgAbout;
 		dlgAbout.DoModal();
 	}
 	else
@@ -131,9 +102,7 @@ void ExampleCodeDialog::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// If you add a minimize button to your dialog, you will need the code below
-//  to draw the icon.  For MFC applications using the document/view model,
-//  this is automatically done for you by the framework.
+
 
 void ExampleCodeDialog::OnPaint()
 {
@@ -160,18 +129,14 @@ void ExampleCodeDialog::OnPaint()
 	}
 }
 
-// The system calls this function to obtain the cursor to display while the user drags
-//  the minimized window.
+
+
 HCURSOR ExampleCodeDialog::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-// Automation servers should not exit when a user closes the UI
-//  if a controller still holds on to one of its objects.  These
-//  message handlers make sure that if the proxy is still in use,
-//  then the UI is hidden but the dialog remains around if it
-//  is dismissed.
+
 
 void ExampleCodeDialog::OnClose()
 {
@@ -179,11 +144,27 @@ void ExampleCodeDialog::OnClose()
 		CDHtmlDialog::OnClose();
 }
 
+
+
 void ExampleCodeDialog::OnOK()
 {
-	if (CanExit())
-		CDHtmlDialog::OnOK();
+	Example::Trivial_Usage_of_CEvent::run();
+
+	IHTMLElement* pElement = NULL;
+	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != NULL)
+	{
+		// Get element html
+		BSTR html = SysAllocString(_T(""));
+		pElement->get_outerHTML(&html);
+
+		// Update element html
+		CString updatedHTML;
+		updatedHTML.Format(_T("<div ID=\"text-out\" >&nbsp; %s </div>"), _T("Okay, done."));
+		pElement->put_outerHTML(updatedHTML.AllocSysString());
+	}
 }
+
+
 
 void ExampleCodeDialog::OnCancel()
 {
@@ -191,25 +172,30 @@ void ExampleCodeDialog::OnCancel()
 		CDHtmlDialog::OnCancel();
 }
 
+
+
 BOOL ExampleCodeDialog::CanExit()
 {
 	// If the proxy object is still around, then the automation
 	//  controller is still holding on to this application.  Leave
 	//  the dialog around, but hide its UI.
-	if (m_pAutoProxy != NULL)
+	if (m_pAutoProxy != nullptr)
 	{
 		ShowWindow(SW_HIDE);
 		return FALSE;
 	}
-
 	return TRUE;
 }
+
+
 
 HRESULT ExampleCodeDialog::OnButtonOK(IHTMLElement* /*pElement*/)
 {
 	OnOK();
 	return S_OK;
 }
+
+
 
 HRESULT ExampleCodeDialog::OnButtonCancel(IHTMLElement* /*pElement*/)
 {

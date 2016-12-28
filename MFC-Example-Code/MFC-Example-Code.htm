@@ -1,20 +1,39 @@
 <HTML>
 <HEAD>
 </HEAD>
-<BODY ID=ExampleCodeDialog BGCOLOR=LIGHTGREY style="font-family:MS Shell Dlg;font-size:8">
+<BODY ID=ExampleCodeDialog BGCOLOR="white" style="font-family:'Source Code Pro';font-size:12pt;">
 
-<TABLE WIDTH=100% HEIGHT=100%>
-<TR WIDTH=100% HEIGHT=45%>
-<TD ALIGN=CENTER VALIGN=BOTTOM>
-TODO: Place controls here.
-</TD>
-</TR>
-<TR WIDTH=100% HEIGHT=100%>
-<TD ALIGN=RIGHT VALIGN=BOTTOM>
-<BUTTON STYLE="WIDTH:100" ID="ButtonOK">OK</BUTTON>&nbsp;<BUTTON STYLE="WIDTH:100" ID="ButtonCancel">Cancel</BUTTON>
-</TD>
-</TR>
-</TABLE>
+    <TABLE STYLE="WIDTH:100%; HEIGHT:100%;">
+        <TR WIDTH="100%" HEIGHT="90%">
+            <!-- First Column -->
+            <TD ALIGN="center" VALIGN="top" WIDTH="30%">
+                <h4>
+                    Examples
+                </h4>
+                <BUTTON ID="ButtonOK">
+                    Trivial Usage of CEvent
+                </BUTTON>
+                &nbsp;
+            </TD>
+            <!-- Second Column: display area -->
+            <TD ALIGN="center" VALIGN="top" WIDTH="70%" style="border-width: 2px; border-color: black; border:solid;">
+                <div ID="text-out">
+                    &nbsp;
+                </div>
+            </TD>
+        </TR>
+
+        <!-- Last row for Quit button. -->
+        <TR WIDTH="100%">
+            <TD ALIGN="right" VALIGN="middle"></TD>
+            <TD ALIGN="right" VALIGN="middle">
+                <BUTTON STYLE="WIDTH:100px" ID="ButtonCancel">
+                    Quit
+                </BUTTON>
+            </TD>
+        </TR>
+
+    </TABLE>
 
 </BODY>
 </HTML>

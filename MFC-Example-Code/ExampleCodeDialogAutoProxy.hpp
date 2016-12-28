@@ -1,43 +1,41 @@
-
-// ExampleCodeDialogAutoProxy.hpp: header file
-//
-
 #pragma once
-
+#include <afx.h>
+#include <afxwin.h>
+#include <afxext.h>
+#include <atlbase.h>
+#include <atlstr.h>
+#include <afxdisp.h>
+#include <afxdtctl.h>
+#include <afxdialogex.h>
+#include <afxdhtml.h>
+#undef min
+#undef max
+#include "Resource.h"
 class ExampleCodeDialog;
 
 
-// ExampleCodeDialogAutoProxy command target
-
 class ExampleCodeDialogAutoProxy : public CCmdTarget
 {
+
+protected: // Ctors et al -----------------------------------------------------
+
+	ExampleCodeDialogAutoProxy();
+	virtual ~ExampleCodeDialogAutoProxy();
 	DECLARE_DYNCREATE(ExampleCodeDialogAutoProxy)
 
-	ExampleCodeDialogAutoProxy();           // protected constructor used by dynamic creation
+public: // State --------------------------------------------------------------
 
-// Attributes
-public:
 	ExampleCodeDialog* m_pDialog;
 
-// Operations
-public:
+public: // Overrides ----------------------------------------------------------
 
-// Overrides
-	public:
-	virtual void OnFinalRelease();
+	void OnFinalRelease() override;
 
-// Implementation
-protected:
-	virtual ~ExampleCodeDialogAutoProxy();
+public: // Messages -----------------------------------------------------------
 
-	// Generated message map functions
-
-	DECLARE_MESSAGE_MAP()
-	DECLARE_OLECREATE(ExampleCodeDialogAutoProxy)
-
-	// Generated OLE dispatch map functions
-
-	DECLARE_DISPATCH_MAP()
-	DECLARE_INTERFACE_MAP()
+	DECLARE_MESSAGE_MAP();
+	DECLARE_OLECREATE(ExampleCodeDialogAutoProxy);
+	DECLARE_DISPATCH_MAP();
+	DECLARE_INTERFACE_MAP();
 };
 

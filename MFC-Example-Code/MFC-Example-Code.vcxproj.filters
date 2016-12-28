@@ -13,21 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{ff6f8ff2-4179-44f7-88c3-e138042a707f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="The Examples">
+      <UniqueIdentifier>{55d0d3e3-e6f6-4806-8a51-c254b0ef1cef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MFC-Example-Code.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ExampleCodeDialog.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ExampleCodeDialogAutoProxy.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
@@ -36,19 +33,43 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pch-MFC-Example-Code.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TheApp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutDlg.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MFCExampleCode_h.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trivial_Usage_of_CEvent.hpp">
+      <Filter>The Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MFC-Example-Code.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ExampleCodeDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExampleCodeDialogAutoProxy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="pch-MFC-Example-Code.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TheApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MFCExampleCode_i.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trivial_Usage_of_CEvent.cpp">
+      <Filter>The Examples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
