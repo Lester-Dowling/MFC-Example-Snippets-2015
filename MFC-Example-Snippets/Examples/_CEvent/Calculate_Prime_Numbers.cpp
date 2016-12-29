@@ -1,40 +1,18 @@
 #include "pch-MFC-Example-Snippets.hpp"
-#include "Calculate_Prime_Numbers_via_CEvent.hpp"
-namespace Example {
+#include "Calculate_Prime_Numbers.hpp"
+namespace Examples {
 
 
-    Calculate_Prime_Numbers_via_CEvent::Calculate_Prime_Numbers_via_CEvent(std::wostringstream *text_out_stream)
+    _CEvent::Calculate_Prime_Numbers::Calculate_Prime_Numbers(std::wostringstream *text_out_stream)
         : m_pCalcNext(new CEvent(FALSE, FALSE))
         , m_pCalcFinished(new CEvent(FALSE, FALSE))
         , m_pTerminateThread(new CEvent(FALSE, FALSE))
         , m_iCurrentPrime(0)
-    {
-        // Create a thread that will calculate the prime numbers
-        CWinThread* pThread;
-        pThread = ::AfxBeginThread(&PrimeCalcProc, this, 0, 0, CREATE_SUSPENDED, NULL);
-        pThread->m_bAutoDelete = FALSE;
-        pThread->ResumeThread();
-
-        // Calcuate the first 10 prime numbers in the series on the thread
-        for (UINT i = 0; i < 10; i++)
-            {
-                // Signal the thread to do the next work item
-                m_pCalcNext->SetEvent();
-                // Wait for the thread to complete the current task
-                ::WaitForSingleObject(m_pCalcFinished->m_hObject, INFINITE);
-                // Print the result
-				*text_out_stream << "<p>The value of m_iCurrentPrime is " << m_iCurrentPrime << "</p>";
-            }
-
-        // Notify the worker thread to exit and wait for it to complete
-        m_pTerminateThread->SetEvent();
-        ::WaitForSingleObject(pThread->m_hThread, INFINITE);
-        delete pThread;
-    }
+    {}
 
 
 
-    Calculate_Prime_Numbers_via_CEvent::~Calculate_Prime_Numbers_via_CEvent()
+    _CEvent::Calculate_Prime_Numbers::~Calculate_Prime_Numbers()
     {
         delete m_pCalcNext;
         delete m_pCalcFinished;
@@ -43,7 +21,36 @@ namespace Example {
 
 
 
-    BOOL Calculate_Prime_Numbers_via_CEvent::IsPrime(INT ThisPrime)
+	void _CEvent::Calculate_Prime_Numbers::run()
+	{
+		// Create a thread that will calculate the prime numbers
+		CWinThread* pThread;
+		pThread = ::AfxBeginThread(&PrimeCalcProc, this, 0, 0, CREATE_SUSPENDED, NULL);
+		pThread->m_bAutoDelete = FALSE;
+		pThread->ResumeThread();
+
+		// Calcuate the first 10 prime numbers in the series on the thread
+		for (UINT i = 0; i < 10; i++)
+		{
+			// Signal the thread to do the next work item
+			m_pCalcNext->SetEvent();
+			// Wait for the thread to complete the current task
+			::WaitForSingleObject(m_pCalcFinished->m_hObject, INFINITE);
+			// Print the result
+			std::wostringstream oss;
+			oss << "The value of m_iCurrentPrime is " << m_iCurrentPrime;
+			m_text_output(oss.str());
+		}
+
+		// Notify the worker thread to exit and wait for it to complete
+		m_pTerminateThread->SetEvent();
+		::WaitForSingleObject(pThread->m_hThread, INFINITE);
+		delete pThread;
+	}
+
+
+
+	BOOL _CEvent::Calculate_Prime_Numbers::IsPrime(INT ThisPrime)
     {
         if (ThisPrime < 2)
             return FALSE;
@@ -58,7 +65,7 @@ namespace Example {
 
 
 
-    INT Calculate_Prime_Numbers_via_CEvent::NextPrime(INT ThisPrime)
+    INT _CEvent::Calculate_Prime_Numbers::NextPrime(INT ThisPrime)
     {
         while (TRUE)
             {
@@ -71,11 +78,10 @@ namespace Example {
 
 
 
-    UINT Calculate_Prime_Numbers_via_CEvent::PrimeCalcProc(LPVOID lpParameter)
+    UINT _CEvent::Calculate_Prime_Numbers::PrimeCalcProc(LPVOID lpParameter)
     {
-        Calculate_Prime_Numbers_via_CEvent* pThis = static_cast<Calculate_Prime_Numbers_via_CEvent*>(lpParameter);
+        Calculate_Prime_Numbers* pThis = static_cast<Calculate_Prime_Numbers*>(lpParameter);
         VERIFY(pThis != NULL);
-
         VERIFY(pThis->m_pCalcNext != NULL);
         VERIFY(pThis->m_pCalcFinished != NULL);
         VERIFY(pThis->m_pTerminateThread != NULL);

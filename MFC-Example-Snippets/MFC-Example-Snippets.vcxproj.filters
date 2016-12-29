@@ -4,9 +4,6 @@
     <Filter Include="Generated Files">
       <UniqueIdentifier>{ff6f8ff2-4179-44f7-88c3-e138042a707f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="The Examples">
-      <UniqueIdentifier>{55d0d3e3-e6f6-4806-8a51-c254b0ef1cef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -18,6 +15,15 @@
     <Filter Include="Source Code">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{e8647525-1977-4f9c-bcb5-41fe70bfc62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{55d0d3e3-e6f6-4806-8a51-c254b0ef1cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Examples\_CEvent">
+      <UniqueIdentifier>{63b97101-918b-4848-9b81-1ab5911fde53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,12 +39,6 @@
     <ClInclude Include="AboutDlg.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Trivial_Usage_of_CEvent.hpp">
-      <Filter>The Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Calculate_Prime_Numbers_via_CEvent.hpp">
-      <Filter>The Examples</Filter>
-    </ClInclude>
     <ClInclude Include="pch-MFC-Example-Snippets.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -51,6 +51,15 @@
     <ClInclude Include="MFCExampleSnippets_h.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\Text_Output.hpp">
+      <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp">
+      <Filter>Examples\_CEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp">
+      <Filter>Examples\_CEvent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -58,12 +67,6 @@
     </ClCompile>
     <ClCompile Include="AboutDlg.cpp">
       <Filter>Source Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Trivial_Usage_of_CEvent.cpp">
-      <Filter>The Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Calculate_Prime_Numbers_via_CEvent.cpp">
-      <Filter>The Examples</Filter>
     </ClCompile>
     <ClCompile Include="pch-MFC-Example-Snippets.cpp">
       <Filter>Source Code</Filter>
@@ -76,6 +79,12 @@
     </ClCompile>
     <ClCompile Include="MFCExampleSnippets_i.c">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CEvent\Calculate_Prime_Numbers.cpp">
+      <Filter>Examples\_CEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp">
+      <Filter>Examples\_CEvent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

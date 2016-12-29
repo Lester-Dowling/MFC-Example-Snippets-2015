@@ -3,8 +3,8 @@
 #include "ExampleSnippetsDialog.hpp"
 #include "ExampleSnippetsDialogAutoProxy.hpp"
 #include "AboutDlg.hpp"
-#include "Trivial_Usage_of_CEvent.hpp"
-#include "Calculate_Prime_Numbers_via_CEvent.hpp"
+#include "Examples/_CEvent/Trivial_Usage.hpp"
+#include "Examples/_CEvent/Calculate_Prime_Numbers.hpp"
 #include "Resource.h"
 
 #ifdef _DEBUG
@@ -22,30 +22,71 @@ END_MESSAGE_MAP();
 
 
 BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
-	DHTML_EVENT_ONCLICK(L"Trivial_Usage_of_CEvent", On_Trivial_Usage_of_CEvent)
-	DHTML_EVENT_ONCLICK(L"Calculate_Prime_Numbers_via_CEvent", On_Calculate_Prime_Numbers_via_CEvent)
+	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Trivial_Usage", On_CEvent_Trivial_Usage)
+	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Calculate_Prime_Numbers", On_CEvent_Calculate_Prime_Numbers)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
 
 
-HRESULT ExampleSnippetsDialog::On_Trivial_Usage_of_CEvent(IHTMLElement* /*pElement*/)
+void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
+{
+	*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
+	write_text_out_stream();
+}
+
+
+
+void ExampleSnippetsDialog::write_text_out_stream()
+{
+
+	IHTMLElement* pElement = NULL;
+	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != NULL)
+	{
+		// Get element html
+		BSTR html = SysAllocString(_T(""));
+		// pElement->get_outerHTML(&html);
+		pElement->get_innerHTML(&html);
+
+		// Update element html
+		//CString updatedHTML;
+		// updatedHTML.Format(_T("<div ID=\"text-out\" >&nbsp; %s </div>"), _T("Okay, done."));
+		//updatedHTML.Format(L"&nbsp; %s", L"Okay, all done.");
+		BSTR updatedHTML = ::SysAllocString(m_text_out_stream->str().c_str());
+		pElement->put_innerHTML(updatedHTML);
+
+	}
+}
+
+
+
+HRESULT ExampleSnippetsDialog::On_CEvent_Trivial_Usage(IHTMLElement*)
 {
 	m_text_out_stream = new std::wostringstream;
-	Example::Trivial_Usage_of_CEvent::run();
-	*m_text_out_stream << "<p>Okay, finished trivial usage of CEvent.</p>";
-	write_text_out_stream();
+	Examples::_CEvent::Trivial_Usage example;
+	m_text_out_connection = example.connect(boost::bind(&ExampleSnippetsDialog::write_text_out, this, _1));
+
+	example.run();
+
+	*m_text_out_stream << "<p>Finished: " << __FUNCTION__ << "</p>"; write_text_out_stream();
+	example.disconnect(m_text_out_connection);
+	delete m_text_out_stream; m_text_out_stream = nullptr;
 	return S_OK;
 }
 
 
 
-HRESULT ExampleSnippetsDialog::On_Calculate_Prime_Numbers_via_CEvent(IHTMLElement * pElement)
+HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
 {
 	m_text_out_stream = new std::wostringstream;
-	Example::Calculate_Prime_Numbers_via_CEvent example{ m_text_out_stream };
-	*m_text_out_stream << "<p>Okay, finished calculation of prime numbers via CEvent.</p>";
-	write_text_out_stream();
+	Examples::_CEvent::Calculate_Prime_Numbers example{ m_text_out_stream };
+	m_text_out_connection = example.connect(boost::bind(&ExampleSnippetsDialog::write_text_out, this, _1));
+
+	example.run();
+
+	*m_text_out_stream << "<p>Finished: " << __FUNCTION__ << "</p>"; write_text_out_stream();
+	example.disconnect(m_text_out_connection);
+	delete m_text_out_stream; m_text_out_stream = nullptr;
 	return S_OK;
 }
 
@@ -167,29 +208,6 @@ void ExampleSnippetsDialog::OnClose()
 {
 	if (CanExit())
 		CDHtmlDialog::OnClose();
-}
-
-
-
-void ExampleSnippetsDialog::write_text_out_stream()
-{
-
-	IHTMLElement* pElement = NULL;
-	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != NULL)
-	{
-		// Get element html
-		BSTR html = SysAllocString(_T(""));
-		// pElement->get_outerHTML(&html);
-		pElement->get_innerHTML(&html);
-
-		// Update element html
-		//CString updatedHTML;
-		// updatedHTML.Format(_T("<div ID=\"text-out\" >&nbsp; %s </div>"), _T("Okay, done."));
-		//updatedHTML.Format(L"&nbsp; %s", L"Okay, all done.");
-		BSTR updatedHTML = ::SysAllocString(m_text_out_stream->str().c_str());
-		pElement->put_innerHTML(updatedHTML);
-		delete m_text_out_stream; m_text_out_stream = nullptr;
-	}
 }
 
 

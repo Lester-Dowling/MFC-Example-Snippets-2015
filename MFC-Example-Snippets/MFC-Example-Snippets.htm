@@ -1,43 +1,86 @@
 <HTML>
 <HEAD>
+    <style type="text/css">
+        p {
+            padding: 2px;
+            margin: 0;
+            border: none;
+            font-size: 12pt;
+            font-family: 'Source Code Pro';
+        }
+
+        body {
+            font-size: 12pt;
+            font-family: 'Source Code Pro';
+            background-color: white;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            empty-cells: show;
+            width: 100%;
+            height: 100%;
+        }
+
+        td, th {
+            vertical-align: top;
+            padding: 3px;
+        }
+
+        tr {
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            clear: both;
+        }
+
+        button {
+            width: 100%;
+            font-size: 11pt;
+        }
+
+        #text-out {
+            padding: 4px;
+            font-size: 12pt;
+            font-family: 'Source Code Pro';
+        }
+
+        #text-out-cell {
+            border-width: 3px;
+            border-color: black;
+            border: solid;
+            font-size: 12pt;
+            font-family: 'Source Code Pro';
+        }
+    </style>
 </HEAD>
-<BODY ID=ExampleSnippetsDialog BGCOLOR="white" style="font-family:'Source Snippets Pro';font-size:12pt;">
-
-    <TABLE STYLE="WIDTH:100%; HEIGHT:100%;">
-        <TR WIDTH="100%" HEIGHT="90%">
+<BODY ID=ExampleSnippetsDialog>
+    <TABLE>
+        <TR HEIGHT="90%">
             <!-- First Column -->
-            <TD ALIGN="center" VALIGN="top" WIDTH="30%">
-                <h4>
-                    Examples
-                </h4>
-                <BUTTON ID="Trivial_Usage_of_CEvent">
-                    Trivial Usage of CEvent
-                </BUTTON>
-                &nbsp;
-                <BUTTON ID="Calculate_Prime_Numbers_via_CEvent">
-                    Calculate Prime Numbers via CEvent
-                </BUTTON>
-                &nbsp;
+            <TD ALIGN="center" WIDTH="30%">
+                <h4> Examples </h4>
+                <p>
+                    <BUTTON ID="Examples::_CEvent::Trivial_Usage"> Trivial Usage of CEvent </BUTTON>
+                </p>
+                <p>
+                    <BUTTON ID="Examples::_CEvent::Calculate_Prime_Numbers"> Calculate Prime Numbers via CEvent </BUTTON>
+                </p>
             </TD>
-            <!-- Second Column: display area -->
-            <TD ALIGN="center" VALIGN="top" WIDTH="70%" style="border-width: 2px; border-color: black; border:solid;">
-                <div ID="text-out">
-                    &nbsp;
-                </div>
+            <!-- Second Column: text out display area -->
+            <TD id="text-out-cell" ALIGN="left" WIDTH="70%">
+                <div ID="text-out"> &nbsp; </div>
             </TD>
         </TR>
-
         <!-- Last row for Quit button. -->
-        <TR WIDTH="100%">
-            <TD ALIGN="right" VALIGN="middle"></TD>
-            <TD ALIGN="right" VALIGN="middle">
-                <BUTTON STYLE="WIDTH:100px" ID="ButtonCancel">
-                    <b>Quit</b>
-                </BUTTON>
+        <TR>
+            <TD> </TD>
+            <TD align="right" style="vertical-align:middle;">
+                <BUTTON ID="ButtonCancel" STYLE="WIDTH:100px"> <b> Quit</b> </BUTTON>
             </TD>
         </TR>
-
     </TABLE>
-
 </BODY>
 </HTML>

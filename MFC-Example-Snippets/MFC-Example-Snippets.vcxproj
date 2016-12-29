@@ -40,9 +40,11 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Boost-Debug-x64-0.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Boost-Release-x64-0.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -59,6 +61,7 @@
       <PreprocessorDefinitions>ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW;_AFX_ALL_WARNINGS;_ATL_CSTRING_EXPLICIT_CONSTRUCTORS;VC_EXTRALEAN;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_WINDOWS;_CRTDBG_MAP_ALLOC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <PrecompiledHeaderFile>pch-MFC-Example-Snippets.hpp</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -97,6 +100,7 @@
       <PreprocessorDefinitions>ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW;_AFX_ALL_WARNINGS;_ATL_CSTRING_EXPLICIT_CONSTRUCTORS;VC_EXTRALEAN;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <PrecompiledHeaderFile>pch-MFC-Example-Snippets.hpp</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,21 +133,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.hpp" />
-    <ClInclude Include="Calculate_Prime_Numbers_via_CEvent.hpp" />
     <ClInclude Include="ExampleSnippetsDialog.hpp" />
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
+    <ClInclude Include="Examples\Text_Output.hpp" />
+    <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp" />
+    <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp" />
     <ClInclude Include="MFCExampleSnippets_h.h" />
     <ClInclude Include="TheApp.hpp" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="pch-MFC-Example-Snippets.hpp" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Trivial_Usage_of_CEvent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
-    <ClCompile Include="Calculate_Prime_Numbers_via_CEvent.cpp" />
     <ClCompile Include="ExampleSnippetsDialog.cpp" />
     <ClCompile Include="ExampleSnippetsDialogAutoProxy.cpp" />
+    <ClCompile Include="Examples\_CEvent\Calculate_Prime_Numbers.cpp" />
+    <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp" />
     <ClCompile Include="MFCExampleSnippets_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -153,7 +159,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Trivial_Usage_of_CEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MFC-Example-Snippets.htm">
