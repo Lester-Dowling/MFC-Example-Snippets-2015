@@ -60,6 +60,8 @@ void ExampleSnippetsDialog::write_text_out_stream()
 static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
 {
 	auto dialog = reinterpret_cast<ExampleSnippetsDialog*>(lpParameter);
+	if (dialog == nullptr || !dialog->IsKindOf(RUNTIME_CLASS(ExampleSnippetsDialog)))
+		return 1;   // dialog is not valid  
 	dialog->runnable()->run();
 	// Terminate the thread:
 	dialog->clean_up_example();
