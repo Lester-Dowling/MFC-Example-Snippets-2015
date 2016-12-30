@@ -19,7 +19,7 @@ IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
 BEGIN_MESSAGE_MAP(ExampleSnippetsDialog, CDHtmlDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_CLOSE()
-	ON_WM_TIMER()
+	ON_MESSAGE(static_cast<UINT>(MSG::more_text_out), &OnMoreTextOut)
 END_MESSAGE_MAP();
 
 
@@ -31,6 +31,18 @@ END_DHTML_EVENT_MAP();
 
 
 
+LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
+{
+	// Ensure this happens on the UI thread:
+	if (m_ui_thread_id == GetCurrentThreadId())
+	{
+		write_text_out_stream();
+	}
+	return 0;
+}
+
+
+
 /*slot*/ void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
 {
 	CSingleLock text_out_lock(&m_text_out_mutex);
@@ -38,7 +50,12 @@ END_DHTML_EVENT_MAP();
 	if (text_out_lock.IsLocked())  // Mutex has been locked.
 	{
 		*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
-		more_text_out = true;
+		//more_text_out = true;
+		m_text_out_finished->ResetEvent();
+		ASSERT(0 < m_ui_thread_id);
+		const WPARAM wParam = 0;
+		const LPARAM lParam = 0;
+		PostMessage(static_cast<UINT>(MSG::more_text_out), wParam, lParam);
 		::Sleep(100); // Give the UI a brief moment to catch-up.
 	}
 }
@@ -57,7 +74,8 @@ void ExampleSnippetsDialog::write_text_out_stream()
 			// Update the text-out element with the contents of the text out stream:
 			BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
 			pElement->put_innerHTML(updated_text_out);
-			more_text_out = false;
+			//more_text_out = false;
+			m_text_out_finished->SetEvent();
 		}
 	}
 }
@@ -84,8 +102,11 @@ void ExampleSnippetsDialog::clean_up_example()
 	std::wostringstream oss;
 	oss << "Finished: " << __FUNCTION__;
 	write_text_out(oss.str());
-	while (more_text_out) { ::Sleep(50); };
-	more_text_out = false;
+	// Wait for the event to be signaled:
+	::WaitForSingleObject(m_text_out_finished->m_hObject, INFINITE);
+	m_text_out_finished->ResetEvent();
+	//while (more_text_out) { ::Sleep(50); };
+	//more_text_out = false;
 	delete m_text_out_stream; m_text_out_stream = nullptr;
 	delete m_runnable; m_runnable = nullptr;
 	m_pThread = nullptr; // Thread will auto-delete itself.
@@ -98,7 +119,7 @@ void ExampleSnippetsDialog::run_example(Interface::Runnable *runnable)
 	ASSERT(m_runnable == nullptr);
 	ASSERT(m_pThread == nullptr);
 	ASSERT(m_text_out_stream == nullptr);
-	ASSERT(more_text_out == false);
+	//ASSERT(more_text_out == false);
 	ASSERT(runnable != nullptr);
 	m_runnable = runnable;
 	m_text_out_stream = new std::wostringstream;
@@ -182,7 +203,8 @@ BOOL ExampleSnippetsDialog::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);         // Set big icon
 	SetIcon(m_hIcon, FALSE);        // Set small icon
 
-	text_out_timer = this->SetTimer(text_out_timer, 100, nullptr);
+	// Grab the ID of the UI thread:
+	m_ui_thread_id = GetCurrentThreadId();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -273,14 +295,4 @@ HRESULT ExampleSnippetsDialog::OnButtonCancel(IHTMLElement* /*pElement*/)
 {
 	OnCancel();
 	return S_OK;
-}
-
-
-
-void ExampleSnippetsDialog::OnTimer(UINT_PTR)
-{
-	if (more_text_out)
-	{
-		write_text_out_stream();
-	}
 }
