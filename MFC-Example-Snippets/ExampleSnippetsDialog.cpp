@@ -68,8 +68,10 @@ HRESULT ExampleSnippetsDialog::On_CFile_GetStatus(IHTMLElement *)
 
 
 
-LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM, LPARAM)
+LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 {
+	// Verify that the identity of this MSG is mine:
+	if (wParam != 82 && lParam != 34) return -1;
 	// Ensure this happens on the UI thread:
 	if (m_ui_thread_id == GetCurrentThreadId())
 	{
@@ -98,8 +100,8 @@ LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM, LPARAM)
 	m_text_out_finished->ResetEvent(); // Signal that there is more text to output.
 	text_out_lock.Unlock(); // Finished with text output stream.
 	ASSERT(0 < m_ui_thread_id);
-	const WPARAM wParam = 0;
-	const LPARAM lParam = 0;
+	const WPARAM wParam = 82; // Arbitrary number to identify MSG::more_text_out.
+	const LPARAM lParam = 34; // Arbitrary number to identify MSG::more_text_out.
 	PostMessage(static_cast<UINT>(MSG::more_text_out), wParam, lParam);
 	::Sleep(100); // Give the UI a brief moment to catch-up.
 }

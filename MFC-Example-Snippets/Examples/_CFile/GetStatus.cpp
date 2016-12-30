@@ -1,5 +1,5 @@
 #include "pch-MFC-Example-Snippets.hpp"
-#include "GetStatus.hpp""
+#include "GetStatus.hpp"
 namespace Examples {
 
 
