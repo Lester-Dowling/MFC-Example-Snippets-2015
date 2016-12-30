@@ -3,7 +3,7 @@
 namespace Examples {
 
 
-    _CEvent::Calculate_Prime_Numbers::Calculate_Prime_Numbers(std::wostringstream *text_out_stream)
+    _CEvent::Calculate_Prime_Numbers::Calculate_Prime_Numbers()
         : m_pCalcNext(new CEvent(FALSE, FALSE))
         , m_pCalcFinished(new CEvent(FALSE, FALSE))
         , m_pTerminateThread(new CEvent(FALSE, FALSE))

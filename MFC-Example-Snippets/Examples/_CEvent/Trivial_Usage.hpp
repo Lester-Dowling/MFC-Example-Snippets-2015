@@ -17,7 +17,7 @@
 #include <iostream>
 #include <boost/signals2.hpp>
 #include <boost/bind.hpp>
-#include "Examples/Text_Output.hpp"
+#include "Interface/Runnable.hpp"
 
 namespace Examples {
 
@@ -34,7 +34,7 @@ namespace Examples {
 		 *  thread.  The other thread will wait for the event to be signaled
 		 *  and then exit
 		 */
-		class Trivial_Usage
+		class Trivial_Usage : public Interface::Runnable
 		{
 
 		public: // Methods ----------------------------------------------------
@@ -50,26 +50,8 @@ namespace Examples {
 			 *
 			 *  Run the example.
 			 */
-			void run();
+			void run() override;
 
-
-		private: // Text Output Signal ----------------------------------------
-
-			typedef boost::signals2::connection connection_t;
-			Examples::text_output_signal_t m_text_output;
-
-		public: // Text Output Signal Connection Methods ----------------------
-
-			connection_t connect(Examples::text_output_slot_t subscriber)
-			{
-				return m_text_output.connect(subscriber);
-			}
-
-
-			void disconnect(connection_t subscriber)
-			{
-				subscriber.disconnect();
-			}
 
 		};
 	}

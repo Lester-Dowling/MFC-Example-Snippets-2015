@@ -51,14 +51,14 @@
     <ClInclude Include="MFCExampleSnippets_h.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\Text_Output.hpp">
-      <Filter>Examples</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp">
       <Filter>Examples\_CEvent</Filter>
     </ClInclude>
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp">
       <Filter>Examples\_CEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\Runnable.hpp">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -135,9 +135,9 @@
     <ClInclude Include="AboutDlg.hpp" />
     <ClInclude Include="ExampleSnippetsDialog.hpp" />
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
-    <ClInclude Include="Examples\Text_Output.hpp" />
     <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp" />
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp" />
+    <ClInclude Include="Interface\Runnable.hpp" />
     <ClInclude Include="MFCExampleSnippets_h.h" />
     <ClInclude Include="TheApp.hpp" />
     <ClInclude Include="Resource.h" />

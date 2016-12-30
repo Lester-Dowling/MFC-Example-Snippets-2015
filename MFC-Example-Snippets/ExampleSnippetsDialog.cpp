@@ -5,6 +5,7 @@
 #include "AboutDlg.hpp"
 #include "Examples/_CEvent/Trivial_Usage.hpp"
 #include "Examples/_CEvent/Calculate_Prime_Numbers.hpp"
+#include <boost/bind.hpp>
 #include "Resource.h"
 
 #ifdef _DEBUG
@@ -18,6 +19,7 @@ IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
 BEGIN_MESSAGE_MAP(ExampleSnippetsDialog, CDHtmlDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_CLOSE()
+	ON_WM_TIMER()
 END_MESSAGE_MAP();
 
 
@@ -29,48 +31,85 @@ END_DHTML_EVENT_MAP();
 
 
 
-void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
+/*slot*/ void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
 {
+	::Sleep(100);
+	while (text_out_lock) { ::Sleep(50); }; text_out_lock = true;
 	*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
-	write_text_out_stream();
+	text_out_lock = false;
+	more_text_out = true;
 }
 
 
 
 void ExampleSnippetsDialog::write_text_out_stream()
 {
-
 	IHTMLElement* pElement = NULL;
 	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != NULL)
 	{
-		// Get element html
-		BSTR html = SysAllocString(_T(""));
-		// pElement->get_outerHTML(&html);
-		pElement->get_innerHTML(&html);
-
-		// Update element html
-		//CString updatedHTML;
-		// updatedHTML.Format(_T("<div ID=\"text-out\" >&nbsp; %s </div>"), _T("Okay, done."));
-		//updatedHTML.Format(L"&nbsp; %s", L"Okay, all done.");
-		BSTR updatedHTML = ::SysAllocString(m_text_out_stream->str().c_str());
-		pElement->put_innerHTML(updatedHTML);
-
+		// Update the text-out element with the contents of the text out stream:
+		while (text_out_lock) { ::Sleep(50); }; text_out_lock = true;
+		BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
+		text_out_lock = false;
+		pElement->put_innerHTML(updated_text_out);
+		more_text_out = false;
 	}
+}
+
+
+static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
+{
+	auto dialog = reinterpret_cast<ExampleSnippetsDialog*>(lpParameter);
+	dialog->runnable()->run();
+	// Terminate the thread:
+	dialog->clean_up_example();
+	::AfxEndThread(0, FALSE);
+	return 0L;
+}
+
+
+
+void ExampleSnippetsDialog::run_example(Interface::Runnable *runnable)
+{
+	ASSERT(m_runnable == nullptr);
+	ASSERT(m_pThread == nullptr);
+	ASSERT(m_text_out_stream == nullptr);
+	ASSERT(more_text_out == false);
+	ASSERT(text_out_lock == false);
+	ASSERT(runnable != nullptr);
+	m_runnable = runnable;
+	m_text_out_stream = new std::wostringstream;
+	m_text_out_connection = m_runnable->connect(boost::bind(&ExampleSnippetsDialog::write_text_out, this, _1));
+	m_pThread = AfxBeginThread(&run_example_thread_proc, this);
+	//, 0, 0, CREATE_SUSPENDED, NULL);
+	//m_pThread->ResumeThread();
+}
+
+
+
+void ExampleSnippetsDialog::clean_up_example()
+{
+	while (more_text_out || text_out_lock) { ::Sleep(50); };
+	ASSERT(more_text_out == false);
+	ASSERT(text_out_lock == false);
+	m_runnable->disconnect(m_text_out_connection);
+	std::wostringstream oss;
+	oss << "Finished: " << __FUNCTION__;
+	write_text_out(oss.str());
+	while (more_text_out) { ::Sleep(50); };
+	more_text_out = false;
+	text_out_lock = false;
+	delete m_text_out_stream; m_text_out_stream = nullptr;
+	delete m_runnable; m_runnable = nullptr;
+	m_pThread = nullptr; // Thread will auto-delete itself.
 }
 
 
 
 HRESULT ExampleSnippetsDialog::On_CEvent_Trivial_Usage(IHTMLElement*)
 {
-	m_text_out_stream = new std::wostringstream;
-	Examples::_CEvent::Trivial_Usage example;
-	m_text_out_connection = example.connect(boost::bind(&ExampleSnippetsDialog::write_text_out, this, _1));
-
-	example.run();
-
-	*m_text_out_stream << "<p>Finished: " << __FUNCTION__ << "</p>"; write_text_out_stream();
-	example.disconnect(m_text_out_connection);
-	delete m_text_out_stream; m_text_out_stream = nullptr;
+	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	run_example(new Examples::_CEvent::Trivial_Usage);
 	return S_OK;
 }
 
@@ -78,15 +117,8 @@ HRESULT ExampleSnippetsDialog::On_CEvent_Trivial_Usage(IHTMLElement*)
 
 HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
 {
-	m_text_out_stream = new std::wostringstream;
-	Examples::_CEvent::Calculate_Prime_Numbers example{ m_text_out_stream };
-	m_text_out_connection = example.connect(boost::bind(&ExampleSnippetsDialog::write_text_out, this, _1));
-
-	example.run();
-
-	*m_text_out_stream << "<p>Finished: " << __FUNCTION__ << "</p>"; write_text_out_stream();
-	example.disconnect(m_text_out_connection);
-	delete m_text_out_stream; m_text_out_stream = nullptr;
+	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
 	return S_OK;
 }
 
@@ -148,7 +180,7 @@ BOOL ExampleSnippetsDialog::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);         // Set big icon
 	SetIcon(m_hIcon, FALSE);        // Set small icon
 
-	// TODO: Add extra initialization here
+	text_out_timer = this->SetTimer(text_out_timer, 100, nullptr);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -239,4 +271,14 @@ HRESULT ExampleSnippetsDialog::OnButtonCancel(IHTMLElement* /*pElement*/)
 {
 	OnCancel();
 	return S_OK;
+}
+
+
+
+void ExampleSnippetsDialog::OnTimer(UINT_PTR)
+{
+	if (more_text_out)
+	{
+		write_text_out_stream();
+	}
 }

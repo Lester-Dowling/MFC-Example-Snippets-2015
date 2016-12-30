@@ -1,18 +1,17 @@
 <HTML>
 <HEAD>
     <style type="text/css">
-        p {
-            padding: 2px;
-            margin: 0;
-            border: none;
-            font-size: 12pt;
-            font-family: 'Source Code Pro';
-        }
-
         body {
             font-size: 12pt;
             font-family: 'Source Code Pro';
             background-color: white;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-size: 12pt;
         }
 
         table {
@@ -34,16 +33,38 @@
 
         h1, h2, h3, h4, h5, h6 {
             clear: both;
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 12pt;
+            border-bottom: solid 1px black;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 11pt;
+            margin-bottom: 4px;
         }
 
         button {
             width: 100%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
             font-size: 11pt;
+            padding: 3px;
+            margin: 3px;
         }
 
         #text-out {
             padding: 4px;
-            font-size: 12pt;
+        }
+
+        #text-out p {
+            padding: 2px;
+            font-size: 11pt;
             font-family: 'Source Code Pro';
         }
 
@@ -51,8 +72,6 @@
             border-width: 3px;
             border-color: black;
             border: solid;
-            font-size: 12pt;
-            font-family: 'Source Code Pro';
         }
     </style>
 </HEAD>
@@ -61,12 +80,13 @@
         <TR HEIGHT="90%">
             <!-- First Column -->
             <TD ALIGN="center" WIDTH="30%">
-                <h4> Examples </h4>
+                <h1> Examples </h1>
+                <h2> CEvent</h2>
                 <p>
-                    <BUTTON ID="Examples::_CEvent::Trivial_Usage"> Trivial Usage of CEvent </BUTTON>
+                    <BUTTON ID="Examples::_CEvent::Trivial_Usage"> Trivial Usage </BUTTON>
                 </p>
                 <p>
-                    <BUTTON ID="Examples::_CEvent::Calculate_Prime_Numbers"> Calculate Prime Numbers via CEvent </BUTTON>
+                    <BUTTON ID="Examples::_CEvent::Calculate_Prime_Numbers"> Calculate Prime Numbers </BUTTON>
                 </p>
             </TD>
             <!-- Second Column: text out display area -->
