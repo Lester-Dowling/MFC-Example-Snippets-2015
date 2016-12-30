@@ -139,6 +139,7 @@
     <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp" />
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp" />
     <ClInclude Include="Examples\_CFile\GetStatus.hpp" />
+    <ClInclude Include="Examples\_CFile\Open.hpp" />
     <ClInclude Include="Examples\_CFile\Write.hpp" />
     <ClInclude Include="Interface\Runnable.hpp" />
     <ClInclude Include="MFCExampleSnippets_h.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Examples\_CEvent\Calculate_Prime_Numbers.cpp" />
     <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp" />
     <ClCompile Include="Examples\_CFile\GetStatus.cpp" />
+    <ClCompile Include="Examples\_CFile\Open.cpp" />
     <ClCompile Include="Examples\_CFile\Write.cpp" />
     <ClCompile Include="MFCExampleSnippets_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>

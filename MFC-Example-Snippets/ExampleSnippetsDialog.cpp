@@ -27,6 +27,7 @@ BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
 	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Calculate_Prime_Numbers", On_CEvent_Calculate_Prime_Numbers)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Write", On_CFile_Write)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::GetStatus", On_CFile_GetStatus)
+	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Open", On_CFile_Open)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
@@ -45,6 +46,15 @@ HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
 {
 	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
+	return S_OK;
+}
+
+
+
+HRESULT ExampleSnippetsDialog::On_CFile_Open(IHTMLElement *)
+{
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
+	run_example(new Examples::_CFile::Open);
 	return S_OK;
 }
 

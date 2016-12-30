@@ -41,6 +41,7 @@ protected: // Events ----------------------------------------------------------
 	HRESULT OnButtonCancel(IHTMLElement*);
 	HRESULT On_CEvent_Trivial_Usage(IHTMLElement*);
 	HRESULT On_CEvent_Calculate_Prime_Numbers(IHTMLElement*);
+	HRESULT On_CFile_Open(IHTMLElement*);
 	HRESULT On_CFile_Write(IHTMLElement*);
 	HRESULT On_CFile_GetStatus(IHTMLElement*);
 
