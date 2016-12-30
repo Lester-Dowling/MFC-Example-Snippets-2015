@@ -78,7 +78,6 @@ protected: // Implementation --------------------------------------------------
 	std::unique_ptr<CEvent> m_text_out_finished{ new CEvent(bInitiallyOwn, bManualReset) };
 	//bool more_text_out = false;
 	CMutex m_text_out_mutex;
-	void write_text_out_stream();
 
 	/**
 	 *  The signal connection to collect text output from examples.

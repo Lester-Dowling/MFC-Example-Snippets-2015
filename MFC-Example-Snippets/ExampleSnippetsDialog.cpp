@@ -34,7 +34,7 @@ END_DHTML_EVENT_MAP();
 
 HRESULT ExampleSnippetsDialog::On_CEvent_Trivial_Usage(IHTMLElement*)
 {
-	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	run_example(new Examples::_CEvent::Trivial_Usage);
 	return S_OK;
 }
@@ -43,7 +43,7 @@ HRESULT ExampleSnippetsDialog::On_CEvent_Trivial_Usage(IHTMLElement*)
 
 HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
 {
-	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
 	return S_OK;
 }
@@ -52,7 +52,7 @@ HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
 
 HRESULT ExampleSnippetsDialog::On_CFile_Write(IHTMLElement * pElement)
 {
-	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	run_example(new Examples::_CFile::Write);
 	return S_OK;
 }
@@ -61,19 +61,29 @@ HRESULT ExampleSnippetsDialog::On_CFile_Write(IHTMLElement * pElement)
 
 HRESULT ExampleSnippetsDialog::On_CFile_GetStatus(IHTMLElement *)
 {
-	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	run_example(new Examples::_CFile::GetStatus);
 	return S_OK;
 }
 
 
 
-LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
+LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM, LPARAM)
 {
 	// Ensure this happens on the UI thread:
 	if (m_ui_thread_id == GetCurrentThreadId())
 	{
-		write_text_out_stream();
+		IHTMLElement* pElement = nullptr;
+		if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != nullptr)
+		{
+			CSingleLock text_out_lock(&m_text_out_mutex, TRUE); // Attempt to lock the mutex.
+			if (!text_out_lock.IsLocked()) return -1;
+			// Update the text-out element with the contents of the text out stream:
+			BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
+			m_text_out_finished->SetEvent(); // Signal that all the current text has been sent to output.
+			text_out_lock.Unlock(); // Finished with text output stream.
+			pElement->put_innerHTML(updated_text_out);
+		}
 	}
 	return 0;
 }
@@ -82,39 +92,16 @@ LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 
 /*slot*/ void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
 {
-	CSingleLock text_out_lock(&m_text_out_mutex);
-	text_out_lock.Lock();  // Attempt to lock the mutex.
-	if (text_out_lock.IsLocked())  // Mutex has been locked.
-	{
-		*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
-		//more_text_out = true;
-		m_text_out_finished->ResetEvent();
-		ASSERT(0 < m_ui_thread_id);
-		const WPARAM wParam = 0;
-		const LPARAM lParam = 0;
-		PostMessage(static_cast<UINT>(MSG::more_text_out), wParam, lParam);
-		::Sleep(100); // Give the UI a brief moment to catch-up.
-	}
-}
-
-
-
-void ExampleSnippetsDialog::write_text_out_stream()
-{
-	IHTMLElement* pElement = nullptr;
-	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != nullptr)
-	{
-		CSingleLock text_out_lock(&m_text_out_mutex);
-		text_out_lock.Lock();  // Attempt to lock the mutex.
-		if (text_out_lock.IsLocked())  // Mutex has been locked.
-		{
-			// Update the text-out element with the contents of the text out stream:
-			BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
-			pElement->put_innerHTML(updated_text_out);
-			//more_text_out = false;
-			m_text_out_finished->SetEvent();
-		}
-	}
+	CSingleLock text_out_lock(&m_text_out_mutex, TRUE); // Attempt to lock the mutex.
+	if (!text_out_lock.IsLocked()) return;
+	*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
+	m_text_out_finished->ResetEvent(); // Signal that there is more text to output.
+	text_out_lock.Unlock(); // Finished with text output stream.
+	ASSERT(0 < m_ui_thread_id);
+	const WPARAM wParam = 0;
+	const LPARAM lParam = 0;
+	PostMessage(static_cast<UINT>(MSG::more_text_out), wParam, lParam);
+	::Sleep(100); // Give the UI a brief moment to catch-up.
 }
 
 
@@ -125,9 +112,8 @@ static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
 	if (dialog == nullptr || !dialog->IsKindOf(RUNTIME_CLASS(ExampleSnippetsDialog)))
 		return 1;   // dialog is not valid  
 	dialog->runnable()->run();
-	// Terminate the thread:
 	dialog->clean_up_example();
-	::AfxEndThread(0, TRUE);
+	::AfxEndThread(0, TRUE); // Terminate and delete the thread.
 	return 0L;
 }
 
@@ -139,14 +125,12 @@ void ExampleSnippetsDialog::clean_up_example()
 	std::wostringstream oss;
 	oss << "<br/>Finished.";
 	write_text_out(oss.str());
-	// Wait for the event to be signaled:
+	// Wait for the finish of text output to be signaled:
 	::WaitForSingleObject(m_text_out_finished->m_hObject, INFINITE);
 	m_text_out_finished->ResetEvent();
-	//while (more_text_out) { ::Sleep(50); };
-	//more_text_out = false;
 	delete m_text_out_stream; m_text_out_stream = nullptr;
 	delete m_runnable; m_runnable = nullptr;
-	m_pThread = nullptr; // Thread will auto-delete itself.
+	m_pThread = nullptr; // Thread will delete itself.
 }
 
 
