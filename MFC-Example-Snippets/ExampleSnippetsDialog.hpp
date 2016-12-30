@@ -38,9 +38,10 @@ protected: // Overrides -------------------------------------------------------
 
 protected: // Events ----------------------------------------------------------
 
-	HRESULT On_CEvent_Trivial_Usage(IHTMLElement *pElement);
-	HRESULT On_CEvent_Calculate_Prime_Numbers(IHTMLElement *pElement);
-	HRESULT OnButtonCancel(IHTMLElement *pElement);
+	HRESULT OnButtonCancel(IHTMLElement*);
+	HRESULT On_CEvent_Trivial_Usage(IHTMLElement*);
+	HRESULT On_CEvent_Calculate_Prime_Numbers(IHTMLElement*);
+	HRESULT On_CFile_Write(IHTMLElement*);
 
 public: // Accessors ----------------------------------------------------------
 

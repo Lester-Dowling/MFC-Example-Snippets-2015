@@ -3,8 +3,7 @@
 #include "ExampleSnippetsDialog.hpp"
 #include "ExampleSnippetsDialogAutoProxy.hpp"
 #include "AboutDlg.hpp"
-#include "Examples/_CEvent/Trivial_Usage.hpp"
-#include "Examples/_CEvent/Calculate_Prime_Numbers.hpp"
+#include "Examples/Examples.hpp"
 #include <boost/bind.hpp>
 #include "Resource.h"
 
@@ -26,6 +25,7 @@ END_MESSAGE_MAP();
 BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
 	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Trivial_Usage", On_CEvent_Trivial_Usage)
 	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Calculate_Prime_Numbers", On_CEvent_Calculate_Prime_Numbers)
+	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Write", On_CFile_Write)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
@@ -100,7 +100,7 @@ void ExampleSnippetsDialog::clean_up_example()
 {
 	m_runnable->disconnect(m_text_out_connection);
 	std::wostringstream oss;
-	oss << "Finished: " << __FUNCTION__;
+	oss << "Finished.";
 	write_text_out(oss.str());
 	// Wait for the event to be signaled:
 	::WaitForSingleObject(m_text_out_finished->m_hObject, INFINITE);
@@ -142,6 +142,15 @@ HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
 {
 	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
 	run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
+	return S_OK;
+}
+
+
+
+HRESULT ExampleSnippetsDialog::On_CFile_Write(IHTMLElement * pElement)
+{
+	if (m_runnable) return S_OK; // Guard against multiple concurrent examples.
+	run_example(new Examples::_CFile::Write);
 	return S_OK;
 }
 

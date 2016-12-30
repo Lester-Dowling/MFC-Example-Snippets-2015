@@ -25,6 +25,9 @@
     <Filter Include="Examples\_CEvent">
       <UniqueIdentifier>{63b97101-918b-4848-9b81-1ab5911fde53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples\_CFile">
+      <UniqueIdentifier>{6112a7df-0d03-4805-9c89-b55dc6ac1b98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -60,6 +63,12 @@
     <ClInclude Include="Interface\Runnable.hpp">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CFile\Write.hpp">
+      <Filter>Examples\_CFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Examples.hpp">
+      <Filter>Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -85,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp">
       <Filter>Examples\_CEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CFile\Write.cpp">
+      <Filter>Examples\_CFile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

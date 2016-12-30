@@ -135,8 +135,10 @@
     <ClInclude Include="AboutDlg.hpp" />
     <ClInclude Include="ExampleSnippetsDialog.hpp" />
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
+    <ClInclude Include="Examples\Examples.hpp" />
     <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp" />
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp" />
+    <ClInclude Include="Examples\_CFile\Write.hpp" />
     <ClInclude Include="Interface\Runnable.hpp" />
     <ClInclude Include="MFCExampleSnippets_h.h" />
     <ClInclude Include="TheApp.hpp" />
@@ -150,6 +152,7 @@
     <ClCompile Include="ExampleSnippetsDialogAutoProxy.cpp" />
     <ClCompile Include="Examples\_CEvent\Calculate_Prime_Numbers.cpp" />
     <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp" />
+    <ClCompile Include="Examples\_CFile\Write.cpp" />
     <ClCompile Include="MFCExampleSnippets_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

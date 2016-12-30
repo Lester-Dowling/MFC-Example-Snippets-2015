@@ -21,38 +21,36 @@
 
 namespace Examples {
 
-	namespace _CEvent {
+    namespace _CEvent {
 
-		/**
-		 *  Examples::_CEvent::Trivial_Usage
-		 *
-		 *  Copied from:
-		 *      https://msdn.microsoft.com/en-us/library/efk30beh.aspx
-		 *
-		 *  The following demonstrates trivial usage of the CEvent class.
-		 *  A CEvent object is created and passed as a parameter to another
-		 *  thread.  The other thread will wait for the event to be signaled
-		 *  and then exit
-		 */
-		class Trivial_Usage : public Interface::Runnable
-		{
+        /**
+         *  Examples::_CEvent::Trivial_Usage
+         *
+         *  Copied from:
+         *      https://msdn.microsoft.com/en-us/library/efk30beh.aspx
+         *
+         *  The following demonstrates trivial usage of the CEvent class.
+         *  A CEvent object is created and passed as a parameter to another
+         *  thread.  The other thread will wait for the event to be signaled
+         *  and then exit
+         */
+        class Trivial_Usage : public Interface::Runnable
+        {
 
-		public: // Methods ----------------------------------------------------
+        public: // Methods ----------------------------------------------------
 
-			/**
-			 *  Examples::Trivial_Usage::MyThreadProc
-			 */
-			static UINT __cdecl MyThreadProc(LPVOID lpParameter);
+            /**
+             *  Controlling thread proc for the example.
+             */
+            static UINT __cdecl MyThreadProc(LPVOID lpParameter);
 
+        public: // Overrides --------------------------------------------------
 
-			/**
-			 *  Examples::Trivial_Usage::run
-			 *
-			 *  Run the example.
-			 */
-			void run() override;
+            /**
+             *  Run the example.
+             */
+            void run() override;
 
-
-		};
-	}
+        };
+    }
 }
