@@ -67,7 +67,8 @@ protected: // Implementation --------------------------------------------------
      */
     std::wostringstream *m_text_out_stream = nullptr;
     bool more_text_out = false;
-    bool text_out_lock = false;
+	CMutex m_text_out_mutex;
+
     UINT_PTR text_out_timer = 1;
     void write_text_out_stream();
 

@@ -33,28 +33,35 @@ END_DHTML_EVENT_MAP();
 
 /*slot*/ void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
 {
-	::Sleep(100);
-	while (text_out_lock) { ::Sleep(50); }; text_out_lock = true;
-	*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
-	text_out_lock = false;
-	more_text_out = true;
+	CSingleLock text_out_lock(&m_text_out_mutex);
+	text_out_lock.Lock();  // Attempt to lock the mutex.
+	if (text_out_lock.IsLocked())  // Mutex has been locked.
+	{
+		*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
+		more_text_out = true;
+		::Sleep(100); // Give the UI a brief moment to catch-up.
+	}
 }
 
 
 
 void ExampleSnippetsDialog::write_text_out_stream()
 {
-	IHTMLElement* pElement = NULL;
-	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != NULL)
+	IHTMLElement* pElement = nullptr;
+	if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != nullptr)
 	{
-		// Update the text-out element with the contents of the text out stream:
-		while (text_out_lock) { ::Sleep(50); }; text_out_lock = true;
-		BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
-		text_out_lock = false;
-		pElement->put_innerHTML(updated_text_out);
-		more_text_out = false;
+		CSingleLock text_out_lock(&m_text_out_mutex);
+		text_out_lock.Lock();  // Attempt to lock the mutex.
+		if (text_out_lock.IsLocked())  // Mutex has been locked.
+		{
+			// Update the text-out element with the contents of the text out stream:
+			BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
+			pElement->put_innerHTML(updated_text_out);
+			more_text_out = false;
+		}
 	}
 }
+
 
 
 static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
@@ -65,8 +72,23 @@ static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
 	dialog->runnable()->run();
 	// Terminate the thread:
 	dialog->clean_up_example();
-	::AfxEndThread(0, FALSE);
+	::AfxEndThread(0, TRUE);
 	return 0L;
+}
+
+
+
+void ExampleSnippetsDialog::clean_up_example()
+{
+	m_runnable->disconnect(m_text_out_connection);
+	std::wostringstream oss;
+	oss << "Finished: " << __FUNCTION__;
+	write_text_out(oss.str());
+	while (more_text_out) { ::Sleep(50); };
+	more_text_out = false;
+	delete m_text_out_stream; m_text_out_stream = nullptr;
+	delete m_runnable; m_runnable = nullptr;
+	m_pThread = nullptr; // Thread will auto-delete itself.
 }
 
 
@@ -77,33 +99,11 @@ void ExampleSnippetsDialog::run_example(Interface::Runnable *runnable)
 	ASSERT(m_pThread == nullptr);
 	ASSERT(m_text_out_stream == nullptr);
 	ASSERT(more_text_out == false);
-	ASSERT(text_out_lock == false);
 	ASSERT(runnable != nullptr);
 	m_runnable = runnable;
 	m_text_out_stream = new std::wostringstream;
 	m_text_out_connection = m_runnable->connect(boost::bind(&ExampleSnippetsDialog::write_text_out, this, _1));
 	m_pThread = AfxBeginThread(&run_example_thread_proc, this);
-	//, 0, 0, CREATE_SUSPENDED, NULL);
-	//m_pThread->ResumeThread();
-}
-
-
-
-void ExampleSnippetsDialog::clean_up_example()
-{
-	while (more_text_out || text_out_lock) { ::Sleep(50); };
-	ASSERT(more_text_out == false);
-	ASSERT(text_out_lock == false);
-	m_runnable->disconnect(m_text_out_connection);
-	std::wostringstream oss;
-	oss << "Finished: " << __FUNCTION__;
-	write_text_out(oss.str());
-	while (more_text_out) { ::Sleep(50); };
-	more_text_out = false;
-	text_out_lock = false;
-	delete m_text_out_stream; m_text_out_stream = nullptr;
-	delete m_runnable; m_runnable = nullptr;
-	m_pThread = nullptr; // Thread will auto-delete itself.
 }
 
 
