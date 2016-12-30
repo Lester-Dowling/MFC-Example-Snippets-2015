@@ -15,8 +15,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <boost/signals2.hpp>
-#include <boost/bind.hpp>
 #include "Interface/Runnable.hpp"
 
 namespace Examples {
