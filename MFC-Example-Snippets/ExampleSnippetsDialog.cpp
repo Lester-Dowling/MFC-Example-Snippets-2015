@@ -92,9 +92,9 @@ LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 			if (!text_out_lock.IsLocked()) return -1;
 			// Update the text-out element with the contents of the text out stream:
 			BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
-			m_text_out_finished->SetEvent(); // Signal that all the current text has been sent to output.
 			text_out_lock.Unlock(); // Finished with text output stream.
 			pElement->put_innerHTML(updated_text_out);
+			m_text_out_finished->SetEvent(); // Signal that all the current text has been sent to output.
 		}
 	}
 	return 0;
@@ -104,10 +104,10 @@ LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 
 /*slot*/ void ExampleSnippetsDialog::write_text_out(std::wstring text_out)
 {
+	m_text_out_finished->ResetEvent(); // Signal that there is more text to output.
 	CSingleLock text_out_lock(&m_text_out_mutex, TRUE); // Attempt to lock the mutex.
 	if (!text_out_lock.IsLocked()) return;
 	*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
-	m_text_out_finished->ResetEvent(); // Signal that there is more text to output.
 	text_out_lock.Unlock(); // Finished with text output stream.
 	ASSERT(0 < m_ui_thread_id);
 	const WPARAM wParam = 82; // Arbitrary number to identify MSG::more_text_out.
