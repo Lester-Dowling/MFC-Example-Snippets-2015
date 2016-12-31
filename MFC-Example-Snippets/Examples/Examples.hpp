@@ -7,3 +7,4 @@
 #include "Examples/_CFile/Open.hpp"
 #include "Examples/_CFile/Write.hpp"
 #include "Examples/_CFile/GetStatus.hpp"
+#include "Examples/_CFile/SetFilePath.hpp"

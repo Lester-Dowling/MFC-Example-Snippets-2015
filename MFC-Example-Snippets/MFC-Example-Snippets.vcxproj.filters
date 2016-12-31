@@ -75,6 +75,9 @@
     <ClInclude Include="Examples\_CFile\Open.hpp">
       <Filter>Examples\_CFile</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CFile\SetFilePath.hpp">
+      <Filter>Examples\_CFile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -108,6 +111,9 @@
       <Filter>Examples\_CFile</Filter>
     </ClCompile>
     <ClCompile Include="Examples\_CFile\Open.cpp">
+      <Filter>Examples\_CFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CFile\SetFilePath.cpp">
       <Filter>Examples\_CFile</Filter>
     </ClCompile>
   </ItemGroup>

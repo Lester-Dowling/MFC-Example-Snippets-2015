@@ -28,6 +28,7 @@ BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Write", On_CFile_Write)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::GetStatus", On_CFile_GetStatus)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Open", On_CFile_Open)
+	DHTML_EVENT_ONCLICK(L"Examples::_CFile::SetFilePath", On_CFile_SetFilePath)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
@@ -73,6 +74,13 @@ HRESULT ExampleSnippetsDialog::On_CFile_GetStatus(IHTMLElement *)
 {
 	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	run_example(new Examples::_CFile::GetStatus);
+	return S_OK;
+}
+
+HRESULT ExampleSnippetsDialog::On_CFile_SetFilePath(IHTMLElement *)
+{
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
+	run_example(new Examples::_CFile::SetFilePath);
 	return S_OK;
 }
 

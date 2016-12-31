@@ -44,6 +44,7 @@ protected: // Events ----------------------------------------------------------
 	HRESULT On_CFile_Open(IHTMLElement*);
 	HRESULT On_CFile_Write(IHTMLElement*);
 	HRESULT On_CFile_GetStatus(IHTMLElement*);
+	HRESULT On_CFile_SetFilePath(IHTMLElement*);
 
 public: // Accessors ----------------------------------------------------------
 
