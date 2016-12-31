@@ -13,15 +13,14 @@ namespace Examples {
 		// routed to the calling function.
 		try
 		{
-			m_text_output(L"Opening file for read-only...");
+			TEXT_OUT("Opening file for read-only...");
 			pFile = new CFile(_T("C:\\WINDOWS\\SYSTEM.INI"), CFile::modeRead | CFile::shareDenyNone);
 
-			m_text_output(L"Getting length...");
+			TEXT_OUT("Getting length...");
 			ULONGLONG dwLength = pFile->GetLength();
 
 			std::wostringstream oss;
-			oss << "The SYSTEM.INI file is " << dwLength << " bytes long.";
-			m_text_output(oss.str());
+			TEXT_OUT("The SYSTEM.INI file is " << dwLength << " bytes long.");
 		}
 		catch (CFileException* pEx)
 		{
@@ -45,7 +44,7 @@ namespace Examples {
 		// Thus, our clean-up code needs to test for NULL.
 		if (pFile != NULL)
 		{
-			m_text_output(L"Closing file...");
+			TEXT_OUT("Closing file...");
 			pFile->Close();
 			delete pFile;
 		}

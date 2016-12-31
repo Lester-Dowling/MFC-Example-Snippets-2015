@@ -101,7 +101,7 @@ HRESULT ExampleSnippetsDialog::On_CFile_GetLength(IHTMLElement *)
 LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 {
 	// Verify that the identity of this MSG is mine:
-	if (wParam != 82 && lParam != 34) return -1;
+	if (wParam != 82 && lParam != 34) { ::Beep(500,800); return -1; }
 	// Ensure this happens on the UI thread:
 	if (m_ui_thread_id == GetCurrentThreadId())
 	{
@@ -154,9 +154,7 @@ static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
 void ExampleSnippetsDialog::clean_up_example()
 {
 	m_runnable->disconnect(m_text_out_connection);
-	std::wostringstream oss;
-	oss << "<br/>Finished.";
-	write_text_out(oss.str());
+	write_text_out(L"<br/>Finished.");
 	// Wait for the finish of text output to be signaled:
 	::WaitForSingleObject(m_text_out_finished->m_hObject, INFINITE);
 	m_text_out_finished->ResetEvent();

@@ -41,7 +41,17 @@ namespace Interface {
         }
 
 
-	public: // ----------------------------------------------------------------
+    public: // ----------------------------------------------------------------
         virtual ~Runnable() {}
     };
 }
+
+/**
+ *  A convenient macro for text output in classes derived from Interface::Runnable.
+ */
+#define TEXT_OUT(msg)                           \
+    do {                                        \
+        std::wostringstream oss;                \
+        oss << msg;                             \
+        m_text_output(oss.str());               \
+    } while(false)

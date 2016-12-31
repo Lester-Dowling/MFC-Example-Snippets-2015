@@ -7,10 +7,10 @@ namespace Examples {
 		constexpr size_t data_size = 32;
 		constexpr size_t data_buffer_size = data_size + 1;
 
-		m_text_output(L"Opening file for write access...");
+		TEXT_OUT("Opening file for write access...");
 		CFile cfile; cfile.Open(L"Write_File.dat", CFile::modeCreate | CFile::modeReadWrite);
 
-		m_text_output(L"Setting up sample buffer of data...");
+		TEXT_OUT("Setting up sample buffer of data...");
 		char pbufWrite[data_buffer_size] = {};
 		char * pBufferWalk = pbufWrite;
 		const size_t data_chunk_size = data_size / 8;
@@ -23,29 +23,24 @@ namespace Examples {
 		memset(pBufferWalk, 'g', data_chunk_size); pBufferWalk += data_chunk_size;
 		memset(pBufferWalk, 'h', data_chunk_size); pBufferWalk += data_chunk_size;
 
-		m_text_output(L"Writing sample data to file...");
+		TEXT_OUT("Writing sample data to file...");
 		cfile.Write(pbufWrite, data_size);
 
-		m_text_output(L"Flushing file...");
+		TEXT_OUT("Flushing file...");
 		cfile.Flush();
 
-		m_text_output(L"Seeking to the beginning of the file...");
+		TEXT_OUT("Seeking to the beginning of the file...");
 		cfile.SeekToBegin();
 
-		m_text_output(L"Reading back in the file contents...");
+		TEXT_OUT("Reading back in the file contents...");
 		char pbufRead[data_buffer_size] = {};
 		cfile.Read(pbufRead, data_size);
 
-		m_text_output(L"Comparing read-back with original...");
+		TEXT_OUT("Comparing read-back with original...");
 		ASSERT(0 == memcmp(pbufWrite, pbufRead, data_size));
 
-		std::wostringstream oss1;
-		oss1 << "Original data : " << pbufWrite;
-		m_text_output(oss1.str());
-
-		std::wostringstream oss2;
-		oss2 << "Data read back: " << pbufRead;
-		m_text_output(oss2.str());
+		TEXT_OUT("Original data : " << pbufWrite);
+		TEXT_OUT("Data read back: " << pbufRead);
 	}
 
 

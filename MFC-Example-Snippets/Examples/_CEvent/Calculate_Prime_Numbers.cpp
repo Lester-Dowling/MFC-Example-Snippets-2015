@@ -37,9 +37,7 @@ namespace Examples {
 			// Wait for the thread to complete the current task
 			::WaitForSingleObject(m_pCalcFinished->m_hObject, INFINITE);
 			// Print the result
-			std::wostringstream oss;
-			oss << "The value of m_iCurrentPrime is " << m_iCurrentPrime;
-			m_text_output(oss.str());
+			TEXT_OUT("The value of m_iCurrentPrime is " << m_iCurrentPrime);
 		}
 
 		// Notify the worker thread to exit and wait for it to complete

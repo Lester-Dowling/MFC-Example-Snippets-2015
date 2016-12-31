@@ -19,18 +19,18 @@ namespace Examples {
 
 	void _CEvent::Trivial_Usage::run()
 	{
-		m_text_output(L"Creating the CEvent object that will be passed to the thread routine...");
+		TEXT_OUT("Creating the CEvent object that will be passed to the thread routine...");
 		std::unique_ptr<CEvent> pEvent{ new CEvent(FALSE, FALSE) };
 
-		m_text_output(L"Creating a thread that will wait on the event...");
+		TEXT_OUT("Creating a thread that will wait on the event...");
 		std::unique_ptr<CWinThread> pThread{ AfxBeginThread(&MyThreadProc, pEvent.get(), 0, 0, CREATE_SUSPENDED, NULL) };
 		pThread->m_bAutoDelete = FALSE;
 		pThread->ResumeThread();
 
-		m_text_output(L"Signalling the thread to do the next work item...");
+		TEXT_OUT("Signalling the thread to do the next work item...");
 		pEvent->SetEvent();
 
-		m_text_output(L"Waiting for the thread to consume the event and return...");
+		TEXT_OUT("Waiting for the thread to consume the event and return...");
 		::WaitForSingleObject(pThread->m_hThread, INFINITE);
 	}
 

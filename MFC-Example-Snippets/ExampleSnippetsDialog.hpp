@@ -74,7 +74,7 @@ protected: // Implementation --------------------------------------------------
 	/**
 	 *  Coordination of text output.
 	 */
-	enum class MSG : UINT { more_text_out = WM_USER };
+	enum class MSG : UINT { more_text_out = WM_APP };
 	DWORD m_ui_thread_id = 0;
 	const BOOL bInitiallyOwn = FALSE;
 	const BOOL bManualReset = TRUE;
