@@ -8,3 +8,4 @@
 #include "Examples/_CFile/Write.hpp"
 #include "Examples/_CFile/GetStatus.hpp"
 #include "Examples/_CFile/SetFilePath.hpp"
+#include "Examples/_CFile/GetLength.hpp"
