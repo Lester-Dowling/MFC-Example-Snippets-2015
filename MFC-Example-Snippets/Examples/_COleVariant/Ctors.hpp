@@ -10,29 +10,29 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include "Interface/Runnable.hpp"
+#include "ABC/Runnable.hpp"
 
 namespace Examples {
 
-	namespace _COleVariant {
+    namespace _COleVariant {
 
-		/**
-		*  Examples::_COleVariant::Ctors
-		*
-		*  Inspired by:
-		*      https://msdn.microsoft.com/en-us/library/4xd0wkhw.aspx
-		*
-		*/
-		class Ctors : public Interface::Runnable
-		{
+        /**
+         *  Examples::_COleVariant::Ctors
+         *
+         *  Inspired by:
+         *      https://msdn.microsoft.com/en-us/library/4xd0wkhw.aspx
+         *
+         */
+        class Ctors : public ABC::Runnable
+        {
 
-		public: // Overrides ----------------------------------------------------------
+        public: // Overrides ----------------------------------------------------------
 
-				/**
-				*  Run the example.
-				*/
-			void run() override;
+            /**
+             *  Run the example.
+             */
+            void run() override;
 
-		};
-	}
+        };
+    }
 }

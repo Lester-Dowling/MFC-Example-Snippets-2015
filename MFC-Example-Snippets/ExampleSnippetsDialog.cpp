@@ -4,7 +4,6 @@
 #include "ExampleSnippetsDialogAutoProxy.hpp"
 #include "AboutDlg.hpp"
 #include "Examples/Examples.hpp"
-#include <boost/bind.hpp>
 #include "Resource.h"
 
 #ifdef _DEBUG
@@ -180,7 +179,7 @@ void ExampleSnippetsDialog::clean_up_example()
 
 
 
-void ExampleSnippetsDialog::run_example(Interface::Runnable *runnable)
+void ExampleSnippetsDialog::run_example(ABC::Runnable *runnable)
 {
 	ASSERT(m_runnable == nullptr);
 	ASSERT(m_pThread == nullptr);

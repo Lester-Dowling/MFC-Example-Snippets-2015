@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Interface/Runnable.hpp"
+#include "ABC/Runnable.hpp"
 
 namespace Examples {
 
@@ -28,7 +28,7 @@ namespace Examples {
 		 *      https://msdn.microsoft.com/en-us/library/60fh2b6f.aspx
 		 *
 		 */
-		class Write : public Interface::Runnable
+		class Write : public ABC::Runnable
 		{
 
 		public: // Overrides ----------------------------------------------------------

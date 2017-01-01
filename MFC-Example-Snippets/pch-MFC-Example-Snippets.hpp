@@ -57,7 +57,9 @@
 #include <sstream>                          // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\sstream
 #include <limits>                           // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\limits
 #include <iterator>                         // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\iterator
-#include <initializer_list>
+#include <initializer_list>					// C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\initializer_list
+#include <boost/signals2.hpp>				// C:\boost_MSVC_2015_x64\include\boost-1_62\boost\signals2.hpp
+#include <boost/bind.hpp>					// C:\boost_MSVC_2015_x64\include\boost-1_62\boost\bind.hpp
 
 
 template <class Interface>

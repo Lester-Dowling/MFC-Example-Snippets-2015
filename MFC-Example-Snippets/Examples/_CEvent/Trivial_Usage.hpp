@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Interface/Runnable.hpp"
+#include "ABC/Runnable.hpp"
 
 namespace Examples {
 
@@ -32,7 +32,7 @@ namespace Examples {
          *  thread.  The other thread will wait for the event to be signaled
          *  and then exit
          */
-        class Trivial_Usage : public Interface::Runnable
+        class Trivial_Usage : public ABC::Runnable
         {
 
         public: // Methods ----------------------------------------------------

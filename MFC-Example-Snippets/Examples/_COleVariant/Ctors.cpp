@@ -107,14 +107,14 @@ namespace Examples {
 		VARTYPE v0_vt = v0.vt;
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v0_vt));
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating wchar_t* ctor...");
 		COleVariant v1{ L"A short pithy wstring!" };
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v1.vt));
 		TEXT_OUT("      Value is: " << v1.bstrVal);
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating CString ctor...");
 		CString cs{ L"A quick and simple CString!" };
@@ -122,7 +122,7 @@ namespace Examples {
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v2.vt));
 		TEXT_OUT("      Value is: " << v2.bstrVal);
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating signed short ctor...");
 		const signed short ival = std::numeric_limits<signed short>::max();
@@ -130,7 +130,7 @@ namespace Examples {
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v3.vt));
 		TEXT_OUT("      Value is: " << v3.iVal);
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating signed long ctor...");
 		const signed long lval = std::numeric_limits<signed long>::max();
@@ -138,7 +138,7 @@ namespace Examples {
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v4.vt));
 		TEXT_OUT("      Value is: " << v4.lVal);
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating Currency ctor...");
 		constexpr long cents = 100; // Accuracy factor for cents in a CURRENCY value.
@@ -147,7 +147,7 @@ namespace Examples {
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v5.vt));
 		TEXT_OUT("      Value is: " << COleCurrency{ v5.cyVal }.Format().GetString());
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating float ctor...");
 		const float fltval = 7.89f;
@@ -155,7 +155,7 @@ namespace Examples {
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v6.vt));
 		TEXT_OUT("      Value is: " << v6.fltVal);
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating double ctor...");
 		const double dblval = 9.86;
@@ -163,13 +163,29 @@ namespace Examples {
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v7.vt));
 		TEXT_OUT("      Value is: " << v7.dblVal);
 
-		TEXT_BLANKLINE;
+		TEXT_OUT_BLANKLINE;
 
 		TEXT_OUT("Instantiating date & time ctor...");
 		COleDateTime dnt{ COleDateTime::GetCurrentTime() };
 		COleVariant v8{ dnt };
 		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v8.vt));
 		TEXT_OUT("      Value is: " << COleDateTime{ v8.date }.Format().GetString());
+
+		TEXT_OUT_BLANKLINE;
+
+		TEXT_OUT("Instantiating byte array ctor...");
+		CByteArray ba; ba.SetSize(32);
+		for (__int64 idx = 0; idx < ba.GetSize(); ++idx)
+		{
+			BYTE bb = static_cast<BYTE>('a' + idx);
+			ba.SetAt(idx, bb);
+		}
+		ba.SetAt(26, 0);
+		COleVariant v9{ ba };
+		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v9.vt & ~VT_TYPEMASK));
+		TEXT_OUT("  Elements are: " << vartype_symbol(v9.vt & VT_TYPEMASK));
+		SAFEARRAY *sa = v9.parray;
+		TEXT_OUT("      Value is: " << reinterpret_cast<char*>(sa->pvData));
 
 	}
 }

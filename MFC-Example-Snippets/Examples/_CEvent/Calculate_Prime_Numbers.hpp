@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Interface/Runnable.hpp"
+#include "ABC/Runnable.hpp"
 
 namespace Examples {
 
@@ -34,7 +34,7 @@ namespace Examples {
 		 *  calculated. Finally, after several iterations the worker thread
 		 *  is signaled to terminate.
 		 */
-		class Calculate_Prime_Numbers : public Interface::Runnable
+		class Calculate_Prime_Numbers : public ABC::Runnable
 		{
 
 		public: // Ctors et al ------------------------------------------------

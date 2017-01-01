@@ -3,11 +3,19 @@
 #include <boost/signals2.hpp>
 #include <boost/bind.hpp>
 
+/**
+ *  Namespace ABC is for Abstract Base Classes.
+ */
+namespace ABC {
 
-namespace Interface {
-
+	/**
+	 *  ABC::Runnable
+	 *
+	 *  Abstract Base Class for runnable examples.
+	 */
     class Runnable
     {
+
     public: // Methods --------------------------------------------------------
 
         virtual void run() = 0;
@@ -47,8 +55,8 @@ namespace Interface {
 }
 
 /**
-*  A convenient macro for text output in classes derived from Interface::Runnable.
-*/
+ *  A convenient macro for text output in classes derived from ABC::Runnable.
+ */
 #define TEXT_OUT(msg)                           \
     do {                                        \
         std::wostringstream oss;                \
@@ -57,11 +65,11 @@ namespace Interface {
     } while(false)
 
 /**
-*  Text output of an blank line.
-*/
-#define TEXT_BLANKLINE                           \
+ *  Text output of an blank line.
+ */
+#define TEXT_OUT_BLANKLINE                      \
     do {                                        \
         std::wostringstream oss;                \
-        oss << std::endl;                             \
+        oss << std::endl;                       \
         m_text_output(oss.str());               \
     } while(false)

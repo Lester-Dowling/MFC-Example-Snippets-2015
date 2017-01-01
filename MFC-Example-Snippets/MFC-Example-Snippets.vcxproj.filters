@@ -16,9 +16,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Interface">
-      <UniqueIdentifier>{e8647525-1977-4f9c-bcb5-41fe70bfc62a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Examples">
       <UniqueIdentifier>{55d0d3e3-e6f6-4806-8a51-c254b0ef1cef}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,9 @@
     </Filter>
     <Filter Include="Examples\_COleVariant">
       <UniqueIdentifier>{c2712787-00a6-450e-ac3c-8efad0e396e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ABC">
+      <UniqueIdentifier>{e8647525-1977-4f9c-bcb5-41fe70bfc62a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +63,6 @@
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp">
       <Filter>Examples\_CEvent</Filter>
     </ClInclude>
-    <ClInclude Include="Interface\Runnable.hpp">
-      <Filter>Interface</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\_CFile\Write.hpp">
       <Filter>Examples\_CFile</Filter>
     </ClInclude>
@@ -86,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="Examples\_COleVariant\Ctors.hpp">
       <Filter>Examples\_COleVariant</Filter>
+    </ClInclude>
+    <ClInclude Include="ABC\Runnable.hpp">
+      <Filter>ABC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

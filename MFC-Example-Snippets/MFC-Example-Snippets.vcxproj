@@ -132,6 +132,7 @@
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ABC\Runnable.hpp" />
     <ClInclude Include="AboutDlg.hpp" />
     <ClInclude Include="ExampleSnippetsDialog.hpp" />
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
@@ -144,7 +145,6 @@
     <ClInclude Include="Examples\_CFile\Open.hpp" />
     <ClInclude Include="Examples\_CFile\Write.hpp" />
     <ClInclude Include="Examples\_COleVariant\Ctors.hpp" />
-    <ClInclude Include="Interface\Runnable.hpp" />
     <ClInclude Include="MFCExampleSnippets_h.h" />
     <ClInclude Include="TheApp.hpp" />
     <ClInclude Include="Resource.h" />

@@ -12,7 +12,7 @@
 #undef max
 #include <string>
 #include <boost/signals2.hpp>
-#include "Interface/Runnable.hpp"
+#include "ABC/Runnable.hpp"
 #include "Resource.h"
 class ExampleSnippetsDialogAutoProxy;
 
@@ -50,7 +50,7 @@ protected: // Events ----------------------------------------------------------
 
 public: // Accessors ----------------------------------------------------------
 
-	Interface::Runnable * runnable() const { return m_runnable; }
+	ABC::Runnable * runnable() const { return m_runnable; }
 	void clean_up_example();
 
 protected: // Implementation --------------------------------------------------
@@ -58,9 +58,9 @@ protected: // Implementation --------------------------------------------------
 	/**
 	 *  Running the example
 	 */
-	Interface::Runnable *m_runnable = nullptr;
+	ABC::Runnable *m_runnable = nullptr;
 	CWinThread *m_pThread = nullptr;
-	void run_example(Interface::Runnable *runnable);
+	void run_example(ABC::Runnable *runnable);
 
 
 	ExampleSnippetsDialogAutoProxy* m_pAutoProxy = nullptr;
