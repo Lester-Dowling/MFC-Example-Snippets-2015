@@ -30,6 +30,7 @@ BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Open", On_CFile_Open)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::SetFilePath", On_CFile_SetFilePath)
 	DHTML_EVENT_ONCLICK(L"Examples::_CFile::GetLength", On_CFile_GetLength)
+	DHTML_EVENT_ONCLICK(L"Examples::_COleVariant::Ctors", On_COleVariant_Ctors)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
@@ -98,6 +99,15 @@ HRESULT ExampleSnippetsDialog::On_CFile_GetLength(IHTMLElement *)
 
 
 
+HRESULT ExampleSnippetsDialog::On_COleVariant_Ctors(IHTMLElement *)
+{
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
+	run_example(new Examples::_COleVariant::Ctors);
+	return S_OK;
+}
+
+
+
 LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 {
 	// Verify that the identity of this MSG is mine:
@@ -106,15 +116,20 @@ LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 	if (m_ui_thread_id == GetCurrentThreadId())
 	{
 		IHTMLElement* pElement = nullptr;
-		if (GetElement(_T("text-out"), &pElement) == S_OK && pElement != nullptr)
+		if (GetElement(L"text-out", &pElement) == S_OK && pElement != nullptr)
 		{
 			CSingleLock text_out_lock(&m_text_out_mutex, TRUE); // Attempt to lock the mutex.
 			if (!text_out_lock.IsLocked()) return -1;
 			// Update the text-out element with the contents of the text out stream:
 			BSTR updated_text_out = ::SysAllocString(m_text_out_stream->str().c_str());
 			text_out_lock.Unlock(); // Finished with text output stream.
-			pElement->put_innerHTML(updated_text_out);
+			//pElement->put_innerHTML(updated_text_out);
+			pElement->put_innerText(updated_text_out);
 			m_text_out_finished->SetEvent(); // Signal that all the current text has been sent to output.
+		}
+		else
+		{
+			::Beep(300, 1000);
 		}
 	}
 	return 0;
@@ -127,7 +142,7 @@ LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 	m_text_out_finished->ResetEvent(); // Signal that there is more text to output.
 	CSingleLock text_out_lock(&m_text_out_mutex, TRUE); // Attempt to lock the mutex.
 	if (!text_out_lock.IsLocked()) return;
-	*m_text_out_stream << "<p>" << text_out << "</p>" << std::endl;
+	*m_text_out_stream << text_out << std::endl;
 	text_out_lock.Unlock(); // Finished with text output stream.
 	ASSERT(0 < m_ui_thread_id);
 	const WPARAM wParam = 82; // Arbitrary number to identify MSG::more_text_out.
@@ -154,7 +169,7 @@ static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
 void ExampleSnippetsDialog::clean_up_example()
 {
 	m_runnable->disconnect(m_text_out_connection);
-	write_text_out(L"<br/>Finished.");
+	write_text_out(L"\nFinished.");
 	// Wait for the finish of text output to be signaled:
 	::WaitForSingleObject(m_text_out_finished->m_hObject, INFINITE);
 	m_text_out_finished->ResetEvent();

@@ -9,3 +9,4 @@
 #include "Examples/_CFile/GetStatus.hpp"
 #include "Examples/_CFile/SetFilePath.hpp"
 #include "Examples/_CFile/GetLength.hpp"
+#include "Examples/_COleVariant/Ctors.hpp"

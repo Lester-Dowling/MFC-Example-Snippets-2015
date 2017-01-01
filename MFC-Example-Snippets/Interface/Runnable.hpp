@@ -47,11 +47,21 @@ namespace Interface {
 }
 
 /**
- *  A convenient macro for text output in classes derived from Interface::Runnable.
- */
+*  A convenient macro for text output in classes derived from Interface::Runnable.
+*/
 #define TEXT_OUT(msg)                           \
     do {                                        \
         std::wostringstream oss;                \
         oss << msg;                             \
+        m_text_output(oss.str());               \
+    } while(false)
+
+/**
+*  Text output of an blank line.
+*/
+#define TEXT_BLANKLINE                           \
+    do {                                        \
+        std::wostringstream oss;                \
+        oss << std::endl;                             \
         m_text_output(oss.str());               \
     } while(false)

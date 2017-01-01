@@ -46,6 +46,7 @@ protected: // Events ----------------------------------------------------------
 	HRESULT On_CFile_GetStatus(IHTMLElement*);
 	HRESULT On_CFile_SetFilePath(IHTMLElement*);
 	HRESULT On_CFile_GetLength(IHTMLElement*);
+	HRESULT On_COleVariant_Ctors(IHTMLElement*);
 
 public: // Accessors ----------------------------------------------------------
 

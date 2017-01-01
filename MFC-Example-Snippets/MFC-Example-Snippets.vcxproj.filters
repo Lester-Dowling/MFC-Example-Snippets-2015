@@ -28,6 +28,9 @@
     <Filter Include="Examples\_CFile">
       <UniqueIdentifier>{6112a7df-0d03-4805-9c89-b55dc6ac1b98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples\_COleVariant">
+      <UniqueIdentifier>{c2712787-00a6-450e-ac3c-8efad0e396e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -81,6 +84,9 @@
     <ClInclude Include="Examples\_CFile\GetLength.hpp">
       <Filter>Examples\_CFile</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_COleVariant\Ctors.hpp">
+      <Filter>Examples\_COleVariant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -121,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="Examples\_CFile\GetLength.cpp">
       <Filter>Examples\_CFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_COleVariant\Ctors.cpp">
+      <Filter>Examples\_COleVariant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
