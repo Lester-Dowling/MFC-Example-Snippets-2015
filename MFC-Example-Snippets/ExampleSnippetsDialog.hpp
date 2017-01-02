@@ -11,6 +11,7 @@
 #undef min
 #undef max
 #include <string>
+#include <vector>
 #include <boost/signals2.hpp>
 #include "Abstract_Base/Runnable_Example.hpp"
 #include "Resource.h"
@@ -35,12 +36,17 @@ protected: // Overrides -------------------------------------------------------
 	BOOL OnInitDialog() override;
 	void OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl) override;
 	void OnCancel() override;
-
+	const DHtmlEventMapEntry* GetDHtmlEventMap() override;
 
 protected: // Events ----------------------------------------------------------
 
 	HRESULT OnButtonCancel(IHTMLElement*);
 	HRESULT On_Run_Example(IHTMLElement*);
+
+	/**
+	 *  Event map.
+	 */
+	std::vector<DHtmlEventMapEntry> m_dhtmlEventEntries;
 
 public: // Accessors ----------------------------------------------------------
 
@@ -96,5 +102,4 @@ public: // Messages -----------------------------------------------------------
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnClose();
 	DECLARE_MESSAGE_MAP();
-	DECLARE_DHTML_EVENT_MAP()
 };

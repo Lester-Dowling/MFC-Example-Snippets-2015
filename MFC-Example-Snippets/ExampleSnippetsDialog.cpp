@@ -39,18 +39,59 @@ BEGIN_MESSAGE_MAP(ExampleSnippetsDialog, CDHtmlDialog)
 END_MESSAGE_MAP();
 
 
-BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
-	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
-	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::Open::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::fqcn(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::fqcn(), On_Run_Example)
-END_DHTML_EVENT_MAP();
+//BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
+//END_DHTML_EVENT_MAP();
 
+
+static DHtmlEventMapEntry dhtml_event_onclick(const wchar_t *element_id, HRESULT(ExampleSnippetsDialog::*handler)(IHTMLElement*))
+{
+	return DHtmlEventMapEntry{
+		DHTMLEVENTMAPENTRY_NAME,
+		DISPID_HTMLELEMENTEVENTS_ONCLICK,
+		element_id,
+		(DHEVTFUNCCONTROL)(DHEVTFUNC)handler
+	};
+}
+
+
+const DHtmlEventMapEntry * ExampleSnippetsDialog::GetDHtmlEventMap()
+{
+	typedef ExampleSnippetsDialog theClass;
+	PTM_WARNING_DISABLE;
+	static const DHtmlEventMapEntry _dhtmlEventEntries[] = {
+		DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
+		DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_CFile::Write::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_CFile::Open::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::fqcn(), On_Run_Example)
+		DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::fqcn(), On_Run_Example)
+		{
+			DHTMLEVENTMAPENTRY_END, 0, nullptr, nullptr
+		}
+	};
+	PTM_WARNING_RESTORE;
+	if (m_dhtmlEventEntries.empty())
+	{
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(L"ButtonCancel", &ExampleSnippetsDialog::OnButtonCancel));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CEvent::Trivial_Usage::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::Write::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::Open::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::GetStatus::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::SetFilePath::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::GetLength::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_COleVariant::Ctors::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
+		DHtmlEventMapEntry end_sentinel
+			= {
+			DHTMLEVENTMAPENTRY_END, 0, nullptr, nullptr
+		};
+		m_dhtmlEventEntries.push_back(end_sentinel);
+	}
+	return &m_dhtmlEventEntries.front();
+}
 
 
 void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
