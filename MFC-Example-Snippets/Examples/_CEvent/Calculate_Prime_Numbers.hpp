@@ -37,13 +37,6 @@ namespace Examples {
 		public: // HTML -------------------------------------------------------
 
 			/**
-			 *  Examples::_CEvent::Calculate_Prime_Numbers::id()
-			 *
-			 *  An unique symbol for ID attributes.
-			 */
-			static const wchar_t* id() { return L"Examples::_CEvent::Calculate_Prime_Numbers"; }
-
-			/**
 			 *  Examples::_CEvent::Calculate_Prime_Numbers::ds()
 			 *
 			 *  A short descriptive label.

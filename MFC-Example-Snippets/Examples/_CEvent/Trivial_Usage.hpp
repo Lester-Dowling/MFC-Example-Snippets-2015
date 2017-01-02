@@ -32,17 +32,6 @@ namespace Examples {
             DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE;
 
         public: // HTML -------------------------------------------------------
-
-            /**
-             *  Examples::_CEvent::Trivial_Usage::id()
-             *
-             *  An unique symbol for ID attributes.
-             */
-            static const wchar_t* id() { 
-				static CComBSTR fqcn{ GetThisClass()->m_lpszClassName };
-				return fqcn;
-			}
-
             /**
              *  Examples::_CEvent::Trivial_Usage::ds()
              *

@@ -31,13 +31,6 @@ namespace Examples {
 		public: // HTML -------------------------------------------------------
 
 			/**
-			 *  Examples::_COleVariant::Ctors::id()
-			 *
-			 *  An unique symbol for ID attributes.
-			 */
-			static const wchar_t* id() { return L"Examples::_COleVariant::Ctors"; }
-
-			/**
 			 *  Examples::_COleVariant::Ctors::ds()
 			 *
 			 *  A short descriptive label.

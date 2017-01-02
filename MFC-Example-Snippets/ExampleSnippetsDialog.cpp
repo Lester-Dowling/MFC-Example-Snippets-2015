@@ -41,14 +41,14 @@ END_MESSAGE_MAP();
 
 BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
-	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::Open::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::Open::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::fqcn(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::fqcn(), On_Run_Example)
 END_DHTML_EVENT_MAP();
 
 
@@ -66,18 +66,18 @@ void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 			<< "<h1> Examples </h1>"
 
 			<< "<h2> CEvent</h2>"
-			<< button_html(Examples::_CEvent::Trivial_Usage::id(), Examples::_CEvent::Trivial_Usage::ds())
-			<< button_html(Examples::_CEvent::Calculate_Prime_Numbers::id(), Examples::_CEvent::Calculate_Prime_Numbers::ds())
+			<< button_html(Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds())
+			<< button_html(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds())
 
 			<< "<h2> CFile </h2>"
-			<< button_html(Examples::_CFile::Write::id(), Examples::_CFile::Write::ds())
-			<< button_html(Examples::_CFile::Open::id(), Examples::_CFile::Open::ds())
-			<< button_html(Examples::_CFile::GetStatus::id(), Examples::_CFile::GetStatus::ds())
-			<< button_html(Examples::_CFile::SetFilePath::id(), Examples::_CFile::SetFilePath::ds())
-			<< button_html(Examples::_CFile::GetLength::id(), Examples::_CFile::GetLength::ds())
+			<< button_html(Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds())
+			<< button_html(Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds())
+			<< button_html(Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds())
+			<< button_html(Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds())
+			<< button_html(Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds())
 
 			<< "<h2> COleVariant </h2>"
-			<< button_html(Examples::_COleVariant::Ctors::id(), Examples::_COleVariant::Ctors::ds())
+			<< button_html(Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds())
 			;
 
 		CComBSTR buttons_to_run_examples{ woss.str().c_str() };

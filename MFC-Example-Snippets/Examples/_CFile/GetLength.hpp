@@ -31,13 +31,6 @@ namespace Examples {
 		public: // HTML -------------------------------------------------------
 
 			/**
-			 *  Examples::_CFile::GetLength::id()
-			 *
-			 *  An unique symbol for ID attributes.
-			 */
-			static const wchar_t* id() { return L"Examples::_CFile::GetLength"; }
-
-			/**
 			 *  Examples::_CFile::GetLength::ds()
 			 *
 			 *  A short descriptive label.

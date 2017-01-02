@@ -9,42 +9,48 @@
 #undef min
 #undef max
 
-#define DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE	\
+#define DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE    \
     public:                                             \
     static CRuntimeClass* __stdcall _GetBaseClass();    \
     static CRuntimeClass* GetThisClass();               \
     static CObject* __stdcall CreateObject();           \
-    CRuntimeClass* GetRuntimeClass() const override;
+    CRuntimeClass* GetRuntimeClass() const override;    \
+    static const wchar_t* fqcn();
 
 
 
-#define IMPLEMENT_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE(fqcn)			\
-    CObject* __stdcall fqcn::CreateObject()                             \
+#define IMPLEMENT_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE(FQCN)            \
+    CObject* __stdcall FQCN::CreateObject()                             \
     {                                                                   \
-        return new fqcn;                                                \
+        return new FQCN;                                                \
     }                                                                   \
                                                                         \
-    CRuntimeClass* __stdcall fqcn::_GetBaseClass()                      \
+    CRuntimeClass* __stdcall FQCN::_GetBaseClass()                      \
     {                                                                   \
         return RUNTIME_CLASS(CObject);                                  \
     }                                                                   \
                                                                         \
-    static AFX_CLASSINIT __afx_class_init__{ fqcn::GetThisClass() };    \
+    static AFX_CLASSINIT __afx_class_init__{ FQCN::GetThisClass() };    \
                                                                         \
-    CRuntimeClass* fqcn::GetThisClass()                                 \
+    CRuntimeClass* FQCN::GetThisClass()                                 \
     {                                                                   \
         static CRuntimeClass runtime_class                              \
-            = { #fqcn,                                                  \
-                sizeof(fqcn),                                           \
+            = { #FQCN,                                                  \
+                sizeof(FQCN),                                           \
                 0xFFFF,                                                 \
-                &fqcn::CreateObject,                                    \
-                &fqcn::_GetBaseClass,                                   \
+                &FQCN::CreateObject,                                    \
+                &FQCN::_GetBaseClass,                                   \
                 nullptr,                                                \
                 &__afx_class_init__ };                                  \
         return &runtime_class;                                          \
     }                                                                   \
                                                                         \
-    CRuntimeClass* fqcn::GetRuntimeClass() const                        \
+    CRuntimeClass* FQCN::GetRuntimeClass() const                        \
     {                                                                   \
-        return fqcn::GetThisClass();                                    \
+        return FQCN::GetThisClass();                                    \
+    }                                                                   \
+                                                                        \
+    const wchar_t* FQCN::fqcn() {                                       \
+        static CComBSTR fqcn{ GetThisClass()->m_lpszClassName };        \
+        return fqcn;                                                    \
     }

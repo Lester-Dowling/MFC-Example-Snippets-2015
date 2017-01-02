@@ -31,13 +31,6 @@ namespace Examples {
 		public: // HTML -------------------------------------------------------
 
 			/**
-			 *  Examples::_CFile::SetFilePath::id()
-			 *
-			 *  An unique symbol for ID attributes.
-			 */
-			static const wchar_t* id() { return L"Examples::_CFile::SetFilePath"; }
-
-			/**
 			 *  Examples::_CFile::SetFilePath::ds()
 			 *
 			 *  A short descriptive label.
