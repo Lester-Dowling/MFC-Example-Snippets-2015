@@ -163,6 +163,7 @@ $(OutDir) ^
     <ClInclude Include="Examples\_CFile\Open.hpp" />
     <ClInclude Include="Examples\_CFile\Write.hpp" />
     <ClInclude Include="Examples\_COleVariant\Ctors.hpp" />
+    <ClInclude Include="CRuntimeClass-Support.hpp" />
     <ClInclude Include="MFCExampleSnippets_h.h" />
     <ClInclude Include="TheApp.hpp" />
     <ClInclude Include="Resource.h" />

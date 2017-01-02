@@ -1,5 +1,8 @@
 #include "pch-MFC-Example-Snippets.hpp"
 #include "Ctors.hpp"
+
+IMPLEMENT_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE(Examples::_COleVariant::Ctors)
+
 namespace Examples {
 
 	/**

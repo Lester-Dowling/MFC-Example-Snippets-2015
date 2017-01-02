@@ -1,5 +1,8 @@
 #include "pch-MFC-Example-Snippets.hpp"
 #include "GetLength.hpp"
+
+IMPLEMENT_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE(Examples::_CFile::GetLength)
+
 namespace Examples {
 
 	void _CFile::GetLength::run()

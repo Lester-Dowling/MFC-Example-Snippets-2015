@@ -11,15 +11,7 @@
 #include <cstddef>
 #include <cstdint>
 #include "Abstract_Base/Runnable_Example.hpp"
-
-#define DECLARE_RUNTIME_CLASS                           \
-    public:                                             \
-    static CRuntimeClass* __stdcall _GetBaseClass();    \
-    static CRuntimeClass* GetThisClass();               \
-    static CObject* __stdcall CreateObject();           \
-    CRuntimeClass* GetRuntimeClass() const override;
-
-
+#include "CRuntimeClass-Support.hpp"
 
 namespace Examples {
     namespace _CEvent {
@@ -37,7 +29,7 @@ namespace Examples {
          */
         class Trivial_Usage : public Abstract_Base::Runnable_Example
         {
-            DECLARE_RUNTIME_CLASS;
+            DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE;
 
         public: // HTML -------------------------------------------------------
 

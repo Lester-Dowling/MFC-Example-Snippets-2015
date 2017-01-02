@@ -100,61 +100,15 @@ HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 	if (SUCCEEDED(pElement->get_id(&element_id)))
 	{
 		_RPTWN(_CRT_WARN, L"Got ID: %s\n", element_id);
-		if (element_id == Examples::_CEvent::Trivial_Usage::id())
+		CObject* example = CRuntimeClass::CreateObject(element_id);
+		if (example)
 		{
-			CObject* example = CRuntimeClass::CreateObject("Examples::_CEvent::Trivial_Usage");
-			if (example)
-			{
-				run_example(dynamic_cast<Abstract_Base::Runnable_Example*>(example));
-			}
-			else
-			{
-				// No such example:
-				::Beep(300, 800);
-			}
-			return S_OK;
-		}
-		if (element_id == Examples::_CEvent::Calculate_Prime_Numbers::id())
-		{
-			run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
-			return S_OK;
-		}
-		if (element_id == Examples::_CFile::Open::id())
-		{
-			run_example(new Examples::_CFile::Open);
-			return S_OK;
-		}
-		if (element_id == Examples::_CFile::Write::id())
-		{
-			run_example(new Examples::_CFile::Write);
-			return S_OK;
-		}
-		if (element_id == Examples::_CFile::GetStatus::id())
-		{
-			run_example(new Examples::_CFile::GetStatus);
-			return S_OK;
-		}
-		if (element_id == Examples::_CFile::SetFilePath::id())
-		{
-			run_example(new Examples::_CFile::SetFilePath);
-			return S_OK;
-		}
-		if (element_id == Examples::_CFile::GetLength::id())
-		{
-			run_example(new Examples::_CFile::GetLength);
-			return S_OK;
-		}
-		if (element_id == Examples::_COleVariant::Ctors::id())
-		{
-			run_example(new Examples::_COleVariant::Ctors);
+			run_example(dynamic_cast<Abstract_Base::Runnable_Example*>(example));
 			return S_OK;
 		}
 	}
-	else
-	{
-		// No such element id:
-		::Beep(300, 800);
-	}
+	// No such element:
+	::Beep(300, 800);
 	return S_OK;
 }
 

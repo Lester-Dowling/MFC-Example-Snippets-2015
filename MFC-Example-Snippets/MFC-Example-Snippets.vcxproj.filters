@@ -90,6 +90,9 @@
     <ClInclude Include="Abstract_Base\Runnable_Example.hpp">
       <Filter>Abstract_Base</Filter>
     </ClInclude>
+    <ClInclude Include="CRuntimeClass-Support.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">

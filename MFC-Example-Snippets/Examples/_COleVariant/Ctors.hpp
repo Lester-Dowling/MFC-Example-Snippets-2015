@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <string>
 #include "Abstract_Base/Runnable_Example.hpp"
+#include "CRuntimeClass-Support.hpp"
 
 namespace Examples {
 
@@ -25,6 +26,7 @@ namespace Examples {
 		 */
 		class Ctors : public Abstract_Base::Runnable_Example
 		{
+			DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE;
 
 		public: // HTML -------------------------------------------------------
 

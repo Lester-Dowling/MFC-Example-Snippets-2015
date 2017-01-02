@@ -1,5 +1,10 @@
 #include "pch-MFC-Example-Snippets.hpp"
 #include "Write.hpp"
+
+
+IMPLEMENT_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE(Examples::_CFile::Write)
+
+
 namespace Examples {
 
 	void _CFile::Write::run()

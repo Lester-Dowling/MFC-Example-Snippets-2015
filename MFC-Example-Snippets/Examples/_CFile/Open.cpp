@@ -1,5 +1,10 @@
 #include "pch-MFC-Example-Snippets.hpp"
 #include "Open.hpp"
+
+
+IMPLEMENT_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE(Examples::_CFile::Open)
+
+
 namespace Examples {
 
 	void _CFile::Open::run()
