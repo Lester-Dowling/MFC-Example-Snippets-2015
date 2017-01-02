@@ -1,29 +1,51 @@
 // MFCExampleSnippets.idl : type library source for MFC-Example-Snippets.exe
 
-// This file will be processed by the MIDL compiler to produce the
-// type library (MFCExampleSnippets.tlb).
+// typedefs for remotable data types:
+import "wtypes.idl";
 
-[ uuid(2448A547-EC16-4036-B419-33675184923F), version(1.0) ]
+// core type interfaces:
+import "unknwn.idl";
+
+// core infrastructure itfs
+import "objidl.idl";
+
+// ole itfs
+import "oleidl.idl";
+
+// automation itfs
+import "oaidl.idl";
+
+// ActiveX Control itfs
+import "ocidl.idl";
+
+[
+	uuid(2448A547-EC16-4036-B419-33675184923F),
+	version(1.0)
+]
 library MFCExampleSnippets
 {
-  importlib("stdole32.tlb");
-  importlib("stdole2.tlb");
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
 
-  //  Primary dispatch interface for CMFCExampleSnippetsDoc
 
-  [ uuid(FFD422F2-4B62-4D59-B35A-8CACEE5806CB) ]
-    dispinterface IMFCExampleSnippets
-    {
-      properties:
 
-      methods:
-    };
+	[
+		uuid(FFD422F2-4B62-4D59-B35A-8CACEE5806CB)
+	]
+	dispinterface IMFCExampleSnippets
+	{
+	  properties:
 
-  //  Class information for CMFCExampleSnippetsDoc
+	  methods:
+	};
 
-  [ uuid(E858A01C-0C76-41E6-A375-C1626C6E0F8C) ]
-    coclass MFCExampleSnippets
-    {
-      [default] dispinterface IMFCExampleSnippets;
-    };
+
+
+	[
+		uuid(E858A01C-0C76-41E6-A375-C1626C6E0F8C)
+	]
+	coclass MFCExampleSnippets
+	{
+		[default] dispinterface IMFCExampleSnippets;
+	};
 };

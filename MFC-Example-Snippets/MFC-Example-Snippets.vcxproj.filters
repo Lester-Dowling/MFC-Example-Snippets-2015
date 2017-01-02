@@ -31,6 +31,9 @@
     <Filter Include="Abstract_Base">
       <UniqueIdentifier>{e8647525-1977-4f9c-bcb5-41fe70bfc62a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{02e42898-5210-46a3-a748-2a7248a4d5f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -151,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MFCExampleSnippets.idl">
-      <Filter>Source Code</Filter>
+      <Filter>Interface</Filter>
     </Midl>
   </ItemGroup>
 </Project>

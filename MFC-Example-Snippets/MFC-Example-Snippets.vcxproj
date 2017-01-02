@@ -89,6 +89,15 @@
     <Xdcmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Xdcmake>
+    <PostBuildEvent>
+      <Command>START /MIN "RoboCopy of type library" ^
+ROBOCOPY   /LOG:"$(OutDir)Post-Build-Event-Copy-Log.txt" ^
+/NP  /R:2  /W:2 ^
+$(IntDir) ^
+$(OutDir) ^
+*.tlb
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -130,6 +139,15 @@
     <Xdcmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Xdcmake>
+    <PostBuildEvent>
+      <Command>START /MIN "RoboCopy of type library" ^
+ROBOCOPY   /LOG:"$(OutDir)Post-Build-Event-Copy-Log.txt" ^
+/NP  /R:2  /W:2 ^
+$(IntDir) ^
+$(OutDir) ^
+*.tlb
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.hpp" />

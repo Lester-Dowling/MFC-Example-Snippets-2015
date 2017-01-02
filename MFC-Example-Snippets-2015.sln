@@ -5,16 +5,30 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MFC-Example-Snippets", "MFC-Example-Snippets\MFC-Example-Snippets.vcxproj", "{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VB-to-MFC-Examples", "VB-to-MFC-Examples\VB-to-MFC-Examples.vbproj", "{92890B78-94E7-4316-9FE3-0809B66A9074}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}.Debug|x64.ActiveCfg = Debug|x64
 		{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}.Debug|x64.Build.0 = Debug|x64
+		{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}.Release|Any CPU.ActiveCfg = Release|x64
 		{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}.Release|x64.ActiveCfg = Release|x64
 		{44CBC9E6-2F1D-4AAE-8E51-AD405A84B8A2}.Release|x64.Build.0 = Release|x64
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Debug|x64.Build.0 = Debug|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Release|x64.ActiveCfg = Release|Any CPU
+		{92890B78-94E7-4316-9FE3-0809B66A9074}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

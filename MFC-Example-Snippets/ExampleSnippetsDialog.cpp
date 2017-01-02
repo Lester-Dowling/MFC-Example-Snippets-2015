@@ -15,18 +15,6 @@
 /**
 *  Return the HTML code for a button element.
 */
-static std::wstring button_html(const char * button_id, const char * button_label)
-{
-	std::wostringstream woss;
-	woss
-		<< "<p>"
-		<< "<BUTTON ID=\"" << button_id << "\">"
-		<< button_label
-		<< "</BUTTON>"
-		<< "</p>";
-	return woss.str();
-}
-
 static std::wstring button_html(const wchar_t * button_id, const wchar_t * button_label)
 {
 	std::wostringstream woss;

@@ -21,7 +21,9 @@ END_DISPATCH_MAP();
 
 
 BEGIN_INTERFACE_MAP(ExampleSnippetsDialogAutoProxy, CCmdTarget)
-INTERFACE_PART(ExampleSnippetsDialogAutoProxy, DIID_IMFCExampleSnippets, Dispatch)
+{
+	&DIID_IMFCExampleSnippets, offsetof(ExampleSnippetsDialogAutoProxy, m_xDispatch)
+},
 END_INTERFACE_MAP();
 
 
@@ -30,48 +32,48 @@ IMPLEMENT_OLECREATE2(ExampleSnippetsDialogAutoProxy, "MFCExampleSnippets.Applica
 
 ExampleSnippetsDialogAutoProxy::ExampleSnippetsDialogAutoProxy()
 {
-    EnableAutomation();
+	EnableAutomation();
 
-    // To keep the application running as long as an automation
-    //  object is active, the constructor calls AfxOleLockApp.
-    AfxOleLockApp();
+	// To keep the application running as long as an automation
+	//  object is active, the constructor calls AfxOleLockApp.
+	AfxOleLockApp();
 
-    // Get access to the dialog through the application's
-    //  main window pointer.  Set the proxy's internal pointer
-    //  to point to the dialog, and set the dialog's back pointer to
-    //  this proxy.
-    ASSERT_VALID(AfxGetApp()->m_pMainWnd);
-    if (AfxGetApp()->m_pMainWnd)
-        {
-            ASSERT_KINDOF(ExampleSnippetsDialog, AfxGetApp()->m_pMainWnd);
-            if (AfxGetApp()->m_pMainWnd->IsKindOf(RUNTIME_CLASS(ExampleSnippetsDialog)))
-                {
-                    m_pDialog = reinterpret_cast<ExampleSnippetsDialog*>(AfxGetApp()->m_pMainWnd);
-                    m_pDialog->m_pAutoProxy = this;
-                }
-        }
+	// Get access to the dialog through the application's
+	//  main window pointer.  Set the proxy's internal pointer
+	//  to point to the dialog, and set the dialog's back pointer to
+	//  this proxy.
+	ASSERT_VALID(AfxGetApp()->m_pMainWnd);
+	if (AfxGetApp()->m_pMainWnd)
+	{
+		ASSERT_KINDOF(ExampleSnippetsDialog, AfxGetApp()->m_pMainWnd);
+		if (AfxGetApp()->m_pMainWnd->IsKindOf(RUNTIME_CLASS(ExampleSnippetsDialog)))
+		{
+			m_pDialog = reinterpret_cast<ExampleSnippetsDialog*>(AfxGetApp()->m_pMainWnd);
+			m_pDialog->m_pAutoProxy = this;
+		}
+	}
 }
 
 
 
 ExampleSnippetsDialogAutoProxy::~ExampleSnippetsDialogAutoProxy()
 {
-    // To terminate the application when all objects created with
-    //  with automation, the destructor calls AfxOleUnlockApp.
-    //  Among other things, this will destroy the main dialog
-    if (m_pDialog != nullptr)
-        m_pDialog->m_pAutoProxy = nullptr;
-    AfxOleUnlockApp();
+	// To terminate the application when all objects created with
+	//  with automation, the destructor calls AfxOleUnlockApp.
+	//  Among other things, this will destroy the main dialog
+	if (m_pDialog != nullptr)
+		m_pDialog->m_pAutoProxy = nullptr;
+	AfxOleUnlockApp();
 }
 
 
 
 void ExampleSnippetsDialogAutoProxy::OnFinalRelease()
 {
-    // When the last reference for an automation object is released
-    // OnFinalRelease is called.  The base class will automatically
-    // deletes the object.  Add additional cleanup required for your
-    // object before calling the base class.
+	// When the last reference for an automation object is released
+	// OnFinalRelease is called.  The base class will automatically
+	// deletes the object.  Add additional cleanup required for your
+	// object before calling the base class.
 
-    CCmdTarget::OnFinalRelease();
+	CCmdTarget::OnFinalRelease();
 }

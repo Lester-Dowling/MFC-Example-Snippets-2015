@@ -60,6 +60,14 @@ typedef struct MFCExampleSnippets MFCExampleSnippets;
 #endif 	/* __MFCExampleSnippets_FWD_DEFINED__ */
 
 
+/* header files for imported files */
+#include "wtypes.h"
+#include "unknwn.h"
+#include "objidl.h"
+#include "oleidl.h"
+#include "oaidl.h"
+#include "ocidl.h"
+
 #ifdef __cplusplus
 extern "C"{
 #endif 
