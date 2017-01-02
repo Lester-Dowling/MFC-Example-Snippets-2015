@@ -38,7 +38,10 @@ namespace Examples {
              *
              *  An unique symbol for ID attributes.
              */
-            static const wchar_t* id() { return L"Examples::_CEvent::Trivial_Usage"; }
+            static const wchar_t* id() { 
+				static CComBSTR fqcn{ GetThisClass()->m_lpszClassName };
+				return fqcn;
+			}
 
             /**
              *  Examples::_CEvent::Trivial_Usage::ds()
