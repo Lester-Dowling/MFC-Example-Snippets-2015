@@ -40,6 +40,7 @@ END_MESSAGE_MAP();
 
 
 BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
+	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::id(), On_Run_Example)
 	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::id(), On_Run_Example)
 	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::id(), On_Run_Example)
@@ -48,7 +49,6 @@ BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
 	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::id(), On_Run_Example)
 	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::id(), On_Run_Example)
 	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::id(), On_Run_Example)
-	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
 
@@ -80,11 +80,12 @@ void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 			<< button_html(Examples::_COleVariant::Ctors::id(), Examples::_COleVariant::Ctors::ds())
 			;
 
-		BSTR buttons_to_run_examples = ::SysAllocString(woss.str().c_str());
+		CComBSTR buttons_to_run_examples{ woss.str().c_str() };
 		pElement->put_innerHTML(buttons_to_run_examples);
 	}
 	else
 	{
+		// No such element id:
 		::Beep(300, 800);
 	}
 }
@@ -101,7 +102,16 @@ HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 		_RPTWN(_CRT_WARN, L"Got ID: %s\n", element_id);
 		if (element_id == Examples::_CEvent::Trivial_Usage::id())
 		{
-			run_example(new Examples::_CEvent::Trivial_Usage);
+			CObject* example = CRuntimeClass::CreateObject("Examples::_CEvent::Trivial_Usage");
+			if (example)
+			{
+				run_example(dynamic_cast<Abstract_Base::Runnable_Example*>(example));
+			}
+			else
+			{
+				// No such example:
+				::Beep(300, 800);
+			}
 			return S_OK;
 		}
 		if (element_id == Examples::_CEvent::Calculate_Prime_Numbers::id())
@@ -139,6 +149,11 @@ HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 			run_example(new Examples::_COleVariant::Ctors);
 			return S_OK;
 		}
+	}
+	else
+	{
+		// No such element id:
+		::Beep(300, 800);
 	}
 	return S_OK;
 }

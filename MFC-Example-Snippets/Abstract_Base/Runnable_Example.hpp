@@ -1,4 +1,7 @@
 #pragma once
+#include <afx.h>
+#include <afxwin.h>
+#include <afxext.h>
 #include <string>
 #include <boost/signals2.hpp>
 #include <boost/bind.hpp>
@@ -13,7 +16,7 @@ namespace Abstract_Base {
 	 *
 	 *  Abstract base class for runnable examples.
 	 */
-    class Runnable_Example
+    class Runnable_Example : public CObject
     {
 
     public: // Methods --------------------------------------------------------

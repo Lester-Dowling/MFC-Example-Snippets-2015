@@ -12,8 +12,16 @@
 #include <cstdint>
 #include "Abstract_Base/Runnable_Example.hpp"
 
-namespace Examples {
+#define DECLARE_RUNTIME_CLASS                           \
+    public:                                             \
+    static CRuntimeClass* __stdcall _GetBaseClass();    \
+    static CRuntimeClass* GetThisClass();               \
+    static CObject* __stdcall CreateObject();           \
+    CRuntimeClass* GetRuntimeClass() const override;
 
+
+
+namespace Examples {
     namespace _CEvent {
 
         /**
@@ -29,24 +37,25 @@ namespace Examples {
          */
         class Trivial_Usage : public Abstract_Base::Runnable_Example
         {
+            DECLARE_RUNTIME_CLASS;
 
-		public: // HTML -------------------------------------------------------
+        public: // HTML -------------------------------------------------------
 
-			/**
-			 *  Examples::_CEvent::Trivial_Usage::id()
-			 *
-			 *  An unique symbol for ID attributes.
-			 */
-			static const wchar_t* id() { return L"Examples::_CEvent::Trivial_Usage"; }
+            /**
+             *  Examples::_CEvent::Trivial_Usage::id()
+             *
+             *  An unique symbol for ID attributes.
+             */
+            static const wchar_t* id() { return L"Examples::_CEvent::Trivial_Usage"; }
 
-			/**
-			*  Examples::_CEvent::Trivial_Usage::ds()
-			*
-			*  A short descriptive label.
-			 */
-			static const wchar_t* ds() { return L"Trivial Usage"; }
+            /**
+             *  Examples::_CEvent::Trivial_Usage::ds()
+             *
+             *  A short descriptive label.
+             */
+            static const wchar_t* ds() { return L"Trivial Usage"; }
 
-		public: // Methods ----------------------------------------------------
+        public: // Methods ----------------------------------------------------
 
             /**
              *  Controlling thread proc for the example.
