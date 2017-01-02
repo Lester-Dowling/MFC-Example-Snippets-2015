@@ -12,7 +12,7 @@
 #undef max
 #include <string>
 #include <boost/signals2.hpp>
-#include "Abstract_Base/Runnable.hpp"
+#include "Abstract_Base/Runnable_Example.hpp"
 #include "Resource.h"
 class ExampleSnippetsDialogAutoProxy;
 
@@ -40,18 +40,11 @@ protected: // Overrides -------------------------------------------------------
 protected: // Events ----------------------------------------------------------
 
 	HRESULT OnButtonCancel(IHTMLElement*);
-	HRESULT On_CEvent_Trivial_Usage(IHTMLElement*);
-	HRESULT On_CEvent_Calculate_Prime_Numbers(IHTMLElement*);
-	HRESULT On_CFile_Open(IHTMLElement*);
-	HRESULT On_CFile_Write(IHTMLElement*);
-	HRESULT On_CFile_GetStatus(IHTMLElement*);
-	HRESULT On_CFile_SetFilePath(IHTMLElement*);
-	HRESULT On_CFile_GetLength(IHTMLElement*);
-	HRESULT On_COleVariant_Ctors(IHTMLElement*);
+	HRESULT On_Run_Example(IHTMLElement*);
 
 public: // Accessors ----------------------------------------------------------
 
-	Abstract_Base::Runnable * runnable() const { return m_runnable; }
+	Abstract_Base::Runnable_Example * runnable() const { return m_runnable; }
 	void clean_up_example();
 
 protected: // Implementation --------------------------------------------------
@@ -59,9 +52,9 @@ protected: // Implementation --------------------------------------------------
 	/**
 	 *  Running the example
 	 */
-	Abstract_Base::Runnable *m_runnable = nullptr;
+	Abstract_Base::Runnable_Example *m_runnable = nullptr;
 	CWinThread *m_pThread = nullptr;
-	void run_example(Abstract_Base::Runnable *runnable);
+	void run_example(Abstract_Base::Runnable_Example *runnable);
 
 
 	ExampleSnippetsDialogAutoProxy* m_pAutoProxy = nullptr;

@@ -10,7 +10,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include "Abstract_Base/Runnable.hpp"
+#include "Abstract_Base/Runnable_Example.hpp"
 
 namespace Examples {
 
@@ -23,7 +23,7 @@ namespace Examples {
 		 *      https://msdn.microsoft.com/en-us/library/4xd0wkhw.aspx
 		 *
 		 */
-		class Ctors : public Abstract_Base::Runnable
+		class Ctors : public Abstract_Base::Runnable_Example
 		{
 
 		public: // HTML -------------------------------------------------------
@@ -31,7 +31,7 @@ namespace Examples {
 			/**
 			 *  Examples::_COleVariant::Ctors::id()
 			 *
-			 *  A tag for ID elements.
+			 *  An unique symbol for ID attributes.
 			 */
 			static const wchar_t* id() { return L"Examples::_COleVariant::Ctors"; }
 

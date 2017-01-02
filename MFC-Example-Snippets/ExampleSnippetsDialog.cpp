@@ -13,8 +13,8 @@
 
 
 /**
-*  Return the HTML code for a button element.
-*/
+ *  Return the HTML code for a button element.
+ */
 static std::wstring button_html(const wchar_t * button_id, const wchar_t * button_label)
 {
 	std::wostringstream woss;
@@ -40,14 +40,14 @@ END_MESSAGE_MAP();
 
 
 BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
-	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::id(), On_CEvent_Trivial_Usage)
-	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::id(), On_CEvent_Calculate_Prime_Numbers)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::id(), On_CFile_Write)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::Open::id(), On_CFile_Open)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::id(), On_CFile_GetStatus)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::id(), On_CFile_SetFilePath)
-	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::id(), On_CFile_GetLength)
-	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::id(), On_COleVariant_Ctors)
+	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::Open::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::id(), On_Run_Example)
+	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::id(), On_Run_Example)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
 
@@ -91,73 +91,55 @@ void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 
 
 
-HRESULT ExampleSnippetsDialog::On_CEvent_Trivial_Usage(IHTMLElement*)
+HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 {
 	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CEvent::Trivial_Usage);
-	return S_OK;
-}
 
-
-
-HRESULT ExampleSnippetsDialog::On_CEvent_Calculate_Prime_Numbers(IHTMLElement*)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
-	return S_OK;
-}
-
-
-
-HRESULT ExampleSnippetsDialog::On_CFile_Open(IHTMLElement *)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CFile::Open);
-	return S_OK;
-}
-
-
-
-HRESULT ExampleSnippetsDialog::On_CFile_Write(IHTMLElement * pElement)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CFile::Write);
-	return S_OK;
-}
-
-
-
-HRESULT ExampleSnippetsDialog::On_CFile_GetStatus(IHTMLElement *)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CFile::GetStatus);
-	return S_OK;
-}
-
-
-
-HRESULT ExampleSnippetsDialog::On_CFile_SetFilePath(IHTMLElement *)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CFile::SetFilePath);
-	return S_OK;
-}
-
-
-
-HRESULT ExampleSnippetsDialog::On_CFile_GetLength(IHTMLElement *)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_CFile::GetLength);
-	return S_OK;
-}
-
-
-
-HRESULT ExampleSnippetsDialog::On_COleVariant_Ctors(IHTMLElement *)
-{
-	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
-	run_example(new Examples::_COleVariant::Ctors);
+	CComBSTR element_id;
+	if (SUCCEEDED(pElement->get_id(&element_id)))
+	{
+		_RPTWN(_CRT_WARN, L"Got ID: %s\n", element_id);
+		if (element_id == Examples::_CEvent::Trivial_Usage::id())
+		{
+			run_example(new Examples::_CEvent::Trivial_Usage);
+			return S_OK;
+		}
+		if (element_id == Examples::_CEvent::Calculate_Prime_Numbers::id())
+		{
+			run_example(new Examples::_CEvent::Calculate_Prime_Numbers);
+			return S_OK;
+		}
+		if (element_id == Examples::_CFile::Open::id())
+		{
+			run_example(new Examples::_CFile::Open);
+			return S_OK;
+		}
+		if (element_id == Examples::_CFile::Write::id())
+		{
+			run_example(new Examples::_CFile::Write);
+			return S_OK;
+		}
+		if (element_id == Examples::_CFile::GetStatus::id())
+		{
+			run_example(new Examples::_CFile::GetStatus);
+			return S_OK;
+		}
+		if (element_id == Examples::_CFile::SetFilePath::id())
+		{
+			run_example(new Examples::_CFile::SetFilePath);
+			return S_OK;
+		}
+		if (element_id == Examples::_CFile::GetLength::id())
+		{
+			run_example(new Examples::_CFile::GetLength);
+			return S_OK;
+		}
+		if (element_id == Examples::_COleVariant::Ctors::id())
+		{
+			run_example(new Examples::_COleVariant::Ctors);
+			return S_OK;
+		}
+	}
 	return S_OK;
 }
 
@@ -235,7 +217,7 @@ void ExampleSnippetsDialog::clean_up_example()
 
 
 
-void ExampleSnippetsDialog::run_example(Abstract_Base::Runnable *runnable)
+void ExampleSnippetsDialog::run_example(Abstract_Base::Runnable_Example *runnable)
 {
 	ASSERT(m_runnable == nullptr);
 	ASSERT(m_pThread == nullptr);

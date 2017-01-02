@@ -4,16 +4,16 @@
 #include <boost/bind.hpp>
 
 /**
- *  Namespace Abstract_Base is for Abstract Base Classes.
+ *  Namespace Abstract_Base is for abstract base classes.
  */
 namespace Abstract_Base {
 
 	/**
-	 *  Abstract_Base::Runnable
+	 *  Abstract_Base::Runnable_Example
 	 *
-	 *  Abstract Base Class for runnable examples.
+	 *  Abstract base class for runnable examples.
 	 */
-    class Runnable
+    class Runnable_Example
     {
 
     public: // Methods --------------------------------------------------------
@@ -50,12 +50,12 @@ namespace Abstract_Base {
 
 
     public: // ----------------------------------------------------------------
-        virtual ~Runnable() {}
+        virtual ~Runnable_Example() {}
     };
 }
 
 /**
- *  A convenient macro for text output in classes derived from Abstract_Base::Runnable.
+ *  A convenient macro for text output in classes derived from Abstract_Base::Runnable_Example.
  */
 #define TEXT_OUT(msg)                           \
     do {                                        \

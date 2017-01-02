@@ -10,7 +10,7 @@
 #undef max
 #include <cstddef>
 #include <cstdint>
-#include "Abstract_Base/Runnable.hpp"
+#include "Abstract_Base/Runnable_Example.hpp"
 
 namespace Examples {
 
@@ -27,7 +27,7 @@ namespace Examples {
          *  thread.  The other thread will wait for the event to be signaled
          *  and then exit
          */
-        class Trivial_Usage : public Abstract_Base::Runnable
+        class Trivial_Usage : public Abstract_Base::Runnable_Example
         {
 
 		public: // HTML -------------------------------------------------------
@@ -35,7 +35,7 @@ namespace Examples {
 			/**
 			 *  Examples::_CEvent::Trivial_Usage::id()
 			 *
-			 *  A tag for ID elements.
+			 *  An unique symbol for ID attributes.
 			 */
 			static const wchar_t* id() { return L"Examples::_CEvent::Trivial_Usage"; }
 

@@ -87,7 +87,7 @@
     <ClInclude Include="Examples\_COleVariant\Ctors.hpp">
       <Filter>Examples\_COleVariant</Filter>
     </ClInclude>
-    <ClInclude Include="Abstract_Base\Runnable.hpp">
+    <ClInclude Include="Abstract_Base\Runnable_Example.hpp">
       <Filter>Abstract_Base</Filter>
     </ClInclude>
   </ItemGroup>

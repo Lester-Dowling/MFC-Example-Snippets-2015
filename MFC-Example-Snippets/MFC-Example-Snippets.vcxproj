@@ -151,7 +151,7 @@ $(OutDir) ^
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.hpp" />
-    <ClInclude Include="Abstract_Base\Runnable.hpp" />
+    <ClInclude Include="Abstract_Base\Runnable_Example.hpp" />
     <ClInclude Include="ExampleSnippetsDialog.hpp" />
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
     <ClInclude Include="Examples\Examples.hpp" />

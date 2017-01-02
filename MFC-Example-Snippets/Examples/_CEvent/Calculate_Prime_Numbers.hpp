@@ -10,7 +10,7 @@
 #undef max
 #include <cstddef>
 #include <cstdint>
-#include "Abstract_Base/Runnable.hpp"
+#include "Abstract_Base/Runnable_Example.hpp"
 
 namespace Examples {
 
@@ -29,7 +29,7 @@ namespace Examples {
          *  calculated. Finally, after several iterations the worker thread
          *  is signaled to terminate.
          */
-        class Calculate_Prime_Numbers : public Abstract_Base::Runnable
+        class Calculate_Prime_Numbers : public Abstract_Base::Runnable_Example
         {
 
         public: // HTML -------------------------------------------------------
@@ -37,7 +37,7 @@ namespace Examples {
             /**
              *  Examples::_CEvent::Calculate_Prime_Numbers::id()
              *
-             *  A tag for ID elements.
+             *  An unique symbol for ID attributes.
              */
             static const wchar_t* id() { return L"Examples::_CEvent::Calculate_Prime_Numbers"; }
 

@@ -10,7 +10,7 @@
 #undef max
 #include <cstddef>
 #include <cstdint>
-#include "Abstract_Base/Runnable.hpp"
+#include "Abstract_Base/Runnable_Example.hpp"
 
 namespace Examples {
 
@@ -23,7 +23,7 @@ namespace Examples {
 		 *      https://msdn.microsoft.com/en-us/library/60fh2b6f.aspx
 		 *
 		 */
-		class GetLength : public Abstract_Base::Runnable
+		class GetLength : public Abstract_Base::Runnable_Example
 		{
 
 		public: // HTML -------------------------------------------------------
@@ -31,7 +31,7 @@ namespace Examples {
 			/**
 			 *  Examples::_CFile::GetLength::id()
 			 *
-			 *  A tag for ID elements.
+			 *  An unique symbol for ID attributes.
 			 */
 			static const wchar_t* id() { return L"Examples::_CFile::GetLength"; }
 
