@@ -25,12 +25,15 @@
         return new FQCN;                                                \
     }                                                                   \
                                                                         \
+                                                                        \
     CRuntimeClass* __stdcall FQCN::_GetBaseClass()                      \
     {                                                                   \
         return RUNTIME_CLASS(CObject);                                  \
     }                                                                   \
                                                                         \
+                                                                        \
     static AFX_CLASSINIT __afx_class_init__{ FQCN::GetThisClass() };    \
+                                                                        \
                                                                         \
     CRuntimeClass* FQCN::GetThisClass()                                 \
     {                                                                   \
@@ -45,10 +48,12 @@
         return &runtime_class;                                          \
     }                                                                   \
                                                                         \
+                                                                        \
     CRuntimeClass* FQCN::GetRuntimeClass() const                        \
     {                                                                   \
         return FQCN::GetThisClass();                                    \
     }                                                                   \
+                                                                        \
                                                                         \
     const wchar_t* FQCN::fqcn() {                                       \
         static CComBSTR fqcn{ GetThisClass()->m_lpszClassName };        \

@@ -47,6 +47,9 @@ protected: // Events ----------------------------------------------------------
 	 *  Event map.
 	 */
 	std::vector<DHtmlEventMapEntry> m_dhtmlEventEntries;
+	void add_dhtml_event_onclick(const wchar_t *element_id, HRESULT(ExampleSnippetsDialog::*handler)(IHTMLElement*));
+	void append_dhtml_event_sentinel();
+	std::wstring make_run_example_button(const wchar_t * button_id, const wchar_t * button_label);
 
 public: // Accessors ----------------------------------------------------------
 

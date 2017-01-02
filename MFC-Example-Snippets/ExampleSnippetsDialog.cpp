@@ -12,6 +12,47 @@
 
 
 
+IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
+
+
+BEGIN_MESSAGE_MAP(ExampleSnippetsDialog, CDHtmlDialog)
+	ON_WM_SYSCOMMAND()
+	ON_WM_CLOSE()
+	ON_MESSAGE(static_cast<UINT>(MSG::more_text_out), &OnMoreTextOut)
+END_MESSAGE_MAP();
+
+
+/**
+ *  Return the Event Map Entry for the given element id and its handler in this dialog box.
+ */
+static DHtmlEventMapEntry dhtml_event_onclick(const wchar_t *element_id, HRESULT(ExampleSnippetsDialog::*handler)(IHTMLElement*))
+{
+	return DHtmlEventMapEntry{
+		DHTMLEVENTMAPENTRY_NAME,
+		DISPID_HTMLELEMENTEVENTS_ONCLICK,
+		element_id,
+		(DHEVTFUNCCONTROL)(DHEVTFUNC)handler
+	};
+}
+
+
+
+void ExampleSnippetsDialog::add_dhtml_event_onclick(const wchar_t * element_id, HRESULT(ExampleSnippetsDialog::* handler)(IHTMLElement *))
+{
+	m_dhtmlEventEntries.back() = dhtml_event_onclick(element_id, handler);
+	append_dhtml_event_sentinel();
+}
+
+
+
+void ExampleSnippetsDialog::append_dhtml_event_sentinel()
+{
+	DHtmlEventMapEntry end_sentinel
+		= { DHTMLEVENTMAPENTRY_END, 0, nullptr, nullptr };
+	m_dhtmlEventEntries.push_back(end_sentinel);
+}
+
+
 /**
  *  Return the HTML code for a button element.
  */
@@ -29,69 +70,19 @@ static std::wstring button_html(const wchar_t * button_id, const wchar_t * butto
 
 
 
-IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
-
-
-BEGIN_MESSAGE_MAP(ExampleSnippetsDialog, CDHtmlDialog)
-	ON_WM_SYSCOMMAND()
-	ON_WM_CLOSE()
-	ON_MESSAGE(static_cast<UINT>(MSG::more_text_out), &OnMoreTextOut)
-END_MESSAGE_MAP();
-
-
-//BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
-//END_DHTML_EVENT_MAP();
-
-
-static DHtmlEventMapEntry dhtml_event_onclick(const wchar_t *element_id, HRESULT(ExampleSnippetsDialog::*handler)(IHTMLElement*))
+std::wstring ExampleSnippetsDialog::make_run_example_button(const wchar_t * element_id, const wchar_t * button_label)
 {
-	return DHtmlEventMapEntry{
-		DHTMLEVENTMAPENTRY_NAME,
-		DISPID_HTMLELEMENTEVENTS_ONCLICK,
-		element_id,
-		(DHEVTFUNCCONTROL)(DHEVTFUNC)handler
-	};
+	add_dhtml_event_onclick(element_id, &ExampleSnippetsDialog::On_Run_Example);
+	return button_html(element_id, button_label);
 }
+
 
 
 const DHtmlEventMapEntry * ExampleSnippetsDialog::GetDHtmlEventMap()
 {
-	typedef ExampleSnippetsDialog theClass;
-	PTM_WARNING_DISABLE;
-	static const DHtmlEventMapEntry _dhtmlEventEntries[] = {
-		DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
-		DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_CFile::Write::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_CFile::Open::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::fqcn(), On_Run_Example)
-		DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::fqcn(), On_Run_Example)
-		{
-			DHTMLEVENTMAPENTRY_END, 0, nullptr, nullptr
-		}
-	};
-	PTM_WARNING_RESTORE;
-	if (m_dhtmlEventEntries.empty())
-	{
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(L"ButtonCancel", &ExampleSnippetsDialog::OnButtonCancel));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CEvent::Trivial_Usage::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::Write::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::Open::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::GetStatus::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::SetFilePath::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_CFile::GetLength::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		m_dhtmlEventEntries.push_back(dhtml_event_onclick(Examples::_COleVariant::Ctors::fqcn(), &ExampleSnippetsDialog::On_Run_Example));
-		DHtmlEventMapEntry end_sentinel
-			= {
-			DHTMLEVENTMAPENTRY_END, 0, nullptr, nullptr
-		};
-		m_dhtmlEventEntries.push_back(end_sentinel);
-	}
 	return &m_dhtmlEventEntries.front();
 }
+
 
 
 void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
@@ -107,18 +98,18 @@ void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 			<< "<h1> Examples </h1>"
 
 			<< "<h2> CEvent</h2>"
-			<< button_html(Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds())
-			<< button_html(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds())
+			<< make_run_example_button(Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds())
+			<< make_run_example_button(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds())
 
 			<< "<h2> CFile </h2>"
-			<< button_html(Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds())
-			<< button_html(Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds())
-			<< button_html(Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds())
-			<< button_html(Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds())
-			<< button_html(Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds())
+			<< make_run_example_button(Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds())
+			<< make_run_example_button(Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds())
+			<< make_run_example_button(Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds())
+			<< make_run_example_button(Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds())
+			<< make_run_example_button(Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds())
 
 			<< "<h2> COleVariant </h2>"
-			<< button_html(Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds())
+			<< make_run_example_button(Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds())
 			;
 
 		CComBSTR buttons_to_run_examples{ woss.str().c_str() };
@@ -247,6 +238,10 @@ ExampleSnippetsDialog::ExampleSnippetsDialog(CWnd* pParent /*=nullptr*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pAutoProxy = nullptr;
+
+	// Start the event map with only the quit button:
+	append_dhtml_event_sentinel();
+	add_dhtml_event_onclick(L"ButtonCancel", &ExampleSnippetsDialog::OnButtonCancel);
 }
 
 
