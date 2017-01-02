@@ -12,7 +12,7 @@
 #undef max
 #include <string>
 #include <boost/signals2.hpp>
-#include "ABC/Runnable.hpp"
+#include "Abstract_Base/Runnable.hpp"
 #include "Resource.h"
 class ExampleSnippetsDialogAutoProxy;
 
@@ -33,6 +33,7 @@ protected: // Overrides -------------------------------------------------------
 
 	void DoDataExchange(CDataExchange* pDX) override;
 	BOOL OnInitDialog() override;
+	void OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl) override;
 	void OnCancel() override;
 
 
@@ -50,7 +51,7 @@ protected: // Events ----------------------------------------------------------
 
 public: // Accessors ----------------------------------------------------------
 
-	ABC::Runnable * runnable() const { return m_runnable; }
+	Abstract_Base::Runnable * runnable() const { return m_runnable; }
 	void clean_up_example();
 
 protected: // Implementation --------------------------------------------------
@@ -58,9 +59,9 @@ protected: // Implementation --------------------------------------------------
 	/**
 	 *  Running the example
 	 */
-	ABC::Runnable *m_runnable = nullptr;
+	Abstract_Base::Runnable *m_runnable = nullptr;
 	CWinThread *m_pThread = nullptr;
-	void run_example(ABC::Runnable *runnable);
+	void run_example(Abstract_Base::Runnable *runnable);
 
 
 	ExampleSnippetsDialogAutoProxy* m_pAutoProxy = nullptr;

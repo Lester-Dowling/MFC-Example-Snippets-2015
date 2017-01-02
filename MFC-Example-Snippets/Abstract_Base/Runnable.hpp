@@ -4,12 +4,12 @@
 #include <boost/bind.hpp>
 
 /**
- *  Namespace ABC is for Abstract Base Classes.
+ *  Namespace Abstract_Base is for Abstract Base Classes.
  */
-namespace ABC {
+namespace Abstract_Base {
 
 	/**
-	 *  ABC::Runnable
+	 *  Abstract_Base::Runnable
 	 *
 	 *  Abstract Base Class for runnable examples.
 	 */
@@ -55,7 +55,7 @@ namespace ABC {
 }
 
 /**
- *  A convenient macro for text output in classes derived from ABC::Runnable.
+ *  A convenient macro for text output in classes derived from Abstract_Base::Runnable.
  */
 #define TEXT_OUT(msg)                           \
     do {                                        \

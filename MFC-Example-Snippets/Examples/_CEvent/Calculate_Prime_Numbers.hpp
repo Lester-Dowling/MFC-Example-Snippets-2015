@@ -6,92 +6,103 @@
 #include <atlbase.h>
 #include <atlstr.h>
 #include <afxdisp.h>
-#include <afxdialogex.h>
-#include <afxdhtml.h>
 #undef min
 #undef max
 #include <cstddef>
 #include <cstdint>
-#include <string>
-#include <vector>
-#include <iostream>
-#include "ABC/Runnable.hpp"
+#include "Abstract_Base/Runnable.hpp"
 
 namespace Examples {
 
-	namespace _CEvent {
+    namespace _CEvent {
 
-		/**
-		 *  Examples::_CEvent::Calculate_Prime_Numbers
-		 *
-		 *  Copied from:
-		 *      https://msdn.microsoft.com/en-us/library/efk30beh.aspx
-		 *
-		 *  This example builds upon the previous one.  A second thread is
-		 *  created to calculate prime numbers.  The main thread will signal
-		 *  the second thread to calulate the next prime number in the
-		 *  series.  The second thread signals the first after each number is
-		 *  calculated. Finally, after several iterations the worker thread
-		 *  is signaled to terminate.
-		 */
-		class Calculate_Prime_Numbers : public ABC::Runnable
-		{
+        /**
+         *  Examples::_CEvent::Calculate_Prime_Numbers
+         *
+         *  Copied from:
+         *      https://msdn.microsoft.com/en-us/library/efk30beh.aspx
+         *
+         *  This example builds upon the previous one.  A second thread is
+         *  created to calculate prime numbers.  The main thread will signal
+         *  the second thread to calulate the next prime number in the
+         *  series.  The second thread signals the first after each number is
+         *  calculated. Finally, after several iterations the worker thread
+         *  is signaled to terminate.
+         */
+        class Calculate_Prime_Numbers : public Abstract_Base::Runnable
+        {
 
-		public: // Ctors et al ------------------------------------------------
+        public: // HTML -------------------------------------------------------
 
-			Calculate_Prime_Numbers();
+            /**
+             *  Examples::_CEvent::Calculate_Prime_Numbers::id()
+             *
+             *  A tag for ID elements.
+             */
+            static const wchar_t* id() { return L"Examples::_CEvent::Calculate_Prime_Numbers"; }
 
-			~Calculate_Prime_Numbers();
+            /**
+             *  Examples::_CEvent::Calculate_Prime_Numbers::ds()
+             *
+             *  A short descriptive label.
+             */
+            static const wchar_t* ds() { return L"Calculate Prime Numbers"; }
 
-		public: // Methods ----------------------------------------------------
+        public: // Ctors et al ------------------------------------------------
 
-			/**
-			 *  Examples::Calculate_Prime_Numbers::run
-			 *
-			 *  Run the example.
-			 */
-			void run() override;
+            Calculate_Prime_Numbers();
 
-		private: // Implementation --------------------------------------------
+            ~Calculate_Prime_Numbers();
 
-			/**
-			 *  Determines whether the given number is a prime number.
-			 */
-			static BOOL IsPrime(INT ThisPrime);
+        public: // Methods ----------------------------------------------------
 
-			/**
-			 *  Calculates the next prime number in the series.
-			 */
-			static INT NextPrime(INT ThisPrime);
+            /**
+             *  Examples::Calculate_Prime_Numbers::run
+             *
+             *  Run the example.
+             */
+            void run() override;
 
-			/**
-			 *  Worker thread responsible for calculating the next prime
-			 *  number in the series.
-			 */
-			static UINT __cdecl PrimeCalcProc(LPVOID lpParameter);
+        private: // Implementation --------------------------------------------
 
-		private: // State -----------------------------------------------------
+            /**
+             *  Determines whether the given number is a prime number.
+             */
+            static BOOL IsPrime(INT ThisPrime);
 
-			/**
-			 *  Notifies worker thread to calculate next prime.
-			 */
-			CEvent* m_pCalcNext;
+            /**
+             *  Calculates the next prime number in the series.
+             */
+            static INT NextPrime(INT ThisPrime);
 
-			/**
-			 *  Notifies main thread current calculation is complete.
-			 */
-			CEvent* m_pCalcFinished;
+            /**
+             *  Worker thread responsible for calculating the next prime
+             *  number in the series.
+             */
+            static UINT __cdecl PrimeCalcProc(LPVOID lpParameter);
 
-			/**
-			 *  Notifies worker thread to terminate.
-			 */
-			CEvent* m_pTerminateThread;
+        private: // State -----------------------------------------------------
 
-			/**
-			 *  Current calculated prime number.
-			 */
-			INT m_iCurrentPrime;
+            /**
+             *  Notifies worker thread to calculate next prime.
+             */
+            CEvent* m_pCalcNext;
 
-		};
-	}
+            /**
+             *  Notifies main thread current calculation is complete.
+             */
+            CEvent* m_pCalcFinished;
+
+            /**
+             *  Notifies worker thread to terminate.
+             */
+            CEvent* m_pTerminateThread;
+
+            /**
+             *  Current calculated prime number.
+             */
+            INT m_iCurrentPrime;
+
+        };
+    }
 }

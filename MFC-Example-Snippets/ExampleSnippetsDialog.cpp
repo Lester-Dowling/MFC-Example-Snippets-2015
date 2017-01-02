@@ -11,6 +11,36 @@
 #endif
 
 
+
+/**
+*  Return the HTML code for a button element.
+*/
+static std::wstring button_html(const char * button_id, const char * button_label)
+{
+	std::wostringstream woss;
+	woss
+		<< "<p>"
+		<< "<BUTTON ID=\"" << button_id << "\">"
+		<< button_label
+		<< "</BUTTON>"
+		<< "</p>";
+	return woss.str();
+}
+
+static std::wstring button_html(const wchar_t * button_id, const wchar_t * button_label)
+{
+	std::wostringstream woss;
+	woss
+		<< "<p>"
+		<< "<BUTTON ID=\"" << button_id << "\">"
+		<< button_label
+		<< "</BUTTON>"
+		<< "</p>";
+	return woss.str();
+}
+
+
+
 IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
 
 
@@ -22,16 +52,54 @@ END_MESSAGE_MAP();
 
 
 BEGIN_DHTML_EVENT_MAP(ExampleSnippetsDialog)
-	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Trivial_Usage", On_CEvent_Trivial_Usage)
-	DHTML_EVENT_ONCLICK(L"Examples::_CEvent::Calculate_Prime_Numbers", On_CEvent_Calculate_Prime_Numbers)
-	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Write", On_CFile_Write)
-	DHTML_EVENT_ONCLICK(L"Examples::_CFile::GetStatus", On_CFile_GetStatus)
-	DHTML_EVENT_ONCLICK(L"Examples::_CFile::Open", On_CFile_Open)
-	DHTML_EVENT_ONCLICK(L"Examples::_CFile::SetFilePath", On_CFile_SetFilePath)
-	DHTML_EVENT_ONCLICK(L"Examples::_CFile::GetLength", On_CFile_GetLength)
-	DHTML_EVENT_ONCLICK(L"Examples::_COleVariant::Ctors", On_COleVariant_Ctors)
+	DHTML_EVENT_ONCLICK(Examples::_CEvent::Trivial_Usage::id(), On_CEvent_Trivial_Usage)
+	DHTML_EVENT_ONCLICK(Examples::_CEvent::Calculate_Prime_Numbers::id(), On_CEvent_Calculate_Prime_Numbers)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::Write::id(), On_CFile_Write)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::Open::id(), On_CFile_Open)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::GetStatus::id(), On_CFile_GetStatus)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::SetFilePath::id(), On_CFile_SetFilePath)
+	DHTML_EVENT_ONCLICK(Examples::_CFile::GetLength::id(), On_CFile_GetLength)
+	DHTML_EVENT_ONCLICK(Examples::_COleVariant::Ctors::id(), On_COleVariant_Ctors)
 	DHTML_EVENT_ONCLICK(L"ButtonCancel", OnButtonCancel)
 END_DHTML_EVENT_MAP();
+
+
+
+void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
+{
+	CDHtmlDialog::OnDocumentComplete(pDisp, szUrl);
+
+	IHTMLElement* pElement = nullptr;
+	if (GetElement(L"ButtonsToRunExamples", &pElement) == S_OK && pElement != nullptr)
+	{
+		// Setup the buttons to run examples:
+		std::wostringstream woss;
+		woss
+			<< "<h1> Examples </h1>"
+
+			<< "<h2> CEvent</h2>"
+			<< button_html(Examples::_CEvent::Trivial_Usage::id(), Examples::_CEvent::Trivial_Usage::ds())
+			<< button_html(Examples::_CEvent::Calculate_Prime_Numbers::id(), Examples::_CEvent::Calculate_Prime_Numbers::ds())
+
+			<< "<h2> CFile </h2>"
+			<< button_html(Examples::_CFile::Write::id(), Examples::_CFile::Write::ds())
+			<< button_html(Examples::_CFile::Open::id(), Examples::_CFile::Open::ds())
+			<< button_html(Examples::_CFile::GetStatus::id(), Examples::_CFile::GetStatus::ds())
+			<< button_html(Examples::_CFile::SetFilePath::id(), Examples::_CFile::SetFilePath::ds())
+			<< button_html(Examples::_CFile::GetLength::id(), Examples::_CFile::GetLength::ds())
+
+			<< "<h2> COleVariant </h2>"
+			<< button_html(Examples::_COleVariant::Ctors::id(), Examples::_COleVariant::Ctors::ds())
+			;
+
+		BSTR buttons_to_run_examples = ::SysAllocString(woss.str().c_str());
+		pElement->put_innerHTML(buttons_to_run_examples);
+	}
+	else
+	{
+		::Beep(300, 800);
+	}
+}
 
 
 
@@ -110,7 +178,7 @@ HRESULT ExampleSnippetsDialog::On_COleVariant_Ctors(IHTMLElement *)
 LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
 {
 	// Verify that the identity of this MSG is mine:
-	if (wParam != 82 && lParam != 34) { ::Beep(500,800); return -1; }
+	if (wParam != 82 && lParam != 34) { ::Beep(500, 800); return -1; }
 	// Ensure this happens on the UI thread:
 	if (m_ui_thread_id == GetCurrentThreadId())
 	{
@@ -156,7 +224,7 @@ static UINT __cdecl run_example_thread_proc(LPVOID lpParameter)
 {
 	auto dialog = reinterpret_cast<ExampleSnippetsDialog*>(lpParameter);
 	if (dialog == nullptr || !dialog->IsKindOf(RUNTIME_CLASS(ExampleSnippetsDialog)))
-		return 1;   // dialog is not valid  
+		return 1;   // dialog is not valid
 	dialog->runnable()->run();
 	dialog->clean_up_example();
 	::AfxEndThread(0, TRUE); // Terminate and delete the thread.
@@ -179,7 +247,7 @@ void ExampleSnippetsDialog::clean_up_example()
 
 
 
-void ExampleSnippetsDialog::run_example(ABC::Runnable *runnable)
+void ExampleSnippetsDialog::run_example(Abstract_Base::Runnable *runnable)
 {
 	ASSERT(m_runnable == nullptr);
 	ASSERT(m_pThread == nullptr);

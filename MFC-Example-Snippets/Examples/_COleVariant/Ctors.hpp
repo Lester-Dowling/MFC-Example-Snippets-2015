@@ -10,29 +10,45 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include "ABC/Runnable.hpp"
+#include "Abstract_Base/Runnable.hpp"
 
 namespace Examples {
 
-    namespace _COleVariant {
+	namespace _COleVariant {
 
-        /**
-         *  Examples::_COleVariant::Ctors
-         *
-         *  Inspired by:
-         *      https://msdn.microsoft.com/en-us/library/4xd0wkhw.aspx
-         *
-         */
-        class Ctors : public ABC::Runnable
-        {
+		/**
+		 *  Examples::_COleVariant::Ctors
+		 *
+		 *  Inspired by:
+		 *      https://msdn.microsoft.com/en-us/library/4xd0wkhw.aspx
+		 *
+		 */
+		class Ctors : public Abstract_Base::Runnable
+		{
 
-        public: // Overrides ----------------------------------------------------------
+		public: // HTML -------------------------------------------------------
 
-            /**
-             *  Run the example.
-             */
-            void run() override;
+			/**
+			 *  Examples::_COleVariant::Ctors::id()
+			 *
+			 *  A tag for ID elements.
+			 */
+			static const wchar_t* id() { return L"Examples::_COleVariant::Ctors"; }
 
-        };
-    }
+			/**
+			 *  Examples::_COleVariant::Ctors::ds()
+			 *
+			 *  A short descriptive label.
+			 */
+			static const wchar_t* ds() { return L"Constructors"; }
+
+		public: // Overrides ----------------------------------------------------------
+
+			/**
+			 *  Run the example.
+			 */
+			void run() override;
+
+		};
+	}
 }

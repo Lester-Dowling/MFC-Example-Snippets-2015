@@ -28,7 +28,7 @@
     <Filter Include="Examples\_COleVariant">
       <UniqueIdentifier>{c2712787-00a6-450e-ac3c-8efad0e396e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ABC">
+    <Filter Include="Abstract_Base">
       <UniqueIdentifier>{e8647525-1977-4f9c-bcb5-41fe70bfc62a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -84,8 +84,8 @@
     <ClInclude Include="Examples\_COleVariant\Ctors.hpp">
       <Filter>Examples\_COleVariant</Filter>
     </ClInclude>
-    <ClInclude Include="ABC\Runnable.hpp">
-      <Filter>ABC</Filter>
+    <ClInclude Include="Abstract_Base\Runnable.hpp">
+      <Filter>Abstract_Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

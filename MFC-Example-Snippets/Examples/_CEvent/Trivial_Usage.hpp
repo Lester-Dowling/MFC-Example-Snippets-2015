@@ -6,16 +6,11 @@
 #include <atlbase.h>
 #include <atlstr.h>
 #include <afxdisp.h>
-#include <afxdialogex.h>
-#include <afxdhtml.h>
 #undef min
 #undef max
 #include <cstddef>
 #include <cstdint>
-#include <string>
-#include <vector>
-#include <iostream>
-#include "ABC/Runnable.hpp"
+#include "Abstract_Base/Runnable.hpp"
 
 namespace Examples {
 
@@ -32,10 +27,26 @@ namespace Examples {
          *  thread.  The other thread will wait for the event to be signaled
          *  and then exit
          */
-        class Trivial_Usage : public ABC::Runnable
+        class Trivial_Usage : public Abstract_Base::Runnable
         {
 
-        public: // Methods ----------------------------------------------------
+		public: // HTML -------------------------------------------------------
+
+			/**
+			 *  Examples::_CEvent::Trivial_Usage::id()
+			 *
+			 *  A tag for ID elements.
+			 */
+			static const wchar_t* id() { return L"Examples::_CEvent::Trivial_Usage"; }
+
+			/**
+			*  Examples::_CEvent::Trivial_Usage::ds()
+			*
+			*  A short descriptive label.
+			 */
+			static const wchar_t* ds() { return L"Trivial Usage"; }
+
+		public: // Methods ----------------------------------------------------
 
             /**
              *  Controlling thread proc for the example.
