@@ -34,6 +34,9 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{02e42898-5210-46a3-a748-2a7248a4d5f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples\_CArchive">
+      <UniqueIdentifier>{40c16f75-e4bf-40af-8a50-0741163d3e71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -93,6 +96,9 @@
     <ClInclude Include="CRuntimeClass-Support.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CArchive\Store_and_Load.hpp">
+      <Filter>Examples\_CArchive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -136,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="Examples\_COleVariant\Ctors.cpp">
       <Filter>Examples\_COleVariant</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CArchive\Store_and_Load.cpp">
+      <Filter>Examples\_CArchive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

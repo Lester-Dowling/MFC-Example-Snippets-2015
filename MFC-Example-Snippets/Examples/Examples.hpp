@@ -10,3 +10,4 @@
 #include "Examples/_CFile/SetFilePath.hpp"
 #include "Examples/_CFile/GetLength.hpp"
 #include "Examples/_COleVariant/Ctors.hpp"
+#include "Examples/_CArchive/Store_and_Load.hpp"

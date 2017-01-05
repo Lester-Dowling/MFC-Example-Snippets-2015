@@ -155,6 +155,7 @@ $(OutDir) ^
     <ClInclude Include="ExampleSnippetsDialog.hpp" />
     <ClInclude Include="ExampleSnippetsDialogAutoProxy.hpp" />
     <ClInclude Include="Examples\Examples.hpp" />
+    <ClInclude Include="Examples\_CArchive\Store_and_Load.hpp" />
     <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp" />
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp" />
     <ClInclude Include="Examples\_CFile\GetStatus.hpp" />
@@ -174,6 +175,7 @@ $(OutDir) ^
     <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="ExampleSnippetsDialog.cpp" />
     <ClCompile Include="ExampleSnippetsDialogAutoProxy.cpp" />
+    <ClCompile Include="Examples\_CArchive\Store_and_Load.cpp" />
     <ClCompile Include="Examples\_CEvent\Calculate_Prime_Numbers.cpp" />
     <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp" />
     <ClCompile Include="Examples\_CFile\GetStatus.cpp" />
