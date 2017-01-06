@@ -11,3 +11,4 @@
 #include "Examples/_CFile/GetLength.hpp"
 #include "Examples/_COleVariant/Ctors.hpp"
 #include "Examples/_CArchive/Store_and_Load.hpp"
+#include "Examples/_CArchive/MapObject.hpp"

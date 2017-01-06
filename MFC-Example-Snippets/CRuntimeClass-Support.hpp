@@ -9,12 +9,21 @@
 #undef min
 #undef max
 
+/**
+ *  Declare method signatures to support dynamic creation
+ *  via CRuntimeClass.  This declaration and its corresponding
+ *  implementation allow the class name to be specified as a
+ *  Fully Qualified Class Name (FQCN).  The existing macros within
+ *  MFC, DECLARE_DYNCREATE and its IMPLEMENT_DYNCREATE, don't
+ *  allow a fully qualified class name.  These two macros overcome
+ *  that deficiency.
+ */
 #define DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE    \
     public:                                             \
+    CRuntimeClass* GetRuntimeClass() const override;    \
     static CRuntimeClass* __stdcall _GetBaseClass();    \
     static CRuntimeClass* GetThisClass();               \
     static CObject* __stdcall CreateObject();           \
-    CRuntimeClass* GetRuntimeClass() const override;    \
     static const wchar_t* fqcn();
 
 
