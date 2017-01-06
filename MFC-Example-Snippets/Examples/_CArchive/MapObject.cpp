@@ -23,7 +23,7 @@ public:
 class SubItem : public CObject
 {
 	DECLARE_SERIAL(SubItem)
-	SubItem() : m_i(0) {};
+	SubItem() {};
 	SubItem(int i) : m_i{ i } {}
 
 public:
@@ -33,8 +33,8 @@ public:
 	}
 
 	// back pointer to owning document
-	MyDocument* m_pDoc;
-	int m_i; // other item data
+	MyDocument* m_pDoc{};
+	__int64 m_i{}; // other item data
 
 	void Serialize(CArchive& ar) override;
 };
@@ -46,6 +46,7 @@ IMPLEMENT_SERIAL(MyDocument, CDocument, 1)
 
 void MyDocument::Serialize(CArchive& ar)
 {
+	ar.MapObject(this);
 	CDocument::Serialize(ar);
 
 	if (ar.IsStoring())
@@ -57,7 +58,6 @@ void MyDocument::Serialize(CArchive& ar)
 		// TODO: add loading code here
 	}
 
-	ar.MapObject(this);
 
 	//serialize the subitems in the document;
 	//they will be able to serialize their m_pDoc
