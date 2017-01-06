@@ -46,8 +46,8 @@ IMPLEMENT_SERIAL(MyDocument, CDocument, 1)
 
 void MyDocument::Serialize(CArchive& ar)
 {
-	ar.MapObject(this);
 	CDocument::Serialize(ar);
+	ar.MapObject(this);
 
 	if (ar.IsStoring())
 	{
@@ -125,7 +125,7 @@ namespace Examples {
 			TEXT_OUT("Closing the storing archive...");
 			arStore.Close();
 
-			TEXT_OUT("Creating a loading archive...");
+			TEXT_OUT("Creating an archive for loading...");
 			myFile.SeekToBegin();
 			CArchive arLoad(&myFile, CArchive::load);
 
