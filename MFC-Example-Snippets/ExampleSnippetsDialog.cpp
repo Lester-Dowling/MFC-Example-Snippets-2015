@@ -114,6 +114,7 @@ void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 			<< "<h2> CArchive </h2>"
 			<< make_run_example_button(Examples::_CArchive::Store_and_Load::fqcn(), Examples::_CArchive::Store_and_Load::ds())
 			<< make_run_example_button(Examples::_CArchive::MapObject::fqcn(), Examples::_CArchive::MapObject::ds())
+			<< make_run_example_button(Examples::_CArchive::SerializeClass::fqcn(), Examples::_CArchive::SerializeClass::ds())
 			;
 
 		CComBSTR buttons_to_run_examples{ woss.str().c_str() };

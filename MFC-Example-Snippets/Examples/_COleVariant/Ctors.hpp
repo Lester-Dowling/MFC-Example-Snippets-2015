@@ -14,7 +14,6 @@
 #include "CRuntimeClass-Support.hpp"
 
 namespace Examples {
-
 	namespace _COleVariant {
 
 		/**

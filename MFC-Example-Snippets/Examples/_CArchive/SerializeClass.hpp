@@ -17,24 +17,24 @@ namespace Examples {
     namespace _CArchive {
 
         /**
-         *  Examples::_CArchive::Store_and_Load
+         *  Examples::_CArchive::SerializeClass
          *
          *  Copied from:
          *
          *
          */
-        class Store_and_Load : public Abstract_Base::Runnable_Example
+        class SerializeClass : public Abstract_Base::Runnable_Example
         {
             DECLARE_CRUNTIMECLASS_SUPPORT_DYNAMIC_CREATE;
 
         public: // HTML -------------------------------------------------------
 
             /**
-             *  Examples::_CArchive::Store_and_Load::ds()
+             *  Examples::_CArchive::SerializeClass::ds()
              *
              *  A short descriptive label.
              */
-            static const wchar_t* ds() { return L"Store and Load"; }
+            static const wchar_t* ds() { return L"Serialize Base Class"; }
 
         public: // Overrides ----------------------------------------------------------
 
