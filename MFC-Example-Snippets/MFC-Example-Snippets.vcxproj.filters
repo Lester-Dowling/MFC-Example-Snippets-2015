@@ -105,6 +105,9 @@
     <ClInclude Include="Examples\_CArchive\SerializeClass.hpp">
       <Filter>Examples\_CArchive</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CArchive\Compound.hpp">
+      <Filter>Examples\_CArchive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -156,6 +159,9 @@
       <Filter>Examples\_CArchive</Filter>
     </ClCompile>
     <ClCompile Include="Examples\_CArchive\SerializeClass.cpp">
+      <Filter>Examples\_CArchive</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CArchive\Compound.cpp">
       <Filter>Examples\_CArchive</Filter>
     </ClCompile>
   </ItemGroup>
