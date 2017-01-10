@@ -29,10 +29,51 @@ static DHtmlEventMapEntry dhtml_event_onclick(const wchar_t *element_id, HRESULT
 {
 	return DHtmlEventMapEntry{
 		DHTMLEVENTMAPENTRY_NAME,
-		DISPID_HTMLELEMENTEVENTS_ONCLICK,
-		element_id,
-		(DHEVTFUNCCONTROL)(DHEVTFUNC)handler
+			DISPID_HTMLELEMENTEVENTS_ONCLICK,
+			element_id,
+			(DHEVTFUNCCONTROL)(DHEVTFUNC)handler
 	};
+}
+
+
+
+void ExampleSnippetsDialog::register_all_examples()
+{
+	std::wstring class_name;
+	class_examples_t class_examples;
+
+	class_name = L"Examples::_CEvent";
+	class_examples.clear();
+	class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds() });
+	m_examples[class_name] = class_examples;
+
+	class_name = L"Examples::_CFile";
+	class_examples.clear();
+	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds() });
+	m_examples[class_name] = class_examples;
+
+	class_name = L"Examples::_COleVariant";
+	class_examples.clear();
+	class_examples.push_back(element_id_and_button_label{ Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds() });
+	m_examples[class_name] = class_examples;
+
+	class_name = L"Examples::_CArchive";
+	class_examples.clear();
+	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Store_and_Load::fqcn(), Examples::_CArchive::Store_and_Load::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::MapObject::fqcn(), Examples::_CArchive::MapObject::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::SerializeClass::fqcn(), Examples::_CArchive::SerializeClass::ds() });
+	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Compound::fqcn(), Examples::_CArchive::Compound::ds() });
+	m_examples[class_name] = class_examples;
+
+	ASSERT(m_examples[L"Examples::_CEvent"].size() == 2);
+	ASSERT(m_examples[L"Examples::_CFile"].size() == 5);
+	ASSERT(m_examples[L"Examples::_COleVariant"].size() == 1);
+	ASSERT(m_examples[L"Examples::_CArchive"].size() == 4);
 }
 
 
@@ -56,7 +97,7 @@ void ExampleSnippetsDialog::append_dhtml_event_sentinel()
 /**
  *  Return the HTML code for a button element.
  */
-static std::wstring button_html(const wchar_t * button_id, const wchar_t * button_label)
+static std::wstring button_html(const wchar_t * button_id, const std::wstring& button_label)
 {
 	std::wostringstream woss;
 	woss
@@ -70,10 +111,27 @@ static std::wstring button_html(const wchar_t * button_id, const wchar_t * butto
 
 
 
-std::wstring ExampleSnippetsDialog::make_run_example_button(const wchar_t * element_id, const wchar_t * button_label)
+std::wstring ExampleSnippetsDialog::make_run_example_button(const wchar_t * element_id, const std::wstring& button_label)
 {
 	add_dhtml_event_onclick(element_id, &ExampleSnippetsDialog::On_Run_Example);
 	return button_html(element_id, button_label);
+}
+
+
+
+std::wstring ExampleSnippetsDialog::make_class_example_button(const wchar_t * element_id, const std::wstring& button_label)
+{
+	add_dhtml_event_onclick(element_id, &ExampleSnippetsDialog::On_Change_Class_Example);
+	return button_html(element_id, button_label);
+}
+
+
+
+void ExampleSnippetsDialog::clear_dhtml_events()
+{
+	m_dhtmlEventEntries.clear();
+	add_dhtml_event_onclick(L"ButtonCancel", &ExampleSnippetsDialog::OnButtonCancel);
+	append_dhtml_event_sentinel();
 }
 
 
@@ -85,47 +143,56 @@ const DHtmlEventMapEntry * ExampleSnippetsDialog::GetDHtmlEventMap()
 
 
 
-void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
+void ExampleSnippetsDialog::impose_examples_menu()
 {
-	CDHtmlDialog::OnDocumentComplete(pDisp, szUrl);
-
 	IHTMLElement* pElement = nullptr;
-	if (GetElement(L"ButtonsToRunExamples", &pElement) == S_OK && pElement != nullptr)
+	if (GetElement(L"ExamplesMenu", &pElement) == S_OK && pElement != nullptr)
 	{
-		// Setup the buttons to run examples:
 		std::wostringstream woss;
-		woss
-			<< "<h1> Examples </h1>"
-
-			<< "<h2> CEvent</h2>"
-			<< make_run_example_button(Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds())
-			<< make_run_example_button(Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds())
-
-			<< "<h2> CFile </h2>"
-			<< make_run_example_button(Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds())
-			<< make_run_example_button(Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds())
-			<< make_run_example_button(Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds())
-			<< make_run_example_button(Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds())
-			<< make_run_example_button(Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds())
-
-			<< "<h2> COleVariant </h2>"
-			<< make_run_example_button(Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds())
-
-			<< "<h2> CArchive </h2>"
-			<< make_run_example_button(Examples::_CArchive::Store_and_Load::fqcn(), Examples::_CArchive::Store_and_Load::ds())
-			<< make_run_example_button(Examples::_CArchive::MapObject::fqcn(), Examples::_CArchive::MapObject::ds())
-			<< make_run_example_button(Examples::_CArchive::SerializeClass::fqcn(), Examples::_CArchive::SerializeClass::ds())
-			<< make_run_example_button(Examples::_CArchive::Compound::fqcn(), Examples::_CArchive::Compound::ds())
-			;
-
+		if (m_curr_menu_name == L"main menu")
+		{
+			woss << "<h1> Examples </h1>";
+			examples_map_t::const_iterator
+				mitr = m_examples.begin(),
+				mend = m_examples.end();
+			for (; mitr != mend; ++mitr)
+			{
+				const std::wstring& fqcn = mitr->first;
+				size_t underscore_pos = fqcn.find_last_of(L'_');
+				std::wstring class_shortname{ fqcn.cbegin() + underscore_pos, fqcn.cend() };
+				woss << make_class_example_button(fqcn.c_str(), class_shortname);
+			}
+		}
+		if (m_examples.count(m_curr_menu_name))
+		{
+			woss << "<h1> " << m_curr_menu_name << " </h1>";
+			const class_examples_t& examples = m_examples[m_curr_menu_name];
+			class_examples_t::const_iterator
+				eitr = examples.begin(),
+				eend = examples.end();
+			for (; eitr != eend; ++eitr)
+			{
+				const element_id_and_button_label& example_pair = *eitr;
+				const wchar_t* element_id = example_pair.first;
+				const wchar_t* button_label = example_pair.second;
+				woss << make_run_example_button(element_id, button_label);
+			}
+		}
 		CComBSTR buttons_to_run_examples{ woss.str().c_str() };
 		pElement->put_innerHTML(buttons_to_run_examples);
 	}
 	else
 	{
-		// No such element id:
+		// No such element for menu of examples:
 		::Beep(300, 800);
 	}
+}
+
+
+void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
+{
+	CDHtmlDialog::OnDocumentComplete(pDisp, szUrl);
+	impose_examples_menu();
 }
 
 
@@ -144,6 +211,24 @@ HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 			run_example(dynamic_cast<Abstract_Base::Runnable_Example*>(example));
 			return S_OK;
 		}
+	}
+	// No such element:
+	::Beep(300, 800);
+	return S_OK;
+}
+
+
+
+HRESULT ExampleSnippetsDialog::On_Change_Class_Example(IHTMLElement* pElement)
+{
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
+	CComBSTR element_id;
+	if (SUCCEEDED(pElement->get_id(&element_id)))
+	{
+		_RPTWN(_CRT_WARN, L"Got Class Example: %s\n", element_id);
+		m_curr_menu_name = (LPWSTR)element_id;
+		impose_examples_menu();
+		return S_OK;
 	}
 	// No such element:
 	::Beep(300, 800);
@@ -244,10 +329,8 @@ ExampleSnippetsDialog::ExampleSnippetsDialog(CWnd* pParent /*=nullptr*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pAutoProxy = nullptr;
-
-	// Start the event map with only the quit button:
+	// Initialize the event map:
 	append_dhtml_event_sentinel();
-	add_dhtml_event_onclick(L"ButtonCancel", &ExampleSnippetsDialog::OnButtonCancel);
 }
 
 

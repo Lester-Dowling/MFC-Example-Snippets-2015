@@ -34,6 +34,7 @@ protected: // Overrides -------------------------------------------------------
 
 	void DoDataExchange(CDataExchange* pDX) override;
 	BOOL OnInitDialog() override;
+	void impose_examples_menu();
 	void OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl) override;
 	void OnCancel() override;
 	const DHtmlEventMapEntry* GetDHtmlEventMap() override;
@@ -42,14 +43,57 @@ protected: // Events ----------------------------------------------------------
 
 	HRESULT OnButtonCancel(IHTMLElement*);
 	HRESULT On_Run_Example(IHTMLElement*);
+	HRESULT On_Change_Class_Example(IHTMLElement * pElement);
 
 	/**
-	 *  Event map.
+	 *  The name of the current menu displayed to the user.
+	 */
+	std::wstring m_curr_menu_name{ L"main menu" };
+
+	/**
+	 *  Listing of examples and they're grouped by class name:
+	 *
+	 *      class name --> vector of (element_id, button_label)
+	 */
+	typedef std::pair<const wchar_t*, const wchar_t*> element_id_and_button_label;
+	typedef std::vector<element_id_and_button_label> class_examples_t;
+	typedef std::map<std::wstring, class_examples_t> examples_map_t;
+	examples_map_t m_examples;
+
+	/**
+	 *  Load all examples into the examples map.
+	 */
+	void register_all_examples();
+
+	/**
+	 *  The event map of HTML element ids onto event handlers.
 	 */
 	std::vector<DHtmlEventMapEntry> m_dhtmlEventEntries;
+
+	/**
+	 *  Assign the given handler to respond to clicks on elements with the given id.
+	 */
 	void add_dhtml_event_onclick(const wchar_t *element_id, HRESULT(ExampleSnippetsDialog::*handler)(IHTMLElement*));
+
+	/**
+	 *  The event map requires a sentinel value placed at the end position.
+	 */
 	void append_dhtml_event_sentinel();
-	std::wstring make_run_example_button(const wchar_t * button_id, const wchar_t * button_label);
+
+	/**
+	 *  Remove all dhtml events except for important events.
+	 */
+	void clear_dhtml_events();
+
+	/**
+	 *  Make a button to run an example.
+	 */
+	std::wstring make_run_example_button(const wchar_t * button_id, const std::wstring& button_label);
+
+	/**
+	 *  Make a button to change the examples menu to a different example class.
+	 */
+	std::wstring make_class_example_button(const wchar_t * element_id, const std::wstring& button_label);
 
 public: // Accessors ----------------------------------------------------------
 

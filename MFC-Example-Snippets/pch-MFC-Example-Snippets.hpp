@@ -52,6 +52,7 @@
 #include <new>                              // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\new
 #include <memory>                           // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\memory
 #include <vector>                           // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vector
+#include <map>
 #include <stdexcept>                        // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdexcept
 #include <iostream>                         // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\iostream
 #include <sstream>                          // C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\sstream
@@ -65,12 +66,12 @@
 template <class Interface>
 inline void SafeRelease(Interface** interfaceToRelease)
 {
-    if (*interfaceToRelease != nullptr)
-        {
-            (*interfaceToRelease)->Release();
+	if (*interfaceToRelease != nullptr)
+	{
+		(*interfaceToRelease)->Release();
 
-            (*interfaceToRelease) = nullptr;
-        }
+		(*interfaceToRelease) = nullptr;
+	}
 }
 
 // This macro is the same as IMPLEMENT_OLECREATE, except it passes TRUE
