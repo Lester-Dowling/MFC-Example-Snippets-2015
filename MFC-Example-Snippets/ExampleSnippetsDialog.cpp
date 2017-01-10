@@ -18,7 +18,7 @@ IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
 BEGIN_MESSAGE_MAP(ExampleSnippetsDialog, CDHtmlDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_CLOSE()
-	ON_MESSAGE(static_cast<UINT>(MSG::more_text_out), &OnMoreTextOut)
+	ON_MESSAGE(static_cast<UINT>(MSG::more_text_out), &On_More_Text_Out)
 END_MESSAGE_MAP();
 
 
@@ -37,43 +37,64 @@ static DHtmlEventMapEntry dhtml_event_onclick(const wchar_t *element_id, HRESULT
 
 
 
+void ExampleSnippetsDialog::append_dhtml_event_sentinel()
+{
+	static const DHtmlEventMapEntry end_sentinel
+		= {
+		DHTMLEVENTMAPENTRY_END,		// DHtmlEventMapEntryType
+		0,							// DISPID
+		nullptr,					// LPCTSTR
+		nullptr						// pfnEventFunc
+	};
+	m_dhtmlEventEntries.push_back(end_sentinel);
+}
+
+
+
 void ExampleSnippetsDialog::register_all_examples()
 {
-	std::wstring class_name;
-	class_examples_t class_examples;
+	{
+		std::wstring class_name = L"Examples::_CEvent";
+		class_examples_t class_examples; class_examples.reserve(10);
+		class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds() });
+		m_examples[class_name] = class_examples;
+		ASSERT(m_examples[L"Examples::_CEvent"].size() == 2);
+	}
 
-	class_name = L"Examples::_CEvent";
-	class_examples.clear();
-	class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds() });
-	m_examples[class_name] = class_examples;
 
-	class_name = L"Examples::_CFile";
-	class_examples.clear();
-	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds() });
-	m_examples[class_name] = class_examples;
+	{
+		std::wstring class_name = L"Examples::_CFile";
+		class_examples_t class_examples; class_examples.reserve(10);
+		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::Write::fqcn(), Examples::_CFile::Write::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::Open::fqcn(), Examples::_CFile::Open::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetStatus::fqcn(), Examples::_CFile::GetStatus::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds() });
+		m_examples[class_name] = class_examples;
+		ASSERT(m_examples[L"Examples::_CFile"].size() == 5);
+	}
 
-	class_name = L"Examples::_COleVariant";
-	class_examples.clear();
-	class_examples.push_back(element_id_and_button_label{ Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds() });
-	m_examples[class_name] = class_examples;
 
-	class_name = L"Examples::_CArchive";
-	class_examples.clear();
-	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Store_and_Load::fqcn(), Examples::_CArchive::Store_and_Load::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::MapObject::fqcn(), Examples::_CArchive::MapObject::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::SerializeClass::fqcn(), Examples::_CArchive::SerializeClass::ds() });
-	class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Compound::fqcn(), Examples::_CArchive::Compound::ds() });
-	m_examples[class_name] = class_examples;
+	{
+		std::wstring class_name = L"Examples::_COleVariant";
+		class_examples_t class_examples; class_examples.reserve(10);
+		class_examples.push_back(element_id_and_button_label{ Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds() });
+		m_examples[class_name] = class_examples;
+		ASSERT(m_examples[L"Examples::_COleVariant"].size() == 1);
+	}
 
-	ASSERT(m_examples[L"Examples::_CEvent"].size() == 2);
-	ASSERT(m_examples[L"Examples::_CFile"].size() == 5);
-	ASSERT(m_examples[L"Examples::_COleVariant"].size() == 1);
-	ASSERT(m_examples[L"Examples::_CArchive"].size() == 4);
+
+	{
+		std::wstring class_name = L"Examples::_CArchive";
+		class_examples_t class_examples; class_examples.reserve(10);
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Store_and_Load::fqcn(), Examples::_CArchive::Store_and_Load::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::MapObject::fqcn(), Examples::_CArchive::MapObject::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::SerializeClass::fqcn(), Examples::_CArchive::SerializeClass::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Compound::fqcn(), Examples::_CArchive::Compound::ds() });
+		m_examples[class_name] = class_examples;
+		ASSERT(m_examples[L"Examples::_CArchive"].size() == 4);
+	}
 }
 
 
@@ -84,14 +105,6 @@ void ExampleSnippetsDialog::add_dhtml_event_onclick(const wchar_t * element_id, 
 	append_dhtml_event_sentinel();
 }
 
-
-
-void ExampleSnippetsDialog::append_dhtml_event_sentinel()
-{
-	DHtmlEventMapEntry end_sentinel
-		= { DHTMLEVENTMAPENTRY_END, 0, nullptr, nullptr };
-	m_dhtmlEventEntries.push_back(end_sentinel);
-}
 
 
 /**
@@ -127,6 +140,16 @@ std::wstring ExampleSnippetsDialog::make_class_example_button(const wchar_t * el
 
 
 
+std::wstring ExampleSnippetsDialog::make_main_menu_button()
+{
+	static const wchar_t* element_id = L"main menu";
+	static const std::wstring button_label{ L"Main Menu" };
+	add_dhtml_event_onclick(element_id, &ExampleSnippetsDialog::On_Main_Menu);
+	return button_html(element_id, button_label);
+}
+
+
+
 void ExampleSnippetsDialog::clear_dhtml_events()
 {
 	m_dhtmlEventEntries.clear();
@@ -145,13 +168,14 @@ const DHtmlEventMapEntry * ExampleSnippetsDialog::GetDHtmlEventMap()
 
 void ExampleSnippetsDialog::impose_examples_menu()
 {
+	clear_dhtml_events();
 	IHTMLElement* pElement = nullptr;
 	if (GetElement(L"ExamplesMenu", &pElement) == S_OK && pElement != nullptr)
 	{
 		std::wostringstream woss;
 		if (m_curr_menu_name == L"main menu")
 		{
-			woss << "<h1> Examples </h1>";
+			woss << "<h1> Examples </h1>"; // Main menu
 			examples_map_t::const_iterator
 				mitr = m_examples.begin(),
 				mend = m_examples.end();
@@ -159,6 +183,10 @@ void ExampleSnippetsDialog::impose_examples_menu()
 			{
 				const std::wstring& fqcn = mitr->first;
 				size_t underscore_pos = fqcn.find_last_of(L'_');
+				if (underscore_pos == std::wstring::npos)
+					underscore_pos = 0;
+				else
+					++underscore_pos; // Step over the underscore.
 				std::wstring class_shortname{ fqcn.cbegin() + underscore_pos, fqcn.cend() };
 				woss << make_class_example_button(fqcn.c_str(), class_shortname);
 			}
@@ -187,6 +215,7 @@ void ExampleSnippetsDialog::impose_examples_menu()
 		::Beep(300, 800);
 	}
 }
+
 
 
 void ExampleSnippetsDialog::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
@@ -221,6 +250,9 @@ HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 
 HRESULT ExampleSnippetsDialog::On_Change_Class_Example(IHTMLElement* pElement)
 {
+	::Beep(400, 250);
+	::Beep(400, 250);
+
 	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	CComBSTR element_id;
 	if (SUCCEEDED(pElement->get_id(&element_id)))
@@ -237,7 +269,17 @@ HRESULT ExampleSnippetsDialog::On_Change_Class_Example(IHTMLElement* pElement)
 
 
 
-LRESULT ExampleSnippetsDialog::OnMoreTextOut(WPARAM wParam, LPARAM lParam)
+HRESULT ExampleSnippetsDialog::On_Main_Menu(IHTMLElement *)
+{
+	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
+	m_curr_menu_name = L"main menu";
+	impose_examples_menu();
+	return S_OK;
+}
+
+
+
+LRESULT ExampleSnippetsDialog::On_More_Text_Out(WPARAM wParam, LPARAM lParam)
 {
 	// Verify that the identity of this MSG is mine:
 	if (wParam != 82 && lParam != 34) { ::Beep(500, 800); return -1; }
@@ -329,7 +371,8 @@ ExampleSnippetsDialog::ExampleSnippetsDialog(CWnd* pParent /*=nullptr*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pAutoProxy = nullptr;
-	// Initialize the event map:
+	register_all_examples();
+	m_dhtmlEventEntries.reserve(10);
 	append_dhtml_event_sentinel();
 }
 
