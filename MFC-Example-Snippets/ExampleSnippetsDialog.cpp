@@ -143,7 +143,7 @@ std::wstring ExampleSnippetsDialog::make_class_example_button(const wchar_t * el
 std::wstring ExampleSnippetsDialog::make_main_menu_button()
 {
 	static const wchar_t* element_id = L"main menu";
-	static const std::wstring button_label{ L"Main Menu" };
+	static const std::wstring button_label{ L"Back to Examples" };
 	add_dhtml_event_onclick(element_id, &ExampleSnippetsDialog::On_Main_Menu);
 	return button_html(element_id, button_label);
 }
@@ -205,6 +205,7 @@ void ExampleSnippetsDialog::impose_examples_menu()
 				const wchar_t* button_label = example_pair.second;
 				woss << make_run_example_button(element_id, button_label);
 			}
+			woss << "<br/><hr/><br/>" << make_main_menu_button();
 		}
 		CComBSTR buttons_to_run_examples{ woss.str().c_str() };
 		pElement->put_innerHTML(buttons_to_run_examples);
@@ -250,9 +251,6 @@ HRESULT ExampleSnippetsDialog::On_Run_Example(IHTMLElement* pElement)
 
 HRESULT ExampleSnippetsDialog::On_Change_Class_Example(IHTMLElement* pElement)
 {
-	::Beep(400, 250);
-	::Beep(400, 250);
-
 	if (m_runnable) return S_OK; // Guard against multiple clicks on the button.
 	CComBSTR element_id;
 	if (SUCCEEDED(pElement->get_id(&element_id)))
