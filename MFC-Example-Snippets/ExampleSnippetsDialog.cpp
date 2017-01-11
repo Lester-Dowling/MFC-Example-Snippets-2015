@@ -166,6 +166,18 @@ const DHtmlEventMapEntry * ExampleSnippetsDialog::GetDHtmlEventMap()
 
 
 
+static std::wstring replace_wstring(const std::wstring& str, const std::wstring& from, const std::wstring& to)
+{
+	size_t start_pos = str.find(from);
+	if (start_pos == std::wstring::npos)
+		return str;
+	std::wstring result{ str };
+	result.replace(start_pos, from.length(), to);
+	return result;
+}
+
+
+
 void ExampleSnippetsDialog::impose_examples_menu()
 {
 	clear_dhtml_events();
@@ -193,7 +205,7 @@ void ExampleSnippetsDialog::impose_examples_menu()
 		}
 		if (m_examples.count(m_curr_menu_name))
 		{
-			woss << "<h1> " << m_curr_menu_name << " </h1>";
+			woss << "<h1> " << replace_wstring(m_curr_menu_name, L"::_", L" --&gt; ") << "</h1>";
 			const class_examples_t& examples = m_examples[m_curr_menu_name];
 			class_examples_t::const_iterator
 				eitr = examples.begin(),
@@ -205,7 +217,7 @@ void ExampleSnippetsDialog::impose_examples_menu()
 				const wchar_t* button_label = example_pair.second;
 				woss << make_run_example_button(element_id, button_label);
 			}
-			woss << "<br/><hr/><br/>" << make_main_menu_button();
+			woss << "<br/> <hr/> <br/>" << make_main_menu_button();
 		}
 		CComBSTR buttons_to_run_examples{ woss.str().c_str() };
 		pElement->put_innerHTML(buttons_to_run_examples);
