@@ -59,7 +59,6 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Trivial_Usage::fqcn(), Examples::_CEvent::Trivial_Usage::ds() });
 		class_examples.push_back(element_id_and_button_label{ Examples::_CEvent::Calculate_Prime_Numbers::fqcn(), Examples::_CEvent::Calculate_Prime_Numbers::ds() });
 		m_examples[class_name] = class_examples;
-		ASSERT(m_examples[class_name].size() == 2);
 	}
 
 
@@ -72,7 +71,6 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::SetFilePath::fqcn(), Examples::_CFile::SetFilePath::ds() });
 		class_examples.push_back(element_id_and_button_label{ Examples::_CFile::GetLength::fqcn(), Examples::_CFile::GetLength::ds() });
 		m_examples[class_name] = class_examples;
-		ASSERT(m_examples[class_name].size() == 5);
 	}
 
 
@@ -81,7 +79,6 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples_t class_examples; class_examples.reserve(10);
 		class_examples.push_back(element_id_and_button_label{ Examples::_COleVariant::Ctors::fqcn(), Examples::_COleVariant::Ctors::ds() });
 		m_examples[class_name] = class_examples;
-		ASSERT(m_examples[class_name].size() == 1);
 	}
 
 
@@ -93,7 +90,6 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::SerializeClass::fqcn(), Examples::_CArchive::SerializeClass::ds() });
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Compound::fqcn(), Examples::_CArchive::Compound::ds() });
 		m_examples[class_name] = class_examples;
-		ASSERT(m_examples[class_name].size() == 4);
 	}
 
 
@@ -101,8 +97,8 @@ void ExampleSnippetsDialog::register_all_examples()
 		std::wstring class_name = L"Examples::_CArray";
 		class_examples_t class_examples; class_examples.reserve(10);
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::Add::fqcn(), Examples::_CArray::Add::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::GetAt::fqcn(), Examples::_CArray::GetAt::ds() });
 		m_examples[class_name] = class_examples;
-		ASSERT(m_examples[class_name].size() == 1);
 	}
 }
 

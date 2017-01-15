@@ -114,6 +114,9 @@
     <ClInclude Include="Examples\_CArray\Add.hpp">
       <Filter>Examples\_CArray</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CArray\GetAt.hpp">
+      <Filter>Examples\_CArray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -171,6 +174,9 @@
       <Filter>Examples\_CArchive</Filter>
     </ClCompile>
     <ClCompile Include="Examples\_CArray\Add.cpp">
+      <Filter>Examples\_CArray</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CArray\GetAt.cpp">
       <Filter>Examples\_CArray</Filter>
     </ClCompile>
   </ItemGroup>
