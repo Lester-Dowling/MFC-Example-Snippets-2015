@@ -11,7 +11,6 @@
 #endif
 
 
-
 IMPLEMENT_DYNAMIC(ExampleSnippetsDialog, CDHtmlDialog);
 
 
@@ -23,7 +22,8 @@ END_MESSAGE_MAP();
 
 
 /**
- *  Return the Event Map Entry for the given element id and its handler in this dialog box.
+ *  Return the Event Map Entry for the given element id and its handler in this
+ *  dialog box.
  */
 static DHtmlEventMapEntry dhtml_event_onclick(const wchar_t *element_id, HRESULT(ExampleSnippetsDialog::*handler)(IHTMLElement*))
 {
@@ -41,10 +41,10 @@ void ExampleSnippetsDialog::append_dhtml_event_sentinel()
 {
 	static const DHtmlEventMapEntry end_sentinel
 		= {
-		DHTMLEVENTMAPENTRY_END,		// DHtmlEventMapEntryType
-		0,							// DISPID
-		nullptr,					// LPCTSTR
-		nullptr						// pfnEventFunc
+		DHTMLEVENTMAPENTRY_END,     // DHtmlEventMapEntryType
+		0,                          // DISPID
+		nullptr,                    // LPCTSTR
+		nullptr                     // pfnEventFunc
 	};
 	m_dhtmlEventEntries.push_back(end_sentinel);
 }
@@ -94,6 +94,15 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArchive::Compound::fqcn(), Examples::_CArchive::Compound::ds() });
 		m_examples[class_name] = class_examples;
 		ASSERT(m_examples[class_name].size() == 4);
+	}
+
+
+	{
+		std::wstring class_name = L"Examples::_CArray";
+		class_examples_t class_examples; class_examples.reserve(10);
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::Add::fqcn(), Examples::_CArray::Add::ds() });
+		m_examples[class_name] = class_examples;
+		ASSERT(m_examples[class_name].size() == 1);
 	}
 }
 

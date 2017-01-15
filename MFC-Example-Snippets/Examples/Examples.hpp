@@ -14,3 +14,4 @@
 #include "Examples/_CArchive/MapObject.hpp"
 #include "Examples/_CArchive/SerializeClass.hpp"
 #include "Examples/_CArchive/Compound.hpp"
+#include "Examples/_CArray/Add.hpp"
