@@ -16,3 +16,4 @@
 #include "Examples/_CArchive/Compound.hpp"
 #include "Examples/_CArray/Add.hpp"
 #include "Examples/_CArray/GetAt.hpp"
+#include "Examples/_CArray/Append.hpp"
