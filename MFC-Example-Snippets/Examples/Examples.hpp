@@ -17,3 +17,4 @@
 #include "Examples/_CArray/Add.hpp"
 #include "Examples/_CArray/GetAt.hpp"
 #include "Examples/_CArray/Append.hpp"
+#include "Examples/_CArray/Copy.hpp"

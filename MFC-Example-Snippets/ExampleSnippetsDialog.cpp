@@ -99,6 +99,7 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::Add::fqcn(), Examples::_CArray::Add::ds() });
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::GetAt::fqcn(), Examples::_CArray::GetAt::ds() });
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::Append::fqcn(), Examples::_CArray::Append::ds() });
+		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::Copy::fqcn(), Examples::_CArray::Copy::ds() });
 		m_examples[class_name] = class_examples;
 	}
 }

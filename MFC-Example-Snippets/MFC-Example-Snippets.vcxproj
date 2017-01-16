@@ -161,6 +161,7 @@ $(OutDir) ^
     <ClInclude Include="Examples\_CArchive\Store_and_Load.hpp" />
     <ClInclude Include="Examples\_CArray\Add.hpp" />
     <ClInclude Include="Examples\_CArray\Append.hpp" />
+    <ClInclude Include="Examples\_CArray\Copy.hpp" />
     <ClInclude Include="Examples\_CArray\GetAt.hpp" />
     <ClInclude Include="Examples\_CEvent\Calculate_Prime_Numbers.hpp" />
     <ClInclude Include="Examples\_CEvent\Trivial_Usage.hpp" />
@@ -187,6 +188,7 @@ $(OutDir) ^
     <ClCompile Include="Examples\_CArchive\Store_and_Load.cpp" />
     <ClCompile Include="Examples\_CArray\Add.cpp" />
     <ClCompile Include="Examples\_CArray\Append.cpp" />
+    <ClCompile Include="Examples\_CArray\Copy.cpp" />
     <ClCompile Include="Examples\_CArray\GetAt.cpp" />
     <ClCompile Include="Examples\_CEvent\Calculate_Prime_Numbers.cpp" />
     <ClCompile Include="Examples\_CEvent\Trivial_Usage.cpp" />
