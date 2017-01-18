@@ -18,3 +18,4 @@
 #include "Examples/_CArray/GetAt.hpp"
 #include "Examples/_CArray/Append.hpp"
 #include "Examples/_CArray/Copy.hpp"
+#include "Examples/_CArray/InsertAt.hpp"

@@ -123,6 +123,9 @@
     <ClInclude Include="Examples\_CArray\Copy.hpp">
       <Filter>Examples\_CArray</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CArray\InsertAt.hpp">
+      <Filter>Examples\_CArray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -189,6 +192,9 @@
       <Filter>Examples\_CArray</Filter>
     </ClCompile>
     <ClCompile Include="Examples\_CArray\Copy.cpp">
+      <Filter>Examples\_CArray</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CArray\InsertAt.cpp">
       <Filter>Examples\_CArray</Filter>
     </ClCompile>
   </ItemGroup>
