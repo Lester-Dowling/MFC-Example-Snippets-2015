@@ -103,6 +103,14 @@ void ExampleSnippetsDialog::register_all_examples()
 		class_examples.push_back(element_id_and_button_label{ Examples::_CArray::InsertAt::fqcn(), Examples::_CArray::InsertAt::ds() });
 		m_examples[class_name] = class_examples;
 	}
+
+
+	{
+		std::wstring class_name = L"Examples::_CObList";
+		class_examples_t class_examples; class_examples.reserve(10);
+		class_examples.push_back(element_id_and_button_label{ Examples::_CObList::AddHead::fqcn(), Examples::_CObList::AddHead::ds() });
+		m_examples[class_name] = class_examples;
+	}
 }
 
 

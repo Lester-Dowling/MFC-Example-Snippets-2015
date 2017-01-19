@@ -40,6 +40,9 @@
     <Filter Include="Examples\_CArray">
       <UniqueIdentifier>{37f8aa3c-e8d2-48bf-b20e-86cc5429376c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples\_CObList">
+      <UniqueIdentifier>{62b46758-b3da-4541-811c-b1542d8c835f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -126,6 +129,9 @@
     <ClInclude Include="Examples\_CArray\InsertAt.hpp">
       <Filter>Examples\_CArray</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\_CObList\AddHead.hpp">
+      <Filter>Examples\_CObList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheApp.cpp">
@@ -196,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Examples\_CArray\InsertAt.cpp">
       <Filter>Examples\_CArray</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\_CObList\AddHead.cpp">
+      <Filter>Examples\_CObList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
