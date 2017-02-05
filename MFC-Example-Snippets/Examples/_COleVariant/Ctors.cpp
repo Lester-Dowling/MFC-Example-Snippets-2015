@@ -138,7 +138,7 @@ namespace Examples {
 		TEXT_OUT("Instantiating signed long ctor...");
 		const signed long lval = std::numeric_limits<signed long>::max();
 		COleVariant v4{ lval };
-		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v4.vt));
+		TEXT_OUT("    VARTYPE is: " << vartype_symbol(v4.vt)); // VT_I4
 		TEXT_OUT("      Value is: " << v4.lVal);
 
 		TEXT_OUT_BLANKLINE;

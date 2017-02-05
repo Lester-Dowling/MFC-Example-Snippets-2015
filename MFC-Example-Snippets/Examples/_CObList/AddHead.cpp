@@ -52,12 +52,12 @@ public: // Overrides ----------------------------------------------------------
 };
 
 
-IMPLEMENT_SERIAL(CAge, CObject, 1)
+IMPLEMENT_SERIAL(CAge, CObject, 1);
 
 
 /**
-*  Extension of the output operator for CAge.
-*/
+ *  Extension of the output operator for CAge.
+ */
 inline std::wostream& operator<<(std::wostream& o, const CAge& p)
 {
 	return o << '{' << p.years() << '}';
@@ -72,8 +72,8 @@ namespace Examples {
 		{
 			TEXT_OUT("Creating list...");
 			CObList list;
-			list.AddHead(new CAge(21));
-			list.AddHead(new CAge(40));
+			list.AddHead(new CAge{ 21 });
+			list.AddHead(new CAge{ 40 });
 
 			TEXT_OUT("List:");
 			int idx = 0;
